@@ -302,7 +302,7 @@ Casting Time: 1
 Area of Effect: 1 creature
 Saving Throw: None
 
-When a Secret Word is uttered, it dispels the magical protections affecting the target according to the normal Secret Word rules. The spell retains its existing protection-removal coverage, but is cast much more quickly and from greater range. Magic resistance does not affect this spell.~
+When this spell is cast at a target creature, it dispels one spell protection of 8th level or lower. Protections affected include Minor Spell Turning, Minor Globe of Invulnerability, Spell Immunity, Spell Deflection, Spell Turning, and Spell Shield. The target's Magic Resistance does not affect this spell.~
 
 @30430 = ~Farsight~
 @30431 = ~Farsight
