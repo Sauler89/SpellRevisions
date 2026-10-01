@@ -1,0 +1,74 @@
+// Selective Spell Revisions for EET - Arcane Level 3
+// Finalized selection:
+//   Clairvoyance uses the SR combat-oriented replacement.
+//   Hold Person uses SR save/AoE improvements but retains vanilla casting time 3.
+//   Dire Charm uses the SR duration buff.
+//   Detect Illusion uses the SR radius/level expansion and also retains vanilla
+//   removal of Non-Detection.
+// All other Level-3 SR changes are deliberately excluded.
+
+// -----------------------------------------------------------------------------
+// Clairvoyance: accepted SR replacement.
+// Replaces vanilla map-reveal behavior with the SR defensive divination.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi3##/spwi301.spl~ ~override/spwi301.spl~
+  SAY NAME1 @30300
+  SAY UNIDENTIFIED_DESC @30301
+COPY ~spell_rev/spwi3##/scrl1d.itm~ ~override/scrl1d.itm~
+  SAY NAME2 @30300
+  SAY IDENTIFIED_DESC @30301
+
+// -----------------------------------------------------------------------------
+// Hold Person: SR save/AoE improvements, but preserve vanilla casting time 3.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi3##/spwi306.spl~ ~override/spwi306.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 3 END
+  SAY NAME1 @30310
+  SAY UNIDENTIFIED_DESC @30311
+COPY ~spell_rev/spwi3##/scrl1i.itm~ ~override/scrl1i.itm~
+  SAY NAME2 @30310
+  SAY IDENTIFIED_DESC @30311
+
+// -----------------------------------------------------------------------------
+// Dire Charm: SR duration buff.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi3##/spwi316.spl~ ~override/spwi316.spl~
+  SAY NAME1 @30320
+  SAY UNIDENTIFIED_DESC @30321
+COPY ~spell_rev/spwi3##/scrl1s.itm~ ~override/scrl1s.itm~
+  SAY NAME2 @30320
+  SAY IDENTIFIED_DESC @30321
+
+// -----------------------------------------------------------------------------
+// Detect Illusion: SR radius / Level-4 illusion expansion + vanilla ability
+// to remove Non-Detection. SR classifies Non-Detection as an Abjuration spell
+// protection, so its standard school/secondary-type removal effects no longer
+// catch it. Add an explicit resource-based removal to preserve that vanilla
+// capability without broadening the spell to all low-level Abjurations.
+// -----------------------------------------------------------------------------
+
+LAF RES_NUM_OF_SPELL_NAME
+  STR_VAR spell_name = ~WIZARD_NON_DETECTION~
+  RET dvsel_non_detection_resref = spell_res
+END
+
+COPY ~spell_rev/spwi3##/spwi322.spl~ ~override/spwi322.spl~
+  LPF ADD_SPELL_EFFECT
+    INT_VAR
+      insert_point = 0
+      opcode = 321
+      target = 2
+      parameter2 = 2
+      timing = 1
+      resist_dispel = 2
+    STR_VAR
+      resource = EVAL ~%dvsel_non_detection_resref%~
+  END
+  SAY NAME1 @30330
+  SAY UNIDENTIFIED_DESC @30331
+COPY ~spell_rev/spwi3##/scrl6k.itm~ ~override/scrl6k.itm~
+  SAY NAME2 @30330
+  SAY IDENTIFIED_DESC @30331
