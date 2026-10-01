@@ -1,0 +1,159 @@
+// Selective Spell Revisions for EET - Arcane Level 4
+// Finalized selection:
+//   Confusion: SR range/AoE, vanilla scaling duration retained.
+//   Break Enchantment completely replaces Remove Curse; vanilla casting time 4 retained.
+//   Secret Word: SR casting-time/range buffs only; existing school and protection coverage retained.
+//   Farsight: SR duration buff.
+//   Protection from Elemental Energy: new autonomous Level-4 spell with dedicated hidden
+//   SR-derived elemental-protection subspells, so it does not depend on replacing the
+//   vanilla/Tactics elemental protection spells.
+
+// -----------------------------------------------------------------------------
+// Confusion: patch the existing spell rather than copying SR wholesale.
+// This preserves vanilla's better scaling duration while importing SR's 35-range
+// header and 30-ft. AoE projectile.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi401.spl~ ~override~
+  LPF ALTER_SPELL_HEADER
+    INT_VAR
+      range = 35
+      projectile = 170
+  END
+  SAY NAME1 @30400
+  SAY UNIDENTIFIED_DESC @30401
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl1u.itm~ ~override~
+  SAY NAME2 @30400
+  SAY IDENTIFIED_DESC @30401
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Break Enchantment: complete replacement of Remove Curse in SPWI410/SCRL5G.
+// Use SR mechanics, retain vanilla casting time 4, and restore the ZSTweaks
+// Rashad's Talon hook if that higher-priority component has already installed it.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi4##/spwi410.spl~ ~override/spwi410.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 4 END
+  SAY NAME1 @30410
+  SAY UNIDENTIFIED_DESC @30411
+
+ACTION_IF FILE_EXISTS_IN_GAME ~zstwrash.spl~ BEGIN
+  COPY_EXISTING ~spwi410.spl~ ~override~
+    LPF ADD_SPELL_EFFECT
+      INT_VAR
+        target = 2
+        opcode = 321
+        power = 4
+      STR_VAR
+        resource = ~zstwrash~
+    END
+    BUT_ONLY_IF_IT_CHANGES
+END
+
+COPY ~spell_rev/spwi4##/scrl5g.itm~ ~override/scrl5g.itm~
+  SAY NAME2 @30410
+  SAY IDENTIFIED_DESC @30411
+
+APPEND ~spell.ids~ ~2410 WIZARD_BREAK_ENCHANTMENT~ UNLESS ~WIZARD_BREAK_ENCHANTMENT~
+
+// -----------------------------------------------------------------------------
+// Secret Word: patch the existing spell in place.
+// Preserve the installed Abjuration school and vanilla/Tactics protection-removal
+// coverage; import only SR's faster casting and longer range.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi419.spl~ ~override~
+  LPF ALTER_SPELL_HEADER
+    INT_VAR
+      speed = 1
+      range = 30
+  END
+  SAY NAME1 @30420
+  SAY UNIDENTIFIED_DESC @30421
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl6o.itm~ ~override~
+  SAY NAME2 @30420
+  SAY IDENTIFIED_DESC @30421
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Farsight: use the selected SR implementation (5-turn duration).
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi4##/spwi424.spl~ ~override/spwi424.spl~
+  SAY NAME1 @30430
+  SAY UNIDENTIFIED_DESC @30431
+COPY ~spell_rev/spwi4##/scrlaq.itm~ ~override/scrlaq.itm~
+  SAY NAME2 @30430
+  SAY IDENTIFIED_DESC @30431
+
+// -----------------------------------------------------------------------------
+// Protection from Elemental Energy: NEW spell.
+// SR normally points its choice menu at SPWI319/320/512/517. This selective mod
+// deliberately does not install all four SR base protection spells, so use hidden
+// dedicated SR-derived subspells instead. This guarantees the advertised 100%
+// protection without overwriting Tactics/vanilla/IWDification spell resources.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi3##/spwi319.spl~ ~override/dvpeefir.spl~
+COPY ~spell_rev/spwi3##/spwi320.spl~ ~override/dvpeecol.spl~
+COPY ~spell_rev/spwi5##/spwi512.spl~ ~override/dvpeeele.spl~
+COPY ~spell_rev/spwi5##/spwi517.spl~ ~override/dvpeeaci.spl~
+
+COPY ~spell_rev/spwi4##/dvwi426.2da~ ~override/dvpeelem.2da~
+  REPLACE_TEXTUALLY CASE_INSENSITIVE ~spwi319~ ~dvpeefir~
+  REPLACE_TEXTUALLY CASE_INSENSITIVE ~spwi320~ ~dvpeecol~
+  REPLACE_TEXTUALLY CASE_INSENSITIVE ~spwi512~ ~dvpeeele~
+  REPLACE_TEXTUALLY CASE_INSENSITIVE ~spwi517~ ~dvpeeaci~
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_PROTECTION_FROM_ELEMENTAL_ENERGY~)) BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_PROTECTION_FROM_ELEMENTAL_ENERGY~
+    RET dvsel_pee_resref = spell_res
+  END
+
+  COPY ~spell_rev/spwi4##/spwi426.spl~ ~override/%dvsel_pee_resref%.spl~
+    SAY NAME1 @30440
+    SAY UNIDENTIFIED_DESC @30441
+    LPF ALTER_EFFECT
+      INT_VAR
+        match_opcode = 214
+      STR_VAR
+        resource = ~dvpeelem~
+    END
+END ELSE BEGIN
+  ADD_SPELL ~spell_rev/spwi4##/spwi426.spl~ 2 4 ~WIZARD_PROTECTION_FROM_ELEMENTAL_ENERGY~
+    SAY NAME1 @30440
+    SAY UNIDENTIFIED_DESC @30441
+
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_PROTECTION_FROM_ELEMENTAL_ENERGY~
+    RET dvsel_pee_resref = spell_res
+  END
+
+  COPY_EXISTING ~%dvsel_pee_resref%.spl~ ~override~
+    LPF ALTER_EFFECT
+      INT_VAR
+        match_opcode = 214
+      STR_VAR
+        resource = ~dvpeelem~
+    END
+    BUT_ONLY_IF_IT_CHANGES
+END
+
+COPY ~spell_rev/spwi4##/dvwi426a.bam~ ~override~
+     ~spell_rev/spwi4##/dvwi426b.bam~ ~override~
+     ~spell_rev/spwi4##/dvwi426c.bam~ ~override~
+
+COPY ~spell_rev/spwi4##/scrl6h.itm~ ~override/dvpeescr.itm~
+  SAY NAME2 @30440
+  SAY IDENTIFIED_DESC @30441
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x38
+    STR_VAR old_resref = ~SPWI426~
+            new_resref = EVAL ~%dvsel_pee_resref%~
+  END
