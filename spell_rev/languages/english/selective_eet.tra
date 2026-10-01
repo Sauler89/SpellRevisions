@@ -3,114 +3,114 @@
 (Conjuration)
 
 Level: 1
-Range: 0
+Range: Personal
 Duration: 8 hours
 Casting Time: 1 round
 Area of Effect: The caster
 Saving Throw: None
 
-By means of this spell, the wizard creates a magical field of force that sets the caster's base Armor Class to 6. The base Armor Class improves by 1 for every 4 levels of the caster, becoming AC 5 at 4th level, AC 4 at 8th level, and AC 3 at 12th level. The armor does not hinder movement, adds no weight or encumbrance, and does not prevent spellcasting. It lasts until dispelled or until the duration expires.~
+By means of this spell, the wizard creates a magical field of force that sets the caster's base Armor Class to 6. This improves by 1 AC for every four levels of the caster, up to a minimum base Armor Class of 3 at 12th level. This armor does not hinder movement, adds no weight or encumbrance, nor does it prevent spellcasting. It lasts until successfully dispelled or until the duration runs out.~
 
 @30110 = ~Burning Hands~
 @30111 = ~Burning Hands
 (Alteration)
 
 Level: 1
-Range: 10 ft.
+Range: Special
 Duration: Instant
 Casting Time: 1
-Area of Effect: 60-degree cone
+Area of Effect: Cone
 Saving Throw: None
 
-When the wizard casts this spell, a fan of searing flames shoots from the caster's fingertips. All creatures caught in the 10-ft. cone suffer 1d6 points of fire damage, plus an additional 1d6 for every 2 caster levels beyond 1st, to a maximum of 5d6 at 9th level. There is no Saving Throw.~
+When the wizard casts this spell, a cone of searing flames shoots from the caster's fingertips towards a designated point. The caster's hands must be held so as to send forth a fan-like sheet of flames: the thumbs must touch each other and the fingers must be spread. The burning hands send out 10-foot-long jets of flame in a horizontal arc of about 60 degrees in front of the wizard. All creatures caught in the flames suffer 1d6 points of fire damage plus 1d6 for every other 2 levels of the caster, up to a maximum of 5d6.~
 
 @30120 = ~True Strike~
 @30121 = ~True Strike
 (Divination)
 
 Level: 1
-Range: 0
+Range: Personal
 Duration: 3 rounds
 Casting Time: 1
 Area of Effect: The caster
 Saving Throw: None
 
-This spell grants the caster supernatural insight into an opponent's defenses. For 3 rounds, the caster gains a +4 bonus to THAC0 and a +5% bonus to the chance of scoring a critical hit.~
+This spell grants the caster otherworldly sight, resulting in preternatural accuracy for a short period. While the spell is in effect, attack rolls are made with a +4 bonus to THAC0 and the chance to score critical hits is increased by 5%.~
 
 @30130 = ~Shocking Grasp~
 @30131 = ~Shocking Grasp
 (Alteration)
 
 Level: 1
-Range: 0
-Duration: 1 turn or until discharged
+Range: Personal
+Duration: Special
 Casting Time: 1
 Area of Effect: 1 creature
 Saving Throw: Special
 
-When this spell is cast, the wizard's hand becomes charged with electrical energy. The caster gains a +4 bonus to hit with the charged touch. A successful melee hit inflicts 1d6 points of electrical damage and may stun the target for 1 round; a successful Saving Throw vs. Spell negates the stun. The damage increases by 1d6 for every 2 additional caster levels, to a maximum of 5d6 at 9th level, while the Saving Throw penalty increases by 1 at the same rate, to a maximum penalty of -4. A missed attack does not discharge the spell. The spell ends after a successful hit or after 1 turn.~
+When the wizard touches a creature while this spell is in effect, an electrical charge deals 1d6 points of damage and stuns the target for 1 round. If the target makes a successful Saving Throw vs. Spell, it is not stunned. For every two extra experience levels of the caster, the creature suffers an additional 1d6 points of damage and rolls its Saving Throw at an increased -1 penalty, to a maximum of 5d6 damage and a -4 Saving Throw penalty at 9th level. The spell expires once the caster makes a successful melee attack or after 1 turn has passed. The wizard gains a +4 bonus to hit the target.~
 
 @30140 = ~Chill Touch~
 @30141 = ~Chill Touch
 (Necromancy)
 
 Level: 1
-Range: 0
+Range: Personal
 Duration: 1 turn
 Casting Time: 1
-Area of Effect: The caster
+Area of Effect: Special
 Saving Throw: Special
 
-When the caster completes this spell, a blue glow encompasses the caster's hand. The caster gains a +4 bonus to hit with the touch, which is treated as a +1 enchanted weapon for determining what creatures it can strike. A successful hit against a living creature inflicts 1d6 points of cold damage and drains 1 point of Strength for 1 hour. A successful Saving Throw vs. Death negates the Strength drain but not the cold damage.~
+When the caster completes this spell, a blue glow encompasses the caster's hand. This energy attacks the life force of any living creature upon which the wizard makes a successful melee attack. The touched creature suffers 1d6 points of cold damage and loses 1 point of Strength for 1 hour; a successful Saving Throw vs. Death negates the ability drain. The wizard gains a +4 bonus to hit the target, and the touch is considered to be of +1 enchantment to determine what it can hit.~
 
 @30150 = ~Reflected Image~
 @30151 = ~Reflected Image
-(Illusion/Phantasm)
+(Illusion)
 
 Level: 1
-Range: 0
+Range: Personal
 Duration: 4 rounds + 1 round every 3 levels
 Casting Time: 1
 Area of Effect: The caster
 Saving Throw: None
 
-Upon casting this spell, the wizard creates a single illusory duplicate that moves and acts alongside the caster. Attacks directed at the caster have a 50% chance to strike the image instead. Unlike an ordinary reflected image, the duplicate is not destroyed merely by being struck and remains until the duration expires or it is removed by Dispel Magic or illusion-detecting magic. This spell cannot be combined with Mirror Image, and repeated castings do not create additional images.~
+Upon casting this spell, the wizard creates one illusory image of the caster that travels alongside them. The image performs all of the actions that the wizard does and seems to react normally to both physical and magical damage, so enemies cannot tell which one is real. There is a 50% chance that an attacker will attack the image and a 50% chance that the attacker will attack the caster. The image is immune to all forms of damage, but disappears if Dispel Magic or Detect Illusion is used against it, or when the spell duration runs out. This spell cannot be cast on anyone who is under the effects of Mirror Image, and multiple castings do not create additional images.~
 
 @30160 = ~Expeditious Retreat~
 @30161 = ~Expeditious Retreat
 (Alteration)
 
 Level: 1
-Range: 0
+Range: Personal
 Duration: 3 rounds
 Casting Time: 1
-Area of Effect: All allies in the area
+Area of Effect: Special
 Saving Throw: None
 
-This spell grants the caster and nearby allies extraordinary speed, increasing their movement rate to nearly three times normal for 3 rounds. The unnatural pace prevents affected creatures from attacking, casting spells, or using items and special abilities while the spell is active; they can do little except run.~
+When cast, this spell provides all friendly creatures in the area with an amazing fleetness of foot. The affected creatures' movement rate is almost tripled for the duration of the spell, but the excessively unnatural speed prevents them from taking almost any other actions except for running.~
 
 @30170 = ~Obscuring Mist~
 @30171 = ~Obscuring Mist
-(Conjuration/Summoning)
+(Conjuration)
 
 Level: 1
-Range: Visual range of the caster
+Range: Long
 Duration: 6 rounds
 Casting Time: 5
 Area of Effect: 20-ft. radius
 Saving Throw: None
 
-A bank of dense mist billows from the chosen point and obscures vision within the area. Creatures inside the cloud suffer a -2 penalty to THAC0 and have their visual range reduced. Ranged attacks made against a creature concealed by the mist suffer a -4 penalty to THAC0, whether the attacker is inside or outside the cloud. Creatures that do not rely on normal sight are unaffected by these penalties.~
+When this spell is cast, a misty bank of fog billows out from the designated point, obscuring all sight. Everyone within the cloud suffers a -2 penalty to attack rolls and has their line of sight halved. Anyone, inside or outside the cloud, trying to attack a creature concealed by the fog with ranged weapons does so with a -4 penalty to attack rolls. Creatures with blindsight, or that do not rely on sight, can fight within the cloud without penalties.~
 
 @30180 = ~Dimension Jump~
 @30181 = ~Dimension Jump
-(Conjuration/Summoning)
+(Conjuration)
 
 Level: 1
-Range: Visual range of the caster
+Range: Personal
 Duration: Instant
 Casting Time: 1
 Area of Effect: The caster
 Saving Throw: None
 
-This spell instantly transports the caster to a chosen point within sight. The caster disappears from the original position and reappears at the selected destination. Attacks, missiles, and spells already directed at the caster may lose their target as the wizard steps through the dimensional passage.~
+This spell transports the caster to any place within sight. When the spell is cast, a dimensional portal opens up in front of the caster, who immediately steps through. Upon passing through the portal, the caster arrives at the chosen destination. The caster always arrives at exactly the spot desired, and the dimensional door does not allow anyone or anything else to pass through. Spells about to be cast upon the wizard fail, and missiles about to hit the caster instead hit thin air.~
