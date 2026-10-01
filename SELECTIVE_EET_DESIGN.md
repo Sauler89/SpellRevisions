@@ -71,3 +71,12 @@ Before release, dynamically inject the Obscuring Mist scroll into appropriate EE
 4. Avoid duplicate stock entries when reinstalling or when another component has already added the new scroll.
 
 This distribution task is intentionally deferred until the arcane spell set is complete, so all new scrolls can be distributed coherently in one pass.
+
+
+### Resist Elements
+Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll resource is `DVRESSCR.ITM`. Add it to the unified EET scroll-distribution pass after the arcane spell-selection audit is complete.
+
+### Level-2 replacements and scroll inheritance
+- Detect Alignment replaces Know Alignment and converts existing learnable Know Alignment scrolls to the new Level-1 resource.
+- Battering Ram replaces Knock in-place and therefore inherits Knock's scroll distribution.
+- Sound Burst replaces Deafness in-place and therefore inherits Deafness's scroll distribution.
