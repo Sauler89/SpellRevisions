@@ -80,3 +80,11 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Detect Alignment replaces Know Alignment and converts existing learnable Know Alignment scrolls to the new Level-1 resource.
 - Battering Ram replaces Knock in-place and therefore inherits Knock's scroll distribution.
 - Sound Burst replaces Deafness in-place and therefore inherits Deafness's scroll distribution.
+
+
+### Level-3 decisions
+- Clairvoyance: accept the full SR replacement. The vanilla map-reveal function is intentionally removed in favor of SR's defensive combat divination.
+- Hold Person: import SR's stronger save penalty and larger splash radius, but retain vanilla casting time 3.
+- Dire Charm: import the SR duration buff.
+- Detect Illusion: import SR's larger radius and 4th-level illusion removal, while explicitly preserving vanilla removal of Non-Detection through resource-based dispelling.
+- No new Level-3 scroll distribution is required because all selected Level-3 changes are in-place replacements/revisions.
