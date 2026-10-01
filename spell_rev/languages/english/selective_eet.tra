@@ -206,3 +206,60 @@ Area of Effect: 1 creature
 Saving Throw: None
 
 Upon casting this spell, the recipient's resistance to all forms of elemental damage is increased by 25%. This effect lasts for the duration of the spell or until dispelled. Multiple castings of this spell are not cumulative.~
+
+
+@30300 = ~Clairvoyance~
+@30301 = ~Clairvoyance
+(Divination)
+
+Level: 3
+Range: Personal
+Duration: 2 turns
+Casting Time: 3
+Area of Effect: The caster
+Saving Throw: None
+
+This spell grants the caster an unnatural perception of things to come. For the duration of the spell, the caster receives instantaneous warnings of impending danger and cannot be surprised or backstabbed. In addition, the caster gains a +2 bonus to Armor Class and a +2 bonus to Saving Throws vs. Breath. Clairvoyance cannot be dispelled.~
+
+@30310 = ~Hold Person~
+@30311 = ~Hold Person
+(Enchantment/Charm)
+
+Level: 3
+Range: Long
+Duration: 1 turn
+Casting Time: 3
+Area of Effect: Target and enemies within 5 ft.
+Saving Throw: Spell negates
+
+This spell holds one or more humans, demihumans, or humanoid creatures rigidly immobile and in place for 1 turn. The effect is centered on the target selected by the caster, and every enemy within 5 ft. is also affected. Those who make a successful Saving Throw vs. Spell at a -2 penalty are unaffected. Undead creatures cannot be held by this spell.
+
+Held creatures cannot move or speak, but they remain aware of events around them and are helpless to change them. Being held does not stop any worsening of their condition due to wounds, disease, or poison.~
+
+@30320 = ~Dire Charm~
+@30321 = ~Dire Charm
+(Enchantment/Charm)
+
+Level: 3
+Range: Long
+Duration: 1 turn
+Casting Time: 3
+Area of Effect: 1 creature
+Saving Throw: Spell negates
+
+This spell functions in the same manner as Charm Person, but the target receives no bonus to the Saving Throw and the enchantment lasts longer. Dire Charm affects a single human, demihuman, or humanoid of man-size or smaller. If the target fails a Saving Throw vs. Spell, the creature regards the caster as a trusted friend and ally and will obey the caster's commands.
+
+If the caster harms or attempts to harm the charmed creature by some overt action, or if the charm is successfully dispelled, the effect ends. If two or more charm effects affect the same creature at once, the most recent charm takes precedence.~
+
+@30330 = ~Detect Illusion~
+@30331 = ~Detect Illusion
+(Divination)
+
+Level: 3
+Range: Long
+Duration: Instant
+Casting Time: 3
+Area of Effect: 30-ft. radius
+Saving Throw: None
+
+When this spell is cast at a point designated by the wizard, all hostile illusionary protections of 4th level or lower within a 30-ft. radius are dispelled. This includes Reflected Image, Blur, Invisibility, Mirror Image, Ghost Armor, Invisibility Sphere, Improved Invisibility, and Non-Detection. Magic resistance does not affect this spell.~
