@@ -214,3 +214,18 @@ DESIGNATED 70
 LABEL "dv-spell_rev-revised_saving_throws"
 REQUIRE_PREDICATE (ENGINE_IS ~soa tob bg2ee eet~) @8996
 INCLUDE ~spell_rev/components/saving_throw_tables.tpa~
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*------Selective EET Spell Revisions: Arcane Level 1------*/
+
+BEGIN ~Selective EET Spell Revisions - Arcane Level 1~
+DESIGNATED 100
+LABEL ~dv-selective-eet-arcane-level-1~
+REQUIRE_PREDICATE (GAME_IS ~eet~) ~This component is designed for EET.~
+REQUIRE_PREDICATE (!MOD_IS_INSTALLED ~setup-spell_rev.tp2~ 0) ~Do not install the original Spell Revisions main component together with the selective EET component.~
+
+LOAD_TRA ~spell_rev/languages/english/selective_eet.tra~
+INCLUDE ~spell_rev/components/selective_eet_arcane_level_1.tpa~
