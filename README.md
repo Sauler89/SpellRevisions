@@ -33,6 +33,7 @@ Completed modules currently included in component #0:
 - Arcane Level 2
 - Arcane Level 3
 - Arcane Level 4
+- Arcane Level 5
 
 Further arcane and divine levels will be added to the same component as their audits are completed.
 
@@ -124,6 +125,24 @@ The detailed spell-by-spell audit is in:
 
 `docs/selective-eet/arcane-level-4-audit.md`
 
+## Arcane Level 5
+
+Adapted buffs:
+
+- Domination: duration increased to 1 turn
+- Hold Monster: SR 5-ft. splash radius with vanilla 1 round/level duration retained
+- Feeblemind: Save vs. Spell penalty improved to -4
+- Lower Resistance: vanilla Abjuration school/range retained, 19% reduction at level 9 and SR's 2%/level scaling from level 10 onward up to 40%
+- Oracle: vanilla 120-ft. radius and Non-Detection removal retained, plus SR's expanded illusion-removal list
+
+New spell:
+
+- Mestil's Acid Sheath: dynamically allocated Level-5 spell with 50% acid resistance and 4d4 acid retaliation at close range
+
+The detailed spell-by-spell audit is in:
+
+`docs/selective-eet/arcane-level-5-audit.md`
+
 ## Scroll distribution policy
 
 New spell scrolls must not silently remove vanilla or higher-priority-mod scrolls.
@@ -143,6 +162,11 @@ Distribution must account for stores and, where relevant, other EET resources th
 ### Protection from Elemental Energy
 
 Protection from Elemental Energy uses its own scroll resource, `DVPEESCR.ITM`, and must be added dynamically during the final EET arcane-scroll distribution pass. Its hidden protection subspells are internal implementation resources and are not learnable spells.
+
+
+### Mestil's Acid Sheath
+
+Mestil's Acid Sheath uses its own scroll resource, `DVMASSCR.ITM`, because this project preserves Fire Shield (Blue) and its original scroll for Tactics compatibility. Add the Mestil scroll dynamically during the final EET arcane-scroll distribution pass.
 
 
 See `SELECTIVE_EET_DESIGN.md` for the full compatibility rules.
