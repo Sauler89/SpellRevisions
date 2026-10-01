@@ -1,0 +1,204 @@
+// Selective Spell Revisions for EET - Arcane Level 2
+// Finalized selection:
+//   Detect Alignment replaces Know Alignment and moves to level 1.
+//   Battering Ram replaces Knock.
+//   Sound Burst replaces Deafness.
+//   Strength, Ghoul Touch and Power Word Sleep receive selected SR buffs.
+//   Resist Elements is added as a new level-2 spell.
+//   Know Opponent is intentionally NOT imported.
+
+// -----------------------------------------------------------------------------
+// Detect Alignment: complete replacement of Know Alignment.
+// SR moves the spell to level 1. Keep the old Know Alignment resource as a
+// compatibility alias for already-compiled scripts/CREs, but redirect learnable
+// scrolls to the new level-1 resource and hide the old slot from spell selection.
+// -----------------------------------------------------------------------------
+
+LAF RES_NUM_OF_SPELL_NAME
+  STR_VAR spell_name = ~WIZARD_KNOW_ALIGNMENT~
+  RET dvsel_old_know_alignment_resref = spell_res
+END
+
+ADD_SPELL ~spell_rev/spwi1##/spwi126.spl~ 2 1 ~WIZARD_KNOW_ALIGNMENT~
+  SAY NAME1 @30200
+  SAY UNIDENTIFIED_DESC @30201
+
+LAF RES_NUM_OF_SPELL_NAME
+  STR_VAR spell_name = ~WIZARD_KNOW_ALIGNMENT~
+  RET dvsel_detect_alignment_resref = spell_res
+END
+
+OUTER_SET dvsel_detect_alignment_id = IDS_OF_SYMBOL (~spell~ ~WIZARD_KNOW_ALIGNMENT~)
+APPEND ~spell.ids~ ~%dvsel_detect_alignment_id% WIZARD_DETECT_ALIGNMENT~ UNLESS ~WIZARD_DETECT_ALIGNMENT~
+
+ACTION_IF NOT (~%dvsel_old_know_alignment_resref%~ STRING_EQUAL_CASE ~%dvsel_detect_alignment_resref%~) BEGIN
+  // Compatibility alias: anything that still calls the old resource gets Detect Alignment.
+  COPY ~spell_rev/spwi1##/spwi126.spl~ ~override/%dvsel_old_know_alignment_resref%.spl~
+    SAY NAME1 @30200
+    SAY UNIDENTIFIED_DESC @30201
+
+  // Convert every learnable Know Alignment scroll already present in the install.
+  COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+    LPF DVSEL_ITEM_TEACHES_SPELL
+      STR_VAR spell_resref = EVAL ~%dvsel_old_know_alignment_resref%~
+      RET teaches_spell
+    END
+    PATCH_IF teaches_spell BEGIN
+      LPF DVSEL_REPLACE_RESREF
+        INT_VAR ability_size = 0x38
+        STR_VAR old_resref = EVAL ~%dvsel_old_know_alignment_resref%~
+                new_resref = EVAL ~%dvsel_detect_alignment_resref%~
+      END
+      SAY NAME2 @30200
+      SAY IDENTIFIED_DESC @30201
+    END
+    BUT_ONLY_IF_IT_CHANGES
+
+  // Prevent the compatibility alias from appearing as a second level-2 choice.
+  ACTION_IF FILE_EXISTS_IN_GAME ~hidespl.2da~ BEGIN
+    COPY_EXISTING ~hidespl.2da~ ~override~
+      COUNT_2DA_COLS cols
+      PATCH_IF (cols = 4) BEGIN
+        COUNT_2DA_ROWS cols rows
+        SET dvsel_hide_found = 0
+        FOR (row = 0; row < rows; ++row) BEGIN
+          READ_2DA_ENTRY row 0 cols dvsel_hide_res
+          PATCH_IF (~%dvsel_hide_res%~ STRING_EQUAL_CASE ~%dvsel_old_know_alignment_resref%~) BEGIN
+            SET_2DA_ENTRY row 1 cols 1
+            SET dvsel_hide_found = 1
+          END
+        END
+        PATCH_IF (dvsel_hide_found = 0) BEGIN
+          INSERT_2DA_ROW rows cols ~%dvsel_old_know_alignment_resref% 1 0 0~
+        END
+        PRETTY_PRINT_2DA
+      END
+      BUT_ONLY_IF_IT_CHANGES
+  END
+END
+
+// -----------------------------------------------------------------------------
+// Battering Ram: complete replacement of Knock in SPWI207/SCRL91.
+// Keep WIZARD_KNOCK as a compatibility symbol and add the SR semantic alias.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi2##/spwi207.spl~ ~override/spwi207.spl~
+  SAY NAME1 @30210
+  SAY UNIDENTIFIED_DESC @30211
+COPY ~spell_rev/spwi2##/scrl91.itm~ ~override/scrl91.itm~
+  SAY NAME2 @30210
+  SAY IDENTIFIED_DESC @30211
+COPY ~spell_rev/spwi2##/spwi207a.bam~ ~override~
+     ~spell_rev/spwi2##/spwi207b.bam~ ~override~
+     ~spell_rev/spwi2##/spwi207c.bam~ ~override~
+APPEND ~spell.ids~ ~2207 WIZARD_BATTERING_RAM~ UNLESS ~WIZARD_BATTERING_RAM~
+
+// -----------------------------------------------------------------------------
+// Strength: selected SR buff (casting time 9 -> 2).
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi2##/spwi214.spl~ ~override/spwi214.spl~
+  SAY NAME1 @30220
+  SAY UNIDENTIFIED_DESC @30221
+COPY_EXISTING ~scrl98.itm~ ~override~
+  SAY NAME2 @30220
+  SAY IDENTIFIED_DESC @30221
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Ghoul Touch: SR mechanics, but keep vanilla casting time 1.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi2##/spwi218.spl~ ~override/spwi218.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 1 END
+  SAY NAME1 @30230
+  SAY UNIDENTIFIED_DESC @30231
+COPY ~spell_rev/spwi2##/ghoult.itm~ ~override~
+     ~spell_rev/spwi2##/spwi218d.spl~ ~override~
+COPY_EXISTING ~scrl1c.itm~ ~override~
+  SAY NAME2 @30230
+  SAY IDENTIFIED_DESC @30231
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Power Word Sleep: SR's HP/save upgrade, but keep vanilla Conjuration school.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi2##/spwi220.spl~ ~override/spwi220.spl~
+  WRITE_BYTE 0x25 2 // Conjuration/Summoning: preserve vanilla specialist interaction.
+  SAY NAME1 @30240
+  SAY UNIDENTIFIED_DESC @30241
+COPY ~spell_rev/spwi2##/spwi220i.eff~ ~override~
+COPY_EXISTING ~scrl6e.itm~ ~override~
+  SAY NAME2 @30240
+  SAY IDENTIFIED_DESC @30241
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Sound Burst: complete replacement of Deafness in SPWI223/SCRLA2.
+// -----------------------------------------------------------------------------
+
+ADD_PROJECTILE ~spell_rev/projectles/dvsndbr.pro~
+COPY ~spell_rev/spwi2##/spwi223.spl~ ~override/spwi223.spl~
+  SAY NAME1 @30250
+  SAY UNIDENTIFIED_DESC @30251
+COPY ~spell_rev/spwi2##/spwi223d.spl~ ~override~
+  WRITE_SHORT 0x98 %dvsndbr%
+COPY ~spell_rev/spwi2##/spwi223i.eff~ ~override~
+     ~spell_rev/spwi2##/dvsburst.vvc~ ~override~
+     ~spell_rev/spwi2##/dvsburst.bam~ ~override~
+COPY ~spell_rev/spwi2##/scrla2.itm~ ~override/scrla2.itm~
+  SAY NAME2 @30250
+  SAY IDENTIFIED_DESC @30251
+APPEND ~spell.ids~ ~2223 WIZARD_SOUND_BURST~ UNLESS ~WIZARD_SOUND_BURST~
+
+// -----------------------------------------------------------------------------
+// Resist Elements: genuinely new level-2 spell.
+// If another mod has already registered the same IDS symbol, reuse its slot.
+// Create our own scroll resource now; EET distribution is deferred.
+// -----------------------------------------------------------------------------
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_RESIST_ELEMENTS~)) BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_RESIST_ELEMENTS~
+    RET dvsel_resist_elements_resref = spell_res
+  END
+
+  COPY ~spell_rev/spwi2##/spwi225.spl~ ~override/%dvsel_resist_elements_resref%.spl~
+    SAY NAME1 @30260
+    SAY UNIDENTIFIED_DESC @30261
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPWI225~
+              new_resref = EVAL ~%dvsel_resist_elements_resref%~
+    END
+END ELSE BEGIN
+  ADD_SPELL ~spell_rev/spwi2##/spwi225.spl~ 2 2 ~WIZARD_RESIST_ELEMENTS~
+    SAY NAME1 @30260
+    SAY UNIDENTIFIED_DESC @30261
+
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_RESIST_ELEMENTS~
+    RET dvsel_resist_elements_resref = spell_res
+  END
+
+  COPY_EXISTING ~%dvsel_resist_elements_resref%.spl~ ~override~
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPWI225~
+              new_resref = EVAL ~%dvsel_resist_elements_resref%~
+    END
+    BUT_ONLY_IF_IT_CHANGES
+END
+
+COPY ~spell_rev/spwi2##/dvpr210a.bam~ ~override~
+COPY ~spell_rev/spwi2##/scrl86.itm~ ~override/dvresscr.itm~
+  SAY NAME2 @30260
+  SAY IDENTIFIED_DESC @30261
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x38
+    STR_VAR old_resref = ~SPWI225~
+            new_resref = EVAL ~%dvsel_resist_elements_resref%~
+  END
+
+// Know Opponent is intentionally excluded from this project.
