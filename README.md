@@ -1,50 +1,95 @@
-Spell Revisions aims to fix, tweak, and enhance arcane and divine spells in Baldur's Gate II, either the classical or the enhanced editions, including [BGT](https://github.com/SpellholdStudios/BGT-WeiDU) and [EET](https://github.com/Gibberlings3/EET).
+# Selective Spell Revisions for EET
 
-The mod comes with documentation that you can find [here](./readme-spell_rev.html). Detailed lists of spells can be consulted [here](https://gibberlings3.github.io/SpellRevisions/).
+A personal, compatibility-oriented spell overhaul for **Enhanced Edition Trilogy (EET)**, built from **Spell Revisions v4.21** as a source base while deliberately selecting only the changes wanted for this installation.
 
-note(s):
-* The spell documentation, both the one shipped with the mod and the one in [GitHub](https://gibberlings3.github.io/SpellRevisions/), has *not* been updated to reflect the changes since the 4.18beta. The in-game documentation is of course, fully updated.
+This is **not** the original Spell Revisions installer. The project has its own main WeiDU component and is designed around a load order where **Tactics Remix**, **IWDification**, and selected **ZSTweaks** components take priority.
 
-# A. Latest release.
+## Design goals
 
-Latest release is 4.21 downloadable from the releases sidebar.
+- Preserve Tactics Remix spell behavior whenever its Spell Tweaks component substantially changes the same spell.
+- Preserve selected ZSTweaks spell overhauls where they are actually used.
+- Avoid duplicate IWDification spells.
+- Allow a Spell Revisions implementation to supersede IWDification when it is a deliberately selected improvement.
+- Import only Spell Revisions changes judged to be buffs, useful fixes, desirable replacements, or worthwhile additions.
+- Skip pure nerfs and mixed rebalance changes unless explicitly approved.
+- Keep classic Baldur's Gate / Enhanced Edition-style English spell descriptions instead of the reformatted Spell Revisions presentation.
+- Treat every spell replacement explicitly rather than inheriting all of Spell Revisions wholesale.
 
-From the github page, click on releases in the side-bar to download it. If you are feeling *really* adventurous, then you can download the absolute latest by clicking on the code button and then downloading the zip. Note that this is a *source release*; it just bundles the files in the GitHub repository in an archive and does not have any executables, so for the installation you will need the command line -- see section below. It is slightly more inconvenient for users than the standard release, but it allows for faster and more timely releases.
+## Main component
 
-# B. Installation.
+WeiDU component:
 
-Installation is like any other WeiDU mod -- see [A New Player’s Guide to Installing and Playing Mods](https://www.gibberlings3.net/forums/topic/33164-a-new-player%E2%80%99s-guide-to-installing-and-playing-mods/).
+- **#0 — Selective Spell Revisions for EET**
 
-## B. 1. Command line.
+The installer exposes this project as the main component. The original Spell Revisions main component is no longer part of this branch's installer.
 
-Assuming you have WeiDU [^1] installed and on the executable path [^2], just download the release zip file, unzip it with whatever archive unzipper your platform supports into some temporary location, and copy the folder [^3] `spell_rev` to your Baldur's Gate install directory. Then open a command line, change directory to the BG installation dir and do
+Completed spell modules are aggregated by:
 
-```bash
-weinstall spell_rev
-```
+`spell_rev/components/selective_eet_main.tpa`
 
-and install the components you want.
+At present the completed module is:
 
-## B. 2. Double-clicking.
+- Arcane Level 1
 
-If the command line is proving to be too difficult (e.g. Windows platform, do not have `weinstall` in the executable path, etc.), you can install as usual by double clicking the executable installer. For a *source release* that does not come with an executable installer, you can proceed as follows:
+Further arcane and divine levels will be added to the same component as their audits are completed.
 
-  * Do the same download, copy into BG installation dir, etc. as in previous point B. 1.
+## Arcane Level 1
 
-  * Download any, relatively recent updated, mod with such an installer, e.g. [Tweaks Anthology](https://www.gibberlings3.net/files/file/973-the-tweaks-anthology/).
+Included Spell Revisions mechanics:
 
-  * Grab its executable installer, rename it as `setup-spell_rev.exe` and drop it on the parent dir of `spell_rev` (e. g. the folder with the `chitin.key` file).
+- Mage Armor
+- Burning Hands
+- Shocking Grasp
+- Chill Touch
+- Reflected Image
 
-  * Double-click the executable and proceed as usual.
+Accepted replacements / additions:
 
-[^1]: latest version can be grabbed from [here](https://github.com/WeiDUorg/weidu/releases).
+- True Strike replaces Infravision
+- Obscuring Mist is added as a new spell; Blindness remains intact
+- Dimension Jump is added as a new spell
+- Expeditious Retreat uses the selected SR implementation and supersedes IWDification's copy when present
 
-[^2]: precise details depend on the platform.
+Adapted change:
 
-[^3]: for a source release, the top folder is *not* what one wants, rather it is the `spell_rev` subfolder.
+- Find Familiar: only the Universal-school change is imported
 
-# C. Mod order.
+The detailed spell-by-spell audit is in:
 
-For general advice on install order, you can consult various submitted mod load orders at [Baldur's Gate Install Order List Repository](https://github.com/morpheus562/Baldurs-Gate-Install-Order-List-Repository).
+`docs/selective-eet/arcane-level-1-audit.md`
 
-SR's main component does wholesale spell replacement, so it should be installed relatively early in the install order, certainly before Tweaks Anthology and SCS. On the other hand the "Update NPC spellbooks" component should be installed after all NPC mods.
+## Scroll distribution policy
+
+New spell scrolls must not silently remove vanilla or higher-priority-mod scrolls.
+
+### Dimension Jump
+
+Spell Revisions normally reuses the existing Dimension Door scroll resource, which naturally inherits its existing placements. Because this project preserves other spells rather than blindly replacing their resources, final integration must verify the original SR distribution behavior and ensure **Dimension Jump receives proper EET scroll distribution without destroying an existing scroll**.
+
+### Obscuring Mist
+
+Spell Revisions normally replaces Blindness and therefore reuses Blindness's scroll distribution. This project keeps Blindness, so Obscuring Mist uses its own scroll resource.
+
+Before release, the installer must **dynamically distribute the new Obscuring Mist scroll** through the EET installation. The preferred approach is to identify relevant existing level-1 arcane scroll placements (especially Blindness placements) and add the new Obscuring Mist scroll alongside them rather than replacing the original item.
+
+Distribution must account for stores and, where relevant, other EET resources that can carry learnable scrolls.
+
+See `SELECTIVE_EET_DESIGN.md` for the full compatibility rules.
+
+## Credits and source base
+
+This project is derived from and reuses code/assets from **Spell Revisions** by its original authors and maintainers at Gibberlings3.
+
+Upstream project:
+https://github.com/Gibberlings3/SpellRevisions
+
+Spell Revisions documentation:
+https://gibberlings3.github.io/SpellRevisions/
+
+The upstream documentation may lag behind the current v4.21 source; when documentation and source differ, this project audits the actual source used by the installer.
+
+## Status
+
+**Early development / alpha.**
+
+The current branch is intended for development and controlled testing on EET, not yet as a finished general-purpose release.
