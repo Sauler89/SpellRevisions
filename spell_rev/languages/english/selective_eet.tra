@@ -263,3 +263,69 @@ Area of Effect: 30-ft. radius
 Saving Throw: None
 
 When this spell is cast at a point designated by the wizard, all hostile illusionary protections of 4th level or lower within a 30-ft. radius are dispelled. This includes Reflected Image, Blur, Invisibility, Mirror Image, Ghost Armor, Invisibility Sphere, Improved Invisibility, and Non-Detection. Magic resistance does not affect this spell.~
+
+
+@30400 = ~Confusion~
+@30401 = ~Confusion
+(Enchantment/Charm)
+
+Level: 4
+Range: Long
+Duration: 5 rounds + 1 round every 6 levels
+Casting Time: 4
+Area of Effect: 30-ft. radius
+Saving Throw: Spell negates
+
+This spell causes confusion in one or more creatures within the area, creating indecision and the inability to take effective action. All hostile creatures within the area of effect must make a Saving Throw vs. Spell at a -2 penalty. Those who save are unaffected. Those who fail will either go berserk, stand confused, or wander about for the duration of the spell. A confused creature that is attacked perceives the attacker as an enemy and acts according to its nature.~
+
+@30410 = ~Break Enchantment~
+@30411 = ~Break Enchantment
+(Abjuration)
+
+Level: 4
+Range: Short
+Duration: Permanent
+Casting Time: 4
+Area of Effect: 1 creature
+Saving Throw: None
+
+Upon casting this spell, the wizard is able to free a creature from enchantments and curses. Break Enchantment can reverse the effects of confusion and feeblemindedness, free a victim from petrification, magical sleep, or charm, and break the effects of a curse. It does not remove a curse from a cursed shield, weapon, or suit of armor, but allows a creature afflicted by such an item to remove it. Certain special curses may require a particular caster level, ritual, or other means to counter.~
+
+@30420 = ~Secret Word~
+@30421 = ~Secret Word
+(Abjuration)
+
+Level: 4
+Range: Long
+Duration: Instant
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: None
+
+When a Secret Word is uttered, it dispels the magical protections affecting the target according to the normal Secret Word rules. The spell retains its existing protection-removal coverage, but is cast much more quickly and from greater range. Magic resistance does not affect this spell.~
+
+@30430 = ~Farsight~
+@30431 = ~Farsight
+(Divination)
+
+Level: 4
+Range: Personal
+Duration: 5 turns
+Casting Time: 4
+Area of Effect: Special
+Saving Throw: None
+
+When Farsight is cast, the caster is able to view an area of an unexplored map. After casting the spell, select a section of the map to view. For the duration of the spell, the caster can observe that area and note creatures and fortifications within it.~
+
+@30440 = ~Protection from Elemental Energy~
+@30441 = ~Protection from Elemental Energy
+(Abjuration)
+
+Level: 4
+Range: Touch
+Duration: 1 turn/level
+Casting Time: 5
+Area of Effect: 1 creature
+Saving Throw: None
+
+When this spell is cast, the recipient receives complete protection from one type of elemental damage selected by the caster: acid, cold, fire, or lightning. The chosen damage type is resisted completely for the duration of the spell. Multiple castings are not cumulative, but a different element may be selected each time.~
