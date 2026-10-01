@@ -31,6 +31,7 @@ Completed modules currently included in component #0:
 
 - Arcane Level 1
 - Arcane Level 2
+- Arcane Level 3
 
 Further arcane and divine levels will be added to the same component as their audits are completed.
 
@@ -82,6 +83,25 @@ Know Opponent is intentionally not imported.
 The detailed spell-by-spell audit is in:
 
 `docs/selective-eet/arcane-level-2-audit.md`
+
+## Arcane Level 3
+
+Accepted replacement:
+
+- Clairvoyance uses the full SR combat-oriented replacement of the vanilla map-reveal spell
+
+Included buff:
+
+- Dire Charm
+
+Adapted buffs:
+
+- Hold Person: SR save/AoE improvement with vanilla casting time 3 retained
+- Detect Illusion: SR radius/4th-level illusion expansion while retaining vanilla removal of Non-Detection
+
+The detailed spell-by-spell audit is in:
+
+`docs/selective-eet/arcane-level-3-audit.md`
 
 ## Scroll distribution policy
 
