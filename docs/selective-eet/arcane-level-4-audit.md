@@ -6,7 +6,7 @@ Primary sources for this audit are the supplied Spell Revisions v4.21, Tactics R
 
 | Spell | Decision | Reason |
 |---|---|---|
-| Confusion | INCLUDE — ADAPTED | SR doubles the area (15 ft. -> 30 ft.) and increases range, while keeping the same -2 Spell save. SR shortens vanilla's scaling duration to a fixed 5 rounds. Import the SR range/AoE improvement but retain vanilla's 5 rounds + 1 round/6 levels duration, making this a strict buff. |
+| Confusion | INCLUDE — ADAPTED | SR doubles the area (15 ft. -> 30 ft.) while retaining the same effective range and -2 Spell save. SR shortens vanilla's scaling duration to a fixed 5 rounds. Import the SR AoE improvement but retain vanilla's 5 rounds + 1 round/6 levels duration, making this a strict buff. |
 | Dimension Door | KEEP VANILLA | SR disables Dimension Door because it introduces Dimension Jump. This project already added Dimension Jump separately at Level 1, so Dimension Door remains available as its own spell. |
 | Fire Shield (Blue) | SKIP / TACTICS REMIX | Tactics Remix Spell Tweaks directly patches both Fire Shields and their interaction/repeating-damage behavior. SR also repurposes the blue slot around Mestil's Acid Sheath. Preserve Tactics and the existing spell. |
 | Ice Storm | SKIP / TACTICS REMIX + ZSTWEAKS | Tactics Remix adds its area/damage-type handling to Ice Storm and ZSTweaks component 220 further modifies its damage. Do not overwrite either. |
@@ -36,7 +36,7 @@ Primary sources for this audit are the supplied Spell Revisions v4.21, Tactics R
 ## Proposed selected set
 
 ### INCLUDE — ADAPTED
-- Confusion — SR range/AoE, vanilla scaling duration retained
+- Confusion — SR 30-ft. AoE, vanilla range and scaling duration retained
 - Break Enchantment — replaces Remove Curse; retain vanilla casting time 4 and preserve any existing ZSTweaks Rashad's Talon hook
 - Secret Word — retain vanilla Abjuration/protection coverage, import SR casting time 1 and longer range
 
@@ -85,10 +85,7 @@ In-place changes inherit existing scroll distribution:
 - Secret Word
 - Farsight
 
-Protection from Elemental Energy is genuinely new and therefore needs:
-- a unique learnable scroll resource;
-- dynamic EET distribution during the unified arcane-scroll pass;
-- no reuse/overwrite of SR's upstream SCRL6H placement unless explicitly verified safe, because this project retains the original protection spells instead of reproducing SR's complete spell reshuffle.
+Protection from Elemental Energy is genuinely new. It is implemented with a dynamically allocated spell resource and four hidden SR-derived elemental-protection subspells, so it always grants the advertised 100% protection without overwriting the retained Tactics/vanilla protection spells. It uses the dedicated learnable scroll resource `DVPEESCR.ITM`, which still needs dynamic EET distribution during the unified arcane-scroll pass.
 
 Deferred new-scroll list now includes:
 - Obscuring Mist
@@ -98,4 +95,6 @@ Deferred new-scroll list now includes:
 
 ## Status
 
-**OPEN — awaiting user approval of the proposed Level-4 selection before implementation in component #0.**
+**CLOSED for spell selection and implemented in component #0.**
+
+Further Level-4 changes should be limited to technical fixes found during install/in-game testing or the deferred scroll-distribution pass.
