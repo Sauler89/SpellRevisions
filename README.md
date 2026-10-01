@@ -32,6 +32,7 @@ Completed modules currently included in component #0:
 - Arcane Level 1
 - Arcane Level 2
 - Arcane Level 3
+- Arcane Level 4
 
 Further arcane and divine levels will be added to the same component as their audits are completed.
 
@@ -103,6 +104,26 @@ The detailed spell-by-spell audit is in:
 
 `docs/selective-eet/arcane-level-3-audit.md`
 
+## Arcane Level 4
+
+Adapted buffs:
+
+- Confusion: SR 30-ft. area with vanilla scaling duration retained
+- Break Enchantment completely replaces Remove Curse, with vanilla casting time 4 retained and the ZSTweaks Rashad's Talon hook preserved when present
+- Secret Word keeps the installed Abjuration/protection-removal behavior while receiving SR's casting time 1 and longer range
+
+Included buff:
+
+- Farsight: SR 5-turn duration
+
+New spell:
+
+- Protection from Elemental Energy: dynamically allocated Level-4 spell with four hidden SR-derived subspells for 100% Acid, Cold, Fire, or Lightning protection
+
+The detailed spell-by-spell audit is in:
+
+`docs/selective-eet/arcane-level-4-audit.md`
+
 ## Scroll distribution policy
 
 New spell scrolls must not silently remove vanilla or higher-priority-mod scrolls.
@@ -118,6 +139,11 @@ Spell Revisions normally replaces Blindness and therefore reuses Blindness's scr
 Before release, the installer must **dynamically distribute the new Obscuring Mist scroll** through the EET installation. The preferred approach is to identify relevant existing level-1 arcane scroll placements (especially Blindness placements) and add the new Obscuring Mist scroll alongside them rather than replacing the original item.
 
 Distribution must account for stores and, where relevant, other EET resources that can carry learnable scrolls.
+
+### Protection from Elemental Energy
+
+Protection from Elemental Energy uses its own scroll resource, `DVPEESCR.ITM`, and must be added dynamically during the final EET arcane-scroll distribution pass. Its hidden protection subspells are internal implementation resources and are not learnable spells.
+
 
 See `SELECTIVE_EET_DESIGN.md` for the full compatibility rules.
 
