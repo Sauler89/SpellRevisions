@@ -60,3 +60,15 @@ Everything else at arcane level 1 is deliberately left to vanilla/Tactics Remix/
 - When IWDification is installed, Expeditious Retreat must reuse/patch its registered WIZARD_EXPEDITIOUS_RETREAT resource rather than creating a duplicate.
 - Existing spells retain classic BG/EE description formatting. New spells receive descriptions written in that same classic format rather than Spell Revisions' modern formatted style.
 - Avoid importing unrelated SR school changes when the selected buff does not require them.
+
+
+## Status
+
+**CLOSED for spell selection.**
+
+Arcane Level 1 is now part of the project's main component (#0). Further changes at this level should be limited to technical fixes discovered during installation/game testing or to the deferred scroll-distribution pass.
+
+### Deferred scroll work
+
+- **Dimension Jump:** verify and reproduce the intended upstream SR scroll distribution in EET without consuming/replacing another spell's scroll.
+- **Obscuring Mist:** keep Blindness and its scroll untouched; dynamically distribute the new unique Obscuring Mist scroll later, preferably by adding it alongside appropriate existing level-1 scroll placements.
