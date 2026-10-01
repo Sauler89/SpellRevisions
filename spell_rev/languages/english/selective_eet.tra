@@ -329,3 +329,84 @@ Area of Effect: 1 creature
 Saving Throw: None
 
 When this spell is cast, the recipient receives complete protection from one type of elemental damage selected by the caster: acid, cold, fire, or lightning. The chosen damage type is resisted completely for the duration of the spell. Multiple castings are not cumulative, but a different element may be selected each time.~
+
+
+@30500 = ~Domination~
+@30501 = ~Domination
+(Enchantment/Charm)
+
+Level: 5
+Range: Visual range of the caster
+Duration: 1 turn
+Casting Time: 5
+Area of Effect: 1 creature
+Saving Throw: Spell negates
+
+This spell enables the caster to control the actions of one creature through a telepathic link. The target must make a Saving Throw vs. Spell at a -2 penalty or remain under the caster's control for 1 turn. Unlike Mental Domination, the victim has no opportunity to break free merely because it is ordered to act against its nature.~
+
+@30510 = ~Hold Monster~
+@30511 = ~Hold Monster
+(Enchantment/Charm)
+
+Level: 5
+Range: 40 ft.
+Duration: 1 round/level
+Casting Time: 5
+Area of Effect: Target and enemies within 5 ft.
+Saving Throw: Spell negates
+
+This spell holds creatures of any type rigidly immobile and in place. The effect is centered on the selected target, and every enemy within 5 ft. is also affected. Those who make a successful Saving Throw vs. Spell at a -2 penalty are unaffected. Undead creatures cannot be held by this spell.
+
+Held creatures cannot move or speak, but they remain aware of events around them. Being held does not prevent wounds, disease, poison, or other ongoing conditions from worsening.~
+
+@30520 = ~Feeblemind~
+@30521 = ~Feeblemind
+(Enchantment/Charm)
+
+Level: 5
+Range: 40 ft.
+Duration: Permanent
+Casting Time: 5
+Area of Effect: 1 creature
+Saving Throw: Spell negates
+
+Feeblemind causes the subject's intellect to degenerate into that of a simple beast of burden. The victim must make a Saving Throw vs. Spell at a -4 penalty or remain feebleminded until the effect is successfully dispelled or otherwise cured.~
+
+@30530 = ~Lower Resistance~
+@30531 = ~Lower Resistance
+(Abjuration)
+
+Level: 5
+Range: 40 ft.
+Duration: 1 round/level
+Casting Time: 5
+Area of Effect: 1 creature
+Saving Throw: None
+
+When cast upon a target creature, this spell lowers its Magic Resistance automatically. At 9th level the reduction is 19%. From 10th level onward the spell lowers Magic Resistance by 2% per caster level, up to a maximum reduction of 40% at 20th level. The target receives no Saving Throw and its Magic Resistance does not protect against this spell. The effect is cumulative with additional castings and cannot be dispelled.~
+
+@30540 = ~Oracle~
+@30541 = ~Oracle
+(Divination)
+
+Level: 5
+Range: Personal
+Duration: Instant
+Casting Time: 5
+Area of Effect: 120-ft. radius
+Saving Throw: None
+
+When this spell is cast, hostile illusionary protections within a 120-ft. radius of the caster are dispelled. Oracle affects Reflected Image, Blur, Invisibility, Mirror Image, Non-Detection, Ghost Armor, Invisibility Sphere, Improved Invisibility, Shadow Door, Pixie Dust, Mislead, Project Image, and Mass Invisibility. The caster can control whom the spell affects, so allies are not stripped of their protections.~
+
+@30550 = ~Mestil's Acid Sheath~
+@30551 = ~Mestil's Acid Sheath
+(Conjuration)
+
+Level: 5
+Range: Personal
+Duration: 2 turns
+Casting Time: 4
+Area of Effect: The caster
+Saving Throw: None
+
+This spell surrounds the caster with a caustic shield. While protected, the caster gains 50% resistance to acid damage. Any opponent that strikes the caster with a weapon or spell from within 5 ft. suffers 4d4 points of acid damage. Multiple castings are not cumulative, but the spell can be used together with similar magical protections. Magic resistance does not prevent the retaliatory acid damage.~
