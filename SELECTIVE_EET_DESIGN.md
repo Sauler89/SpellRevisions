@@ -97,3 +97,13 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Farsight: use the SR 5-turn duration.
 - Protection from Elemental Energy: add as a new dynamically allocated Level-4 spell. Do not reuse IWDification's SPWI426. The selection menu points to four hidden SR-derived subspells (DVPEEFIR, DVPEECOL, DVPEEELE, DVPEEACI) so the spell always provides 100% protection without replacing the retained elemental-protection spells.
 - Protection from Elemental Energy scroll: `DVPEESCR.ITM`; add it during the unified EET arcane-scroll distribution pass.
+
+
+### Level-5 decisions
+- Domination: preserve the installed spell and extend its charm duration from 8 rounds to 1 turn.
+- Hold Monster: preserve vanilla 1 round/level duration and -2 save penalty, but use SR's 5-ft. splash area.
+- Feeblemind: preserve the installed spell and strengthen its Save vs. Spell penalty from -2 to -4.
+- Lower Resistance: use SR's scalable implementation, but preserve the vanilla Abjuration school and 40-ft. range. Use 19% at caster level 9, then 2%/level from level 10 onward, capped at 40%.
+- Oracle: preserve vanilla 120-ft. radius and Non-Detection removal; add SR coverage for Blur, Ghost Armor, Invisibility Sphere, Pixie Dust, Mislead, Project Image, and Mass Invisibility.
+- Mestil's Acid Sheath: add as a new dynamically allocated Level-5 spell. Never reuse IWDification's SPWI526 (Summon Shadow). Its retaliation subspell is renamed to `DVMASDMG.SPL`.
+- Mestil's Acid Sheath scroll: `DVMASSCR.ITM`; add it during the unified EET arcane-scroll distribution pass.
