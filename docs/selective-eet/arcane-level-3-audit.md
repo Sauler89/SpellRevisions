@@ -6,7 +6,7 @@ Spell Revisions v4.21 source is authoritative when it differs from the older pub
 
 | Spell | Decision | Reason |
 |---|---|---|
-| Clairvoyance | REVIEW / REPLACEMENT | SR completely repurposes the vanilla map-reveal utility spell into a 2-turn, non-dispellable defensive divination granting immunity to surprise/backstab and +2 AC / saves vs. Breath. Much stronger in combat, but it removes the original function rather than simply buffing it. User decision recommended. |
+| Clairvoyance | ACCEPT REPLACEMENT | User-approved full SR replacement. The vanilla map-reveal utility is replaced by SR's 2-turn, non-dispellable defensive divination granting immunity to surprise/backstab and +2 AC / saves vs. Breath. |
 | Remove Magic | SKIP / TACTICS REMIX | Tactics Remix has a dedicated Remove/Dispel Magic cast-level component and its AI is built around that behavior. Do not overwrite it with SR. |
 | Flame Arrow | SKIP / MIXED | SR gains rapid missile scaling and can spread extra arrows among opponents, but each missile is much weaker than vanilla and SR caps at five arrows. At higher levels vanilla has substantially higher focused damage. |
 | Fireball | SKIP / ZSTWEAKS | ZSTweaks component 446 deliberately improves Fireball-type damage scaling and/or visuals. Preserve ZS. SR is also a buff over vanilla (larger radius/range and -2 Breath save), but ZS has priority. |
@@ -32,7 +32,10 @@ Spell Revisions v4.21 source is authoritative when it differs from the older pub
 | Dispel Magic | SKIP / TACTICS REMIX | Tactics Remix has a dedicated Remove/Dispel Magic cast-level component and scripts expect its spell-system behavior. Preserve Tactics. |
 | Icelance | SKIP / IWDIFICATION + ZSTWEAKS | IWDification already supplies WIZARD_ICELANCE/SPWI327 and distributes its scroll. ZSTweaks component 452 further scales Icelance damage up to 10d6, which is substantially stronger than SR's fixed 5d6 implementation. |
 
-## Proposed selected set
+## Final selected set
+
+### ACCEPT REPLACEMENT
+- Clairvoyance — full SR combat-oriented replacement of the vanilla map-reveal spell
 
 ### INCLUDE
 - Dire Charm
@@ -40,9 +43,6 @@ Spell Revisions v4.21 source is authoritative when it differs from the older pub
 ### INCLUDE — ADAPTED
 - Hold Person — SR save/radius improvement, vanilla casting time 3 retained
 - Detect Illusion — SR radius/4th-level illusion expansion, while retaining vanilla ability to remove Non-Detection
-
-### REVIEW before implementation
-- Clairvoyance — SR replacement is much stronger in combat but completely replaces the vanilla map-reveal function
 
 Everything else is deliberately left to vanilla, Tactics Remix, ZSTweaks, or IWDification.
 
@@ -70,12 +70,14 @@ The previously stated user exceptions for ZSTweaks are Magic Missile and Chromat
 
 ## Scroll implications
 
-No new Level-3 spell is currently proposed, so there is no additional new-scroll distribution task.
+No new Level-3 spell is added, so there is no additional new-scroll distribution task.
 
-If Clairvoyance is accepted, it is an in-place replacement and inherits the existing Clairvoyance scroll distribution.
+Clairvoyance is an in-place replacement and inherits the existing Clairvoyance scroll distribution.
 
 Hold Person, Dire Charm, and Detect Illusion are in-place revisions and retain their existing scroll resources/distribution.
 
 ## Status
 
-**OPEN — awaiting user decision on Clairvoyance and approval of the proposed selection before implementation in component #0.**
+**CLOSED for spell selection and implemented in component #0.**
+
+Further Level-3 changes should be limited to technical fixes found during install/in-game testing.
