@@ -1,0 +1,282 @@
+// Selective EET Spell Revisions - Arcane Level 1
+// Priority model: Tactics Remix / ZSTweaks > IWDification > selected SR buffs.
+// This component is intentionally independent from the original SR main component.
+
+DEFINE_PATCH_FUNCTION ~DVSEL_REPLACE_RESREF~
+  INT_VAR
+    ability_size = 0x28
+  STR_VAR
+    old_resref = ~~
+    new_resref = ~~
+BEGIN
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_LONG  0x64 abilities_off
+    READ_SHORT 0x68 num_abilities
+    READ_LONG  0x6a effects_off
+    READ_SHORT 0x6e global_effect_index
+    READ_SHORT 0x70 num_global_effects
+
+    FOR (i = 0; i < num_global_effects; ++i) BEGIN
+      SET effect_off = effects_off + 0x30 * (global_effect_index + i)
+      READ_ASCII (effect_off + 0x14) resource (8) NULL
+      PATCH_IF (~%resource%~ STRING_EQUAL ~%old_resref%~) BEGIN
+        WRITE_ASCIIE (effect_off + 0x14) ~%new_resref%~ #8
+      END
+    END
+
+    FOR (i = 0; i < num_abilities; ++i) BEGIN
+      SET ability_off = abilities_off + ability_size * i
+      READ_SHORT (ability_off + 0x1e) num_effects
+      READ_SHORT (ability_off + 0x20) effect_index
+      FOR (j = 0; j < num_effects; ++j) BEGIN
+        SET effect_off = effects_off + 0x30 * (effect_index + j)
+        READ_ASCII (effect_off + 0x14) resource (8) NULL
+        PATCH_IF (~%resource%~ STRING_EQUAL ~%old_resref%~) BEGIN
+          WRITE_ASCIIE (effect_off + 0x14) ~%new_resref%~ #8
+        END
+      END
+    END
+  END
+END
+
+DEFINE_PATCH_FUNCTION ~DVSEL_ITEM_TEACHES_SPELL~
+  STR_VAR
+    spell_resref = ~~
+  RET
+    teaches_spell
+BEGIN
+  SET teaches_spell = 0
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_LONG  0x64 abilities_off
+    READ_SHORT 0x68 num_abilities
+    READ_LONG  0x6a effects_off
+
+    FOR (i = 0; i < num_abilities; ++i) BEGIN
+      SET ability_off = abilities_off + 0x38 * i
+      READ_SHORT (ability_off + 0x1e) num_effects
+      READ_SHORT (ability_off + 0x20) effect_index
+      FOR (j = 0; j < num_effects; ++j) BEGIN
+        SET effect_off = effects_off + 0x30 * (effect_index + j)
+        READ_SHORT effect_off opcode
+        PATCH_IF (opcode = 147) BEGIN
+          READ_ASCII (effect_off + 0x14) resource (8) NULL
+          PATCH_IF (~%resource%~ STRING_EQUAL ~%spell_resref%~) BEGIN
+            SET teaches_spell = 1
+          END
+        END
+      END
+    END
+  END
+END
+
+// -----------------------------------------------------------------------------
+// Existing spells: import only the selected SR mechanics.
+// Existing scrolls are patched in place instead of being overwritten wholesale.
+// -----------------------------------------------------------------------------
+
+// Mage Armor (Armor): scaling base AC is the selected SR buff.
+COPY ~spell_rev/spwi1##/spwi102.spl~ ~override/spwi102.spl~
+  SAY NAME1 @30100
+  SAY UNIDENTIFIED_DESC @30101
+COPY_EXISTING ~scrl67.itm~ ~override~
+  SAY NAME2 @30100
+  SAY IDENTIFIED_DESC @30101
+  BUT_ONLY_IF_IT_CHANGES
+
+// Burning Hands: SR cone, no save and scaling damage; retain vanilla Alteration school.
+ADD_PROJECTILE ~spell_rev/projectles/dvburnhd.pro~
+COPY ~spell_rev/spwi1##/spwi103.spl~ ~override/spwi103.spl~
+  WRITE_BYTE 0x25 8 // Alteration/Transmutation: preserve vanilla specialist interaction.
+  SAY NAME1 @30110
+  SAY UNIDENTIFIED_DESC @30111
+  SET loop = 5
+  WHILE (loop > 0) BEGIN
+    WRITE_SHORT (0x98 + 0x28 * (loop - 1)) %dvburnhd%
+    SET loop -= 1
+  END
+COPY_EXISTING ~scrl68.itm~ ~override~
+  SAY NAME2 @30110
+  SAY IDENTIFIED_DESC @30111
+  BUT_ONLY_IF_IT_CHANGES
+
+// True Strike intentionally replaces Infravision.
+COPY ~spell_rev/spwi1##/spwi111.spl~ ~override/spwi111.spl~
+  SAY NAME1 @30120
+  SAY UNIDENTIFIED_DESC @30121
+COPY ~spell_rev/spwi1##/dvwi111a.bam~ ~override~
+     ~spell_rev/spwi1##/dvwi111b.bam~ ~override~
+     ~spell_rev/spwi1##/dvwi111c.bam~ ~override~
+COPY ~spell_rev/spwi1##/scrl76.itm~ ~override/scrl76.itm~
+  SAY NAME2 @30120
+  SAY IDENTIFIED_DESC @30121
+APPEND ~spell.ids~ ~2111 WIZARD_TRUE_STRIKE~ UNLESS ~WIZARD_TRUE_STRIKE~
+
+// Shocking Grasp: selected SR combat upgrade; retain vanilla Alteration school.
+COPY ~spell_rev/spwi1##/spwi115.spl~ ~override/spwi115.spl~
+  WRITE_BYTE 0x25 8 // Alteration/Transmutation
+  SAY NAME1 @30130
+  SAY UNIDENTIFIED_DESC @30131
+COPY ~spell_rev/spwi1##/sgrasp.itm~ ~override~
+     ~spell_rev/spwi1##/spwi115d.spl~ ~override~
+COPY_EXISTING ~scrl80.itm~ ~override~
+  SAY NAME2 @30130
+  SAY IDENTIFIED_DESC @30131
+  BUT_ONLY_IF_IT_CHANGES
+
+// Chill Touch: selected SR touch implementation.
+COPY ~spell_rev/spwi1##/spwi117.spl~ ~override/spwi117.spl~
+  SAY NAME1 @30140
+  SAY UNIDENTIFIED_DESC @30141
+COPY ~spell_rev/spwi1##/chillt.itm~ ~override~
+     ~spell_rev/spwi1##/spwi117d.spl~ ~override~
+COPY_EXISTING ~scrl82.itm~ ~override~
+  SAY NAME2 @30140
+  SAY IDENTIFIED_DESC @30141
+  BUT_ONLY_IF_IT_CHANGES
+
+// Reflected Image: image survives ordinary attacks; use the SR implementation.
+COPY ~spell_rev/spwi1##/spwi120.spl~ ~override/spwi120.spl~
+  SAY NAME1 @30150
+  SAY UNIDENTIFIED_DESC @30151
+COPY ~spell_rev/spwi1##/spwi120d.spl~ ~override~
+COPY_EXISTING ~scrl5u.itm~ ~override~
+  SAY NAME2 @30150
+  SAY IDENTIFIED_DESC @30151
+  BUT_ONLY_IF_IT_CHANGES
+
+// Find Familiar: only import SR's Universal-school change. Keep vanilla familiar resources and text.
+COPY_EXISTING ~spwi123.spl~ ~override~
+  WRITE_BYTE 0x25 0 // Universal
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Expeditious Retreat: prefer the existing IWDification spell when present.
+// The SR implementation replaces its mechanics without adding a duplicate spell.
+// -----------------------------------------------------------------------------
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_EXPEDITIOUS_RETREAT~)) BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_EXPEDITIOUS_RETREAT~
+    RET dvsel_exp_resref = spell_res
+  END
+
+  COPY ~spell_rev/spwi1##/spwi108.spl~ ~override/%dvsel_exp_resref%.spl~
+    SAY NAME1 @30160
+    SAY UNIDENTIFIED_DESC @30161
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPWI108~ new_resref = EVAL ~%dvsel_exp_resref%~
+    END
+
+  // Keep IWDification's placed scroll(s), but update their displayed description.
+  COPY_EXISTING_REGEXP GLOB ~^.+\.itm$~ ~override~
+    LPF DVSEL_ITEM_TEACHES_SPELL
+      STR_VAR spell_resref = EVAL ~%dvsel_exp_resref%~
+      RET teaches_spell
+    END
+    PATCH_IF teaches_spell BEGIN
+      SAY NAME2 @30160
+      SAY IDENTIFIED_DESC @30161
+    END
+    BUT_ONLY_IF_IT_CHANGES
+END ELSE BEGIN
+  // Fallback for installs without IWDification.
+  ADD_SPELL ~spell_rev/spwi1##/spwi108.spl~ 2 1 ~WIZARD_EXPEDITIOUS_RETREAT~
+    SAY NAME1 @30160
+    SAY UNIDENTIFIED_DESC @30161
+
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_EXPEDITIOUS_RETREAT~
+    RET dvsel_exp_resref = spell_res
+  END
+
+  COPY_EXISTING ~%dvsel_exp_resref%.spl~ ~override~
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPWI108~ new_resref = EVAL ~%dvsel_exp_resref%~
+    END
+    BUT_ONLY_IF_IT_CHANGES
+
+  COPY ~spell_rev/spwi1##/dvscrl73.itm~ ~override/dvexpscr.itm~
+    SAY NAME2 @30160
+    SAY IDENTIFIED_DESC @30161
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x38
+      STR_VAR old_resref = ~SPWI108~ new_resref = EVAL ~%dvsel_exp_resref%~
+    END
+END
+COPY ~spell_rev/spwi1##/dvwi108a.bam~ ~override~
+     ~spell_rev/spwi1##/dvwi108b.bam~ ~override~
+     ~spell_rev/spwi1##/dvwi108c.bam~ ~override~
+
+// -----------------------------------------------------------------------------
+// Obscuring Mist: add as a NEW spell. Blindness/SPWI106 remains untouched.
+// -----------------------------------------------------------------------------
+
+ADD_PROJECTILE ~spell_rev/projectles/dvfogc.pro~
+ADD_SPELL ~spell_rev/spwi1##/spwi106.spl~ 2 1 ~WIZARD_OBSCURING_MIST~
+  SAY NAME1 @30170
+  SAY UNIDENTIFIED_DESC @30171
+  WRITE_SHORT 0x98 %dvfogc%
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x28
+    STR_VAR old_resref = ~SPWI106I~ new_resref = ~DVOBMI01~
+  END
+
+LAF RES_NUM_OF_SPELL_NAME
+  STR_VAR spell_name = ~WIZARD_OBSCURING_MIST~
+  RET dvsel_obmist_resref = spell_res
+END
+
+COPY ~spell_rev/spwi1##/spwi106i.eff~ ~override/dvobmi01.eff~
+  WRITE_ASCIIE 0x30 ~%dvsel_obmist_resref%~ #8
+COPY ~spell_rev/spwi1##/dvwi106a.bam~ ~override~
+     ~spell_rev/spwi1##/dvwi106b.bam~ ~override~
+     ~spell_rev/spwi1##/dvwi106c.bam~ ~override~
+
+OUTER_SET dvsel_obmist_clearair = dvfogc - 1
+APPEND ~clearair.2da~ ~Selective_Obscuring_Mist     %dvsel_obmist_clearair%~ UNLESS ~Selective_Obscuring_Mist~
+
+COPY ~spell_rev/spwi1##/scrl71.itm~ ~override/dvobmscr.itm~
+  SAY NAME2 @30170
+  SAY IDENTIFIED_DESC @30171
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x38
+    STR_VAR old_resref = ~SPWI106~ new_resref = EVAL ~%dvsel_obmist_resref%~
+  END
+
+// -----------------------------------------------------------------------------
+// Dimension Jump: add as a NEW spell with a new scroll resource.
+// -----------------------------------------------------------------------------
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_DIMENSION_JUMP~)) BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_DIMENSION_JUMP~
+    RET dvsel_dimjump_resref = spell_res
+  END
+  COPY ~spell_rev/spwi1##/spwi109.spl~ ~override/%dvsel_dimjump_resref%.spl~
+    SAY NAME1 @30180
+    SAY UNIDENTIFIED_DESC @30181
+END ELSE BEGIN
+  ADD_SPELL ~spell_rev/spwi1##/spwi109.spl~ 2 1 ~WIZARD_DIMENSION_JUMP~
+    SAY NAME1 @30180
+    SAY UNIDENTIFIED_DESC @30181
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_DIMENSION_JUMP~
+    RET dvsel_dimjump_resref = spell_res
+  END
+END
+
+COPY ~spell_rev/spwi1##/dvwi109a.bam~ ~override~
+     ~spell_rev/spwi1##/dvwi109b.bam~ ~override~
+     ~spell_rev/spwi1##/dvwi109c.bam~ ~override~
+COPY ~spell_rev/spwi1##/scrl1v.itm~ ~override/dvdjmscr.itm~
+  SAY NAME2 @30180
+  SAY IDENTIFIED_DESC @30181
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x38
+    STR_VAR old_resref = ~SPWI109~ new_resref = EVAL ~%dvsel_dimjump_resref%~
+  END
+
+// Detect Alignment is intentionally deferred to the level-2 audit: moving a spell
+// between levels requires resolving its old level-2 IDS/scroll/script references.
