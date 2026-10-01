@@ -114,3 +114,95 @@ Area of Effect: The caster
 Saving Throw: None
 
 This spell transports the caster to any place within sight. When the spell is cast, a dimensional portal opens up in front of the caster, who immediately steps through. Upon passing through the portal, the caster arrives at the chosen destination. The caster always arrives at exactly the spot desired, and the dimensional door does not allow anyone or anything else to pass through. Spells about to be cast upon the wizard fail, and missiles about to hit the caster instead hit thin air.~
+
+
+@30200 = ~Detect Alignment~
+@30201 = ~Detect Alignment
+(Divination)
+
+Level: 1
+Range: Personal
+Duration: Instant
+Casting Time: 2
+Area of Effect: Special
+Saving Throw: None
+
+This spell allows the wizard to search out the feelings of all creatures within the current area. When affected by this spell, a target will briefly glow red if evil, green if good, and white if neutral. Magic resistance does not affect this spell.~
+
+@30210 = ~Battering Ram~
+@30211 = ~Battering Ram
+(Evocation)
+
+Level: 2
+Range: Medium
+Duration: Instant
+Casting Time: 2
+Area of Effect: 1 creature or object
+Saving Throw: Special
+
+This spell creates a ram-like force that can strike with considerable power. The force can be used to open or smash locked, held, or wizard-locked doors, as well as locked boxes or chests, but it does not raise barred gates or similar impediments. If used against a creature, the target suffers 2d6 points of crushing damage and must save vs. Breath to avoid being knocked unconscious for 1 round.~
+
+@30220 = ~Strength~
+@30221 = ~Strength
+(Alteration)
+
+Level: 2
+Range: Short
+Duration: 1 turn/level
+Casting Time: 2
+Area of Effect: 1 creature
+Saving Throw: None
+
+Application of this spell sets the Strength of the character to 18 and then adds 50 exceptional Strength on top of this. The character receives any Strength bonuses appropriate. For example, if a character has between 18/50 and 18/00 Strength, then their Strength will be set to 18/00. If a character has a Strength between 18/01 and 18/50, then their Strength will become 18/50 plus the original percentage. If their Strength is less than 18, then it will become 18/50. However, this spell will actually lower a character's Strength if it is already 19 or more.~
+
+@30230 = ~Ghoul Touch~
+@30231 = ~Ghoul Touch
+(Necromancy)
+
+Level: 2
+Range: Personal
+Duration: 1 turn
+Casting Time: 1
+Area of Effect: Special
+Saving Throw: Death partial
+
+When the caster completes this spell, a red glow encompasses the caster's hand. On a successful touch, the spell inflicts 1d8 points of magic damage and paralyzes the target for 5 rounds unless a successful Saving Throw vs. Death at a -1 penalty is made. The wizard gains a +4 bonus to hit the target, and the touch is considered to be of +1 enchantment to determine what it can hit.~
+
+@30240 = ~Power Word Sleep~
+@30241 = ~Power Word Sleep
+(Conjuration/Summoning)
+
+Level: 2
+Range: Long
+Duration: 5 rounds
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: Spell negates
+
+When a wizard utters this power word, a comatose slumber comes upon one creature. Creatures with 20 or more Hit Points can save vs. Spell to avoid the effect, but creatures with 1 to 19 Hit Points are powerless to resist. Elves and half-elves are particularly resistant to sleep effects, while undead and certain other creatures such as dragons and elementals are completely immune to magically induced sleep.~
+
+@30250 = ~Sound Burst~
+@30251 = ~Sound Burst
+(Evocation)
+
+Level: 2
+Range: Long
+Duration: 1 turn
+Casting Time: 2
+Area of Effect: Target and enemies within 10 ft.
+Saving Throw: Breath partial
+
+This spell blasts an area with a tremendous cacophony. Enemies within the area suffer 4d4 points of crushing damage and are deafened for 1 turn. A successful Saving Throw vs. Breath at a -2 penalty halves the damage and negates the deafness. Deafened spellcasters have a 50% chance to miscast any spell. This deafness can be removed by Dispel Magic or Cure Disease.~
+
+@30260 = ~Resist Elements~
+@30261 = ~Resist Elements
+(Abjuration)
+
+Level: 2
+Range: Touch
+Duration: 1 turn + 1 round/level
+Casting Time: 2
+Area of Effect: 1 creature
+Saving Throw: None
+
+Upon casting this spell, the recipient's resistance to all forms of elemental damage is increased by 25%. This effect lasts for the duration of the spell or until dispelled. Multiple castings of this spell are not cumulative.~
