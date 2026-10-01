@@ -105,10 +105,10 @@ COPY ~spell_rev/spwi5##/spwi512.spl~ ~override/dvpeeele.spl~
 COPY ~spell_rev/spwi5##/spwi517.spl~ ~override/dvpeeaci.spl~
 
 COPY ~spell_rev/spwi4##/dvwi426.2da~ ~override/dvpeelem.2da~
-  REPLACE_TEXTUALLY CASE_INSENSITIVE ~spwi319~ ~dvpeefir~
-  REPLACE_TEXTUALLY CASE_INSENSITIVE ~spwi320~ ~dvpeecol~
-  REPLACE_TEXTUALLY CASE_INSENSITIVE ~spwi512~ ~dvpeeele~
-  REPLACE_TEXTUALLY CASE_INSENSITIVE ~spwi517~ ~dvpeeaci~
+  REPLACE_TEXTUALLY ~spwi319~ ~dvpeefir~
+  REPLACE_TEXTUALLY ~spwi320~ ~dvpeecol~
+  REPLACE_TEXTUALLY ~spwi512~ ~dvpeeele~
+  REPLACE_TEXTUALLY ~spwi517~ ~dvpeeaci~
 
 ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_PROTECTION_FROM_ELEMENTAL_ENERGY~)) BEGIN
   LAF RES_NUM_OF_SPELL_NAME
