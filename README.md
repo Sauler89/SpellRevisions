@@ -27,9 +27,10 @@ Completed spell modules are aggregated by:
 
 `spell_rev/components/selective_eet_main.tpa`
 
-At present the completed module is:
+Completed modules currently included in component #0:
 
 - Arcane Level 1
+- Arcane Level 2
 
 Further arcane and divine levels will be added to the same component as their audits are completed.
 
@@ -57,6 +58,30 @@ Adapted change:
 The detailed spell-by-spell audit is in:
 
 `docs/selective-eet/arcane-level-1-audit.md`
+
+## Arcane Level 2
+
+Included buffs:
+
+- Strength
+- Ghoul Touch (SR mechanics with vanilla casting time retained)
+- Power Word Sleep (SR mechanics with vanilla Conjuration/Summoning school retained)
+
+Accepted replacements:
+
+- Detect Alignment completely replaces Know Alignment and moves to Level 1
+- Battering Ram completely replaces Knock
+- Sound Burst completely replaces Deafness
+
+New spell:
+
+- Resist Elements
+
+Know Opponent is intentionally not imported.
+
+The detailed spell-by-spell audit is in:
+
+`docs/selective-eet/arcane-level-2-audit.md`
 
 ## Scroll distribution policy
 
