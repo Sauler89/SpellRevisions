@@ -6,9 +6,10 @@ INCLUDE ~spell_rev/components/selective_eet_arcane_level_1.tpa~
 INCLUDE ~spell_rev/components/selective_eet_arcane_level_2.tpa~
 INCLUDE ~spell_rev/components/selective_eet_arcane_level_3.tpa~
 INCLUDE ~spell_rev/components/selective_eet_arcane_level_4.tpa~
+INCLUDE ~spell_rev/components/selective_eet_arcane_level_5.tpa~
 
 // Future modules:
-// INCLUDE ~spell_rev/components/selective_eet_arcane_level_5.tpa~
+// INCLUDE ~spell_rev/components/selective_eet_arcane_level_6.tpa~
 // ...
 // INCLUDE ~spell_rev/components/selective_eet_divine_level_1.tpa~
 // ...
