@@ -88,3 +88,12 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Dire Charm: import the SR duration buff.
 - Detect Illusion: import SR's larger radius and 4th-level illusion removal, while explicitly preserving vanilla removal of Non-Detection through resource-based dispelling.
 - No new Level-3 scroll distribution is required because all selected Level-3 changes are in-place replacements/revisions.
+
+
+### Level-4 decisions
+- Confusion: retain vanilla range and scaling duration, but expand the area to SR's 30-ft. radius.
+- Break Enchantment: completely replaces Remove Curse. Use SR mechanics, retain vanilla casting time 4, and preserve the ZSTweaks Rashad's Talon hook when the corresponding resource is present.
+- Secret Word: retain the installed Abjuration school and existing Level-8-or-lower protection-removal behavior; import only SR's casting time 1 and longer range.
+- Farsight: use the SR 5-turn duration.
+- Protection from Elemental Energy: add as a new dynamically allocated Level-4 spell. Do not reuse IWDification's SPWI426. The selection menu points to four hidden SR-derived subspells (DVPEEFIR, DVPEECOL, DVPEEELE, DVPEEACI) so the spell always provides 100% protection without replacing the retained elemental-protection spells.
+- Protection from Elemental Energy scroll: `DVPEESCR.ITM`; add it during the unified EET arcane-scroll distribution pass.
