@@ -8,13 +8,13 @@ The public Spell Revisions documentation is useful as a comparison reference, bu
 |---|---|---|
 | Blur | SKIP / MIXED | SR greatly extends duration and improves saves vs. spell from +1 to +3, but vanilla grants +1 to all saves while SR drops the non-spell save bonuses. Not a pure buff. |
 | Detect Evil | KEEP VANILLA | SR deprecates the level-2 Detect Evil slot as part of its Detect Alignment/Know Opponent restructuring. This project will not remove Detect Evil. |
-| Detect Alignment | ADD AS NEW LEVEL-1 SPELL | Resolve the deferred Level-1 case here. SR's Detect Alignment is a major improvement over vanilla alignment-detection options: area-wide, no save, and unaffected by MR. Add it as a new Level-1 spell instead of consuming Detect Evil or Know Alignment. |
+| Detect Alignment | ACCEPT REPLACEMENT — replaces Know Alignment | Use SR's Detect Alignment in place of Know Alignment. Keep it as the SR Level-1 arcane replacement, and remove/disable the old Know Alignment availability rather than keeping both spells. Detect Evil remains untouched. |
 | Detect Invisibility | SKIP / MIXED | SR repeats detection every round for 5 rounds, but reduces the detection radius substantially and changes what the spell reveals. Useful redesign, not a pure buff. |
 | Horror | SKIP / ZSTWEAKS + MIXED | ZSTweaks component 210 owns Horror's school/projectile presentation. Independently, SR doubles the AoE/range but cuts duration from 1 turn to 5 rounds. Not a pure buff. |
 | Invisibility | SKIP / MIXED | SR reduces maximum duration from 24 hours to 8 hours and changes permitted actions while invisible. This is a behavioral rebalance, not a clean buff. ZSTweaks True Sight compatibility may also patch this resource. |
-| Battering Ram | ADD AS NEW SPELL | Do not replace Knock. Battering Ram retains the utility of opening locks and adds an offensive 2d6 crushing / 1-round unconsciousness use. As a separate spell it is a useful addition without sacrificing Knock. |
-| Know Alignment | KEEP VANILLA | Do not sacrifice the original spell. It also remains available for any ZSTweaks divination/MR-bypass patching. |
-| Know Opponent | ADD AS NEW SPELL | Do not replace Know Alignment. SR's spell is a strong, distinct combat divination: +2 attack bonus against the target and -10% physical resistances for 2 turns, with no save and no MR. |
+| Battering Ram | ACCEPT REPLACEMENT — replaces Knock | Use SR's intended replacement directly: SPWI207 / SCRL91 become Battering Ram. Knock is not retained as a separate arcane spell. |
+| Know Alignment | REPLACED BY DETECT ALIGNMENT | Do not keep Know Alignment as a separate arcane spell. Its role is replaced by SR's Detect Alignment. |
+| Know Opponent | SKIP | Upstream SR v4.21 does contain an arcane Know Opponent at SPWI208, but it is not part of the desired spell list for this project. Do not import it. |
 | Luck | SKIP / TACTICS REMIX + ZSTWEAKS | Tactics Remix directly extends Luck, and ZSTweaks component 145 can further boost both duration and effect. Preserve the higher-priority result. |
 | Resist Fear | SKIP / MIXED | SR gives explicit fear immunity but cuts the duration from vanilla's 1 hour to 5 turns. Not a pure buff. |
 | Melf's Acid Arrow | SKIP / ZSTWEAKS | SR adds 1d6 missile damage on impact and is otherwise a clear offensive improvement, but ZSTweaks component 447 substantially patches the spell and can make the conjured acid bypass MR. Preserve ZSTweaks. If component 447 is ever disabled, SR's version becomes a valid INCLUDE candidate. |
@@ -28,7 +28,7 @@ The public Spell Revisions documentation is useful as a comparison reference, bu
 | Power Word Sleep | INCLUDE — ADAPTED | Vanilla simply fails against targets at 20+ HP. SR retains the irresistible sleep against 1–19 HP but allows targets at 20+ HP to be affected if they fail a save. Clear buff. Preserve the vanilla Conjuration school rather than importing SR's unrelated school change. |
 | Ray of Enfeeblement | SKIP / MIXED | SR adds a -2 save penalty, -3 attack/damage and 50% movement reduction, but replaces vanilla's potentially much stronger Strength=5 effect and changes duration scaling. ZSTweaks component 370 also changes its school/presentation. |
 | Chaos Shield | SKIP / NERF | Wild-surge bonus remains +15, while SR's 2 rounds/level duration is generally shorter than vanilla from mid levels onward. |
-| Sound Burst | ADD AS NEW SPELL | Do not replace Deafness. As a separate spell, Sound Burst provides a useful 10-ft. AoE, 4d4 crushing damage and temporary deafness with a Breath save for partial effect. |
+| Sound Burst | ACCEPT REPLACEMENT — replaces Deafness | Use SR's intended replacement directly. Deafness is not retained as a separate arcane spell. |
 | Glitterdust | SKIP / MIXED | SR guarantees a smaller -2 attack penalty and improved anti-invisibility behavior, but removes vanilla's stronger save-or-blind (-4 attack and AC) effect. Not a pure buff. |
 | Resist Elements | ADD AS NEW SPELL | Useful new Level-2 Abjuration: +25% resistance to all elemental damage for 1 turn + 1 round/level. No IWDification duplicate was found. |
 | Monster Summoning II | SKIP / DUPLICATE IWDIFICATION | IWDification already adds a spell named Monster Summoning II (its IWD Level-4 version). Avoid a second same-name spell at a different level and retain IWDification. |
@@ -40,14 +40,16 @@ Existing spells to buff:
 - Ghoul Touch (SR mechanics, vanilla casting time retained)
 - Power Word Sleep (SR mechanics, vanilla school retained)
 
-New Level-2 spells:
-- Battering Ram — new spell; Knock retained
-- Know Opponent — new spell; Know Alignment retained
-- Sound Burst — new spell; Deafness retained
-- Resist Elements — new spell
+Accepted replacements:
+- Battering Ram replaces Knock
+- Sound Burst replaces Deafness
+- Detect Alignment replaces Know Alignment and remains the SR Level-1 arcane replacement
 
-Deferred Level-1 case resolved during this audit:
-- Detect Alignment — add as a new Level-1 spell; Detect Evil and Know Alignment both retained
+New Level-2 spell:
+- Resist Elements
+
+Explicitly excluded:
+- Know Opponent
 
 ## Priority-mod overlaps
 
@@ -71,12 +73,11 @@ Additional ZSTweaks components can also touch Invisibility and selected divinati
 
 ## Scroll roadmap
 
-All newly added spells must receive unique learnable scroll resources and later EET distribution without removing vanilla/prior-mod scrolls:
+Scroll handling for replacements should follow the replaced vanilla resources where appropriate:
 
-- Detect Alignment
-- Battering Ram
-- Know Opponent
-- Sound Burst
-- Resist Elements
+- Battering Ram reuses Knock's spell/scroll slot (SPWI207 / SCRL91).
+- Sound Burst reuses Deafness's spell/scroll slot.
+- Detect Alignment replaces Know Alignment; its final Level-1 scroll handling must preserve the intended SR move while removing the old Know Alignment availability.
+- Resist Elements is a genuinely new spell and therefore needs its own learnable scroll plus later EET distribution.
 
-Distribution will be handled together with the previously deferred Obscuring Mist and Dimension Jump work after the arcane spell selection is complete.
+The genuinely new-scroll distribution pass will still be handled together with Obscuring Mist and Dimension Jump after the arcane spell selection is complete.
