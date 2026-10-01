@@ -1,0 +1,195 @@
+// Selective Spell Revisions for EET - Arcane Level 5
+// Finalized selection:
+//   Domination: SR duration buff only.
+//   Hold Monster: SR 5-ft. splash radius, vanilla scaling duration retained.
+//   Feeblemind: SR -4 Save vs. Spell penalty.
+//   Lower Resistance: best-of vanilla/SR progression, preserving vanilla school/range.
+//   Oracle: vanilla 120-ft. coverage + Non-Detection, plus SR's expanded illusion list.
+//   Mestil's Acid Sheath: new dynamically allocated Level-5 spell.
+
+// -----------------------------------------------------------------------------
+// Domination: preserve the installed spell and extend only its 8-round effects
+// to 1 turn (10 rounds), matching the selected SR duration.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi506.spl~ ~override~
+  LPF ALTER_EFFECT INT_VAR match_opcode = 5   match_duration = 48 duration = 60 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 142 match_duration = 48 duration = 60 END
+  LPF ALTER_EFFECT INT_VAR match_opcode = 174 match_duration = 48 duration = 60 END
+  SAY NAME1 @30500
+  SAY UNIDENTIFIED_DESC @30501
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl5n.itm~ ~override~
+  SAY NAME2 @30500
+  SAY IDENTIFIED_DESC @30501
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Hold Monster: preserve vanilla 1 round/level duration and -2 save penalty,
+// but use SR's 5-ft. splash projectile.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi507.spl~ ~override~
+  LPF ALTER_SPELL_HEADER INT_VAR projectile = 190 END
+  SAY NAME1 @30510
+  SAY UNIDENTIFIED_DESC @30511
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl5o.itm~ ~override~
+  SAY NAME2 @30510
+  SAY IDENTIFIED_DESC @30511
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Feeblemind: preserve the installed spell and strengthen every effect that
+// already requires a saving throw from the vanilla -2 penalty to SR's -4.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi509.spl~ ~override~
+  LPF ALTER_EFFECT_EX
+    INT_VAR
+      savebonus = "-4"
+    STR_VAR
+      match_savingthrow_ex = ~(o_savingthrow > 0)~
+  END
+  SAY NAME1 @30520
+  SAY UNIDENTIFIED_DESC @30521
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl5q.itm~ ~override~
+  SAY NAME2 @30520
+  SAY IDENTIFIED_DESC @30521
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Lower Resistance: use SR's scalable 2%/level implementation, but keep the
+// vanilla Abjuration school and 40-ft. range. The first SR header covers caster
+// levels below 10; set it to 19% so a normal 9th-level caster is never nerfed.
+// From level 10 onward SR already scales 20%, 22%, ... up to 40% at level 20.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi5##/spwi514.spl~ ~override/spwi514.spl~
+  WRITE_BYTE 0x25 1 // Abjuration: preserve vanilla specialist interaction.
+  LPF ALTER_SPELL_HEADER INT_VAR range = 40 END
+  LPF ALTER_EFFECT INT_VAR header = 0 match_opcode = 166 parameter1 = (0 - 19) END
+  SAY NAME1 @30530
+  SAY UNIDENTIFIED_DESC @30531
+
+COPY_EXISTING ~scrl6v.itm~ ~override~
+  SAY NAME2 @30530
+  SAY IDENTIFIED_DESC @30531
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Oracle: keep the installed vanilla/Tactics spell, including its 120-ft.
+// radius and Non-Detection removal, and explicitly add the illusion resources
+// covered by SR but absent from vanilla Oracle.
+// -----------------------------------------------------------------------------
+
+ACTION_FOR_EACH dvsel_oracle_symbol IN
+  WIZARD_BLUR
+  WIZARD_GHOST_ARMOR
+  WIZARD_INVISIBILITY_10_FOOT
+  CLERIC_PIXIE_DUST
+  WIZARD_MISLEAD
+  WIZARD_PROJECT_IMAGE
+  WIZARD_MASS_INVISIBILITY
+BEGIN
+  ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~%dvsel_oracle_symbol%~)) BEGIN
+    LAF RES_NUM_OF_SPELL_NAME
+      STR_VAR spell_name = EVAL ~%dvsel_oracle_symbol%~
+      RET dvsel_oracle_resref = spell_res
+    END
+
+    COPY_EXISTING ~spwi515.spl~ ~override~
+      LPF ADD_SPELL_EFFECT
+        INT_VAR
+          opcode = 321
+          target = 2
+          power = 5
+          parameter2 = 2
+          timing = 1
+          resist_dispel = 3
+        STR_VAR
+          resource = EVAL ~%dvsel_oracle_resref%~
+      END
+      BUT_ONLY_IF_IT_CHANGES
+  END
+END
+
+COPY_EXISTING ~spwi515.spl~ ~override~
+  SAY NAME1 @30540
+  SAY UNIDENTIFIED_DESC @30541
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl6w.itm~ ~override~
+  SAY NAME2 @30540
+  SAY IDENTIFIED_DESC @30541
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Mestil's Acid Sheath: genuinely new Level-5 spell.
+// IWDification already owns SPWI526 (Summon Shadow), so allocate dynamically.
+// Rename the retaliation subspell and retarget SR's self-immunity reference so
+// the implementation is fully independent of the occupied SPWI526 resource.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi5##/dvwi526d.spl~ ~override/dvmasdmg.spl~
+COPY ~spell_rev/spwi5##/mestsh.vvc~ ~override~
+     ~spell_rev/spwi5##/mestsh.bam~ ~override~
+     ~spell_rev/spwi5##/dvwi526a.bam~ ~override~
+     ~spell_rev/spwi5##/dvwi526b.bam~ ~override~
+     ~spell_rev/spwi5##/dvwi526c.bam~ ~override~
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_MESTILS_ACID_SHEATH~)) BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_MESTILS_ACID_SHEATH~
+    RET dvsel_mestil_resref = spell_res
+  END
+
+  COPY ~spell_rev/spwi5##/spwi526.spl~ ~override/%dvsel_mestil_resref%.spl~
+    SAY NAME1 @30550
+    SAY UNIDENTIFIED_DESC @30551
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~DVWI526D~
+              new_resref = ~DVMASDMG~
+    END
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPWI526~
+              new_resref = EVAL ~%dvsel_mestil_resref%~
+    END
+END ELSE BEGIN
+  ADD_SPELL ~spell_rev/spwi5##/spwi526.spl~ 2 5 ~WIZARD_MESTILS_ACID_SHEATH~
+    SAY NAME1 @30550
+    SAY UNIDENTIFIED_DESC @30551
+
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_MESTILS_ACID_SHEATH~
+    RET dvsel_mestil_resref = spell_res
+  END
+
+  COPY_EXISTING ~%dvsel_mestil_resref%.spl~ ~override~
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~DVWI526D~
+              new_resref = ~DVMASDMG~
+    END
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPWI526~
+              new_resref = EVAL ~%dvsel_mestil_resref%~
+    END
+    BUT_ONLY_IF_IT_CHANGES
+END
+
+COPY ~spell_rev/spwi5##/scrl1w.itm~ ~override/dvmasscr.itm~
+  SAY NAME2 @30550
+  SAY IDENTIFIED_DESC @30551
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x38
+    STR_VAR old_resref = ~SPWI526~
+            new_resref = EVAL ~%dvsel_mestil_resref%~
+  END
