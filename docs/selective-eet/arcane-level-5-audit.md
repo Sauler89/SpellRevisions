@@ -31,17 +31,17 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 | Sunfire / SR Fireburst | SKIP / ZSTWEAKS | ZSTweaks component 446 directly improves Sunfire's damage scaling. SR renames/reworks it as Fireburst with different save/casting behavior. Preserve ZS. |
 | Mestil's Acid Sheath | ADD AS NEW SPELL | Useful new Level-5 Conjuration: 50% acid resistance plus 4d4 acid retaliation against attacks/spells made from within 5 ft., lasting 2 turns. No equivalent spell is supplied by IWDification or the selected ZSTweaks/Tactics spell tweaks. Must be dynamically allocated because IWDification already uses SPWI526 for Summon Shadow. |
 
-## Proposed selected set
+## Final selected set
 
 ### INCLUDE — ADAPTED
-- Domination — extend duration to 1 turn, otherwise preserve installed behavior
-- Hold Monster — SR 5-ft. splash radius, vanilla 1 round/level duration retained
-- Feeblemind — improve Save vs. Spell penalty from -2 to -4
-- Lower Resistance — retain vanilla's 19% at caster level 9, then use SR's 2%/level progression from level 10 onward, capped at 40%
-- Oracle — vanilla 120-ft. radius + Non-Detection removal, plus SR's expanded illusion-removal list
+- Domination — duration extended to 1 turn while preserving the installed spell's behavior
+- Hold Monster — SR 5-ft. splash radius with vanilla 1 round/level duration retained
+- Feeblemind — Save vs. Spell penalty improved from -2 to -4
+- Lower Resistance — vanilla Abjuration school and 40-ft. range retained; 19% at caster level 9, then SR's 2%/level progression from level 10 onward, capped at 40%
+- Oracle — vanilla 120-ft. radius and Non-Detection removal retained, with SR's expanded illusion-removal list added
 
 ### ADD AS NEW SPELL
-- Mestil's Acid Sheath — dynamically allocated Level-5 spell
+- Mestil's Acid Sheath — dynamically allocated Level-5 spell with an independent retaliation subspell
 
 Everything else stays with vanilla, Tactics Remix, ZSTweaks or IWDification.
 
@@ -77,10 +77,7 @@ All adapted existing spells inherit their current scroll distribution:
 - Lower Resistance
 - Oracle
 
-Mestil's Acid Sheath is genuinely new. Upstream SR reuses the Fire Shield (Blue) scroll because SR repurposes that spell; this project keeps Fire Shield (Blue) for Tactics compatibility, so Mestil's Acid Sheath must receive:
-- its own unique learnable scroll;
-- dynamic EET distribution during the unified arcane-scroll pass;
-- no replacement of the Fire Shield (Blue) scroll.
+Mestil's Acid Sheath is genuinely new. Upstream SR reuses the Fire Shield (Blue) scroll because SR repurposes that spell; this project keeps Fire Shield (Blue) for Tactics compatibility. The implemented spell therefore uses the dedicated learnable scroll resource `DVMASSCR.ITM`, which must be distributed dynamically during the unified EET arcane-scroll pass. Fire Shield (Blue) and its scroll remain untouched.
 
 Deferred new-scroll list would become:
 - Obscuring Mist
@@ -91,4 +88,6 @@ Deferred new-scroll list would become:
 
 ## Status
 
-**OPEN — awaiting user approval of the proposed Level-5 selection before implementation in component #0.**
+**CLOSED for spell selection and implemented in component #0.**
+
+Further Level-5 changes should be limited to technical fixes found during install/in-game testing or the deferred scroll-distribution pass.
