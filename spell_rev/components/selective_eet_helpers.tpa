@@ -1,0 +1,120 @@
+// Selective Spell Revisions for EET - autonomous patch helpers
+// These helpers deliberately avoid relying on ALTER_EFFECT_EX, which is not
+// part of the standard WeiDU function set loaded by this standalone installer.
+
+// Set the save bonus on every SPL effect that already requires a saving throw.
+DEFINE_PATCH_FUNCTION ~DVSEL_SET_SAVE_BONUS_ON_SAVING_EFFECTS~
+  INT_VAR
+    savebonus = 0
+BEGIN
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_LONG  0x64 dvsel_abil_off
+    READ_SHORT 0x68 dvsel_abil_num
+    READ_LONG  0x6a dvsel_fx_off
+    READ_SHORT 0x70 dvsel_global_fx_num
+
+    FOR (dvsel_i = 0; dvsel_i < dvsel_global_fx_num; ++dvsel_i) BEGIN
+      SET dvsel_effect_off = dvsel_fx_off + (0x30 * dvsel_i)
+      READ_LONG (dvsel_effect_off + 0x24) dvsel_savingthrow
+      PATCH_IF (dvsel_savingthrow > 0) BEGIN
+        WRITE_LONG (dvsel_effect_off + 0x28) savebonus
+      END
+    END
+
+    FOR (dvsel_i = 0; dvsel_i < dvsel_abil_num; ++dvsel_i) BEGIN
+      SET dvsel_header_off = dvsel_abil_off + (0x28 * dvsel_i)
+      READ_SHORT (dvsel_header_off + 0x1e) dvsel_fx_num
+      READ_SHORT (dvsel_header_off + 0x20) dvsel_fx_index
+      FOR (dvsel_j = 0; dvsel_j < dvsel_fx_num; ++dvsel_j) BEGIN
+        SET dvsel_effect_off = dvsel_fx_off + (0x30 * (dvsel_fx_index + dvsel_j))
+        READ_LONG (dvsel_effect_off + 0x24) dvsel_savingthrow
+        PATCH_IF (dvsel_savingthrow > 0) BEGIN
+          WRITE_LONG (dvsel_effect_off + 0x28) savebonus
+        END
+      END
+    END
+  END
+END
+
+// Replace effect durations that fall inside an inclusive numeric range.
+// Used for selective duration buffs without importing unrelated spell changes.
+DEFINE_PATCH_FUNCTION ~DVSEL_SET_EFFECT_DURATION_RANGE~
+  INT_VAR
+    min_duration = 0
+    max_duration = 0
+    new_duration = 0
+    match_opcode = "-1"
+BEGIN
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_LONG  0x64 dvsel_abil_off
+    READ_SHORT 0x68 dvsel_abil_num
+    READ_LONG  0x6a dvsel_fx_off
+    READ_SHORT 0x70 dvsel_global_fx_num
+
+    FOR (dvsel_i = 0; dvsel_i < dvsel_global_fx_num; ++dvsel_i) BEGIN
+      SET dvsel_effect_off = dvsel_fx_off + (0x30 * dvsel_i)
+      READ_SHORT dvsel_effect_off dvsel_opcode
+      READ_LONG (dvsel_effect_off + 0x0e) dvsel_duration
+      PATCH_IF (((match_opcode < 0) OR (dvsel_opcode = match_opcode)) AND
+                (dvsel_duration >= min_duration) AND
+                (dvsel_duration <= max_duration)) BEGIN
+        WRITE_LONG (dvsel_effect_off + 0x0e) new_duration
+      END
+    END
+
+    FOR (dvsel_i = 0; dvsel_i < dvsel_abil_num; ++dvsel_i) BEGIN
+      SET dvsel_header_off = dvsel_abil_off + (0x28 * dvsel_i)
+      READ_SHORT (dvsel_header_off + 0x1e) dvsel_fx_num
+      READ_SHORT (dvsel_header_off + 0x20) dvsel_fx_index
+      FOR (dvsel_j = 0; dvsel_j < dvsel_fx_num; ++dvsel_j) BEGIN
+        SET dvsel_effect_off = dvsel_fx_off + (0x30 * (dvsel_fx_index + dvsel_j))
+        READ_SHORT dvsel_effect_off dvsel_opcode
+        READ_LONG (dvsel_effect_off + 0x0e) dvsel_duration
+        PATCH_IF (((match_opcode < 0) OR (dvsel_opcode = match_opcode)) AND
+                  (dvsel_duration >= min_duration) AND
+                  (dvsel_duration <= max_duration)) BEGIN
+          WRITE_LONG (dvsel_effect_off + 0x0e) new_duration
+        END
+      END
+    END
+  END
+END
+
+// Add a fixed amount to every positive-duration effect matching an opcode.
+DEFINE_PATCH_FUNCTION ~DVSEL_ADD_EFFECT_DURATION~
+  INT_VAR
+    match_opcode = "-1"
+    add_duration = 0
+BEGIN
+  PATCH_IF (SOURCE_SIZE > 0x71) BEGIN
+    READ_LONG  0x64 dvsel_abil_off
+    READ_SHORT 0x68 dvsel_abil_num
+    READ_LONG  0x6a dvsel_fx_off
+    READ_SHORT 0x70 dvsel_global_fx_num
+
+    FOR (dvsel_i = 0; dvsel_i < dvsel_global_fx_num; ++dvsel_i) BEGIN
+      SET dvsel_effect_off = dvsel_fx_off + (0x30 * dvsel_i)
+      READ_SHORT dvsel_effect_off dvsel_opcode
+      READ_LONG (dvsel_effect_off + 0x0e) dvsel_duration
+      PATCH_IF (((match_opcode < 0) OR (dvsel_opcode = match_opcode)) AND
+                (dvsel_duration > 0)) BEGIN
+        WRITE_LONG (dvsel_effect_off + 0x0e) (dvsel_duration + add_duration)
+      END
+    END
+
+    FOR (dvsel_i = 0; dvsel_i < dvsel_abil_num; ++dvsel_i) BEGIN
+      SET dvsel_header_off = dvsel_abil_off + (0x28 * dvsel_i)
+      READ_SHORT (dvsel_header_off + 0x1e) dvsel_fx_num
+      READ_SHORT (dvsel_header_off + 0x20) dvsel_fx_index
+      FOR (dvsel_j = 0; dvsel_j < dvsel_fx_num; ++dvsel_j) BEGIN
+        SET dvsel_effect_off = dvsel_fx_off + (0x30 * (dvsel_fx_index + dvsel_j))
+        READ_SHORT dvsel_effect_off dvsel_opcode
+        READ_LONG (dvsel_effect_off + 0x0e) dvsel_duration
+        PATCH_IF (((match_opcode < 0) OR (dvsel_opcode = match_opcode)) AND
+                  (dvsel_duration > 0)) BEGIN
+          WRITE_LONG (dvsel_effect_off + 0x0e) (dvsel_duration + add_duration)
+        END
+      END
+    END
+  END
+END
