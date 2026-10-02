@@ -47,11 +47,8 @@ COPY_EXISTING ~scrl5o.itm~ ~override~
 // -----------------------------------------------------------------------------
 
 COPY_EXISTING ~spwi509.spl~ ~override~
-  LPF ALTER_EFFECT_EX
-    INT_VAR
-      savebonus = "-4"
-    STR_VAR
-      match_savingthrow_ex = ~(o_savingthrow > 0)~
+  LPF DVSEL_SET_SAVE_BONUS_ON_SAVING_EFFECTS
+    INT_VAR savebonus = "-4"
   END
   SAY NAME1 @30520
   SAY UNIDENTIFIED_DESC @30521
