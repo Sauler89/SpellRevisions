@@ -34,6 +34,7 @@ Completed modules currently included in component #0:
 - Arcane Level 3
 - Arcane Level 4
 - Arcane Level 5
+- Arcane Level 6
 
 Further arcane and divine levels will be added to the same component as their audits are completed.
 
@@ -143,6 +144,24 @@ The detailed spell-by-spell audit is in:
 
 `docs/selective-eet/arcane-level-5-audit.md`
 
+## Arcane Level 6
+
+Adapted buffs:
+
+- Globe of Invulnerability: minimum 2-turn duration while retaining vanilla 1 round/level scaling above caster level 20
+- Power Word, Silence: duration increased from 7 rounds to 1 turn while preserving vanilla school/semantics
+- Contingency: changed to Universal school only; installed mechanics remain intact
+
+New spell:
+
+- Banishment: dynamically allocated Level-6 Abjuration added separately from Death Spell
+
+Flesh to Stone and Stone to Flesh remain on their installed/vanilla implementations: SR's Flesh to Stone is a mixed petrification-system redesign, while full SR disables/hides Stone to Flesh rather than buffing it.
+
+The detailed spell-by-spell audit is in:
+
+`docs/selective-eet/arcane-level-6-audit.md`
+
 ## Scroll distribution policy
 
 New spell scrolls must not silently remove vanilla or higher-priority-mod scrolls.
@@ -167,6 +186,11 @@ Protection from Elemental Energy uses its own scroll resource, `DVPEESCR.ITM`, a
 ### Mestil's Acid Sheath
 
 Mestil's Acid Sheath uses its own scroll resource, `DVMASSCR.ITM`, because this project preserves Fire Shield (Blue) and its original scroll for Tactics compatibility. Add the Mestil scroll dynamically during the final EET arcane-scroll distribution pass.
+
+
+### Banishment
+
+Banishment uses its own scroll resource, `DVBANSCR.ITM`. Death Spell and its original scroll remain untouched for Tactics compatibility. Add the Banishment scroll dynamically during the final EET arcane-scroll distribution pass.
 
 
 See `SELECTIVE_EET_DESIGN.md` for the full compatibility rules.
