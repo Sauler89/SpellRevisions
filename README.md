@@ -36,6 +36,7 @@ Completed modules currently included in component #0:
 - Arcane Level 5
 - Arcane Level 6
 - Arcane Level 7
+- Arcane Level 8
 
 Further arcane and divine levels will be added to the same component as their audits are completed.
 
@@ -187,6 +188,34 @@ The detailed spell-by-spell audit is in:
 
 `docs/selective-eet/arcane-level-7-audit.md`
 
+## Arcane Level 8
+
+Included upgrade:
+
+- Protection from Energy: full SR upgrade to 100% energy protection and 2 rounds/level
+
+Adapted buffs:
+
+- Spell Trigger: Universal school only
+- Incendiary Cloud: vanilla damage/save/school retained; SR 30-ft. area and -4 THAC0/AC smoke penalties added
+- Power Word, Blind: vanilla area/school retained; duration increased to 1 turn and SR low-HD permanent blindness added
+- Symbol, Stun: vanilla scaling duration/casting time retained; SR 20-ft. area added
+- Symbol, Death: vanilla casting time/60-HP cap retained; SR 20-ft. area and -4 Save vs. Death added
+
+New spell:
+
+- Ghostform: dynamically allocated Level-8 Alteration with its own scroll; IWDification's SPWI801 Monster Summoning VI remains untouched
+
+Explicitly skipped:
+
+- Moment of Prescience
+- Symbol of Weakness
+- Bigby's Icy Grasp
+
+The detailed spell-by-spell audit is in:
+
+`docs/selective-eet/arcane-level-8-audit.md`
+
 ## Scroll distribution policy
 
 New spell scrolls must not silently remove vanilla or higher-priority-mod scrolls.
@@ -221,6 +250,11 @@ Banishment uses its own scroll resource, `DVBANSCR.ITM`. Death Spell and its ori
 ### Summon Death Knight
 
 Summon Death Knight uses the private effect resource `DVDKTEFF.EFF` and the dedicated learnable scroll `DVDKSCR.ITM`. Cacofiend, `SPWI707`, `SPCACO.EFF`, and `SCRL8I` remain untouched. Add `DVDKSCR.ITM` during the final EET arcane-scroll distribution pass.
+
+
+### Ghostform
+
+Ghostform uses a dynamically allocated Level-8 spell resource and the dedicated learnable scroll `DVGHSCR.ITM`. IWDification's `SPWI801` (Monster Summoning VI) remains untouched. The original SR Ghostform self-immunity reference to `SPWI801` is retargeted to the final dynamic Ghostform resource. Add `DVGHSCR.ITM` during the final EET arcane-scroll distribution pass.
 
 
 See `SELECTIVE_EET_DESIGN.md` for the full compatibility rules.
