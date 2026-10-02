@@ -24,7 +24,7 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 | Bigby's Clenched Fist / SR Bigby's Icy Grasp | KEEP ZSTWEAKS; ICY GRASP OPTIONAL AS NEW | ZSTweaks component 445 directly and substantially buffs Bigby's Clenched Fist. Preserve that higher-priority version. SR's Icy Grasp can technically be added as a separate dynamic Level-8 spell if approved, without touching Clenched Fist. |
 | Monster Summoning VIII / WIZARD_MONSTER_SUMMONING_6 | SKIP / DUPLICATE IWDIFICATION | IWDification already owns WIZARD_MONSTER_SUMMONING_6 at Level 8/SPWI801 as Monster Summoning VI, integrated into its IWD summoning progression. Retain IWDification. |
 
-## Proposed selected set
+## Final selected set
 
 ### INCLUDE
 - Protection from Energy — full SR upgrade
@@ -108,11 +108,11 @@ In-place proposed changes inherit existing scroll distribution:
 - Symbol, Stun
 - Symbol, Death
 
-Ghostform is genuinely new and needs a unique learnable scroll plus dynamic EET distribution.
+Ghostform is genuinely new and uses the dedicated learnable scroll resource `DVGHSCR.ITM`. Its spell resource is allocated dynamically because IWDification owns SPWI801; the internal Ghostform self-immunity that originally referenced SPWI801 is retargeted to the final dynamic resource.
 
-If approved as separate spells, Moment of Prescience, Symbol of Weakness and Bigby's Icy Grasp will each also require a unique scroll and dynamic EET distribution because their original SR implementation consumes/replaces an existing vanilla spell slot/scroll.
+Moment of Prescience, Symbol of Weakness and Bigby's Icy Grasp were explicitly rejected and are not added. Their original vanilla/Tactics/ZSTweaks spells remain untouched.
 
-The deferred new-scroll list would therefore contain at minimum:
+The deferred new-scroll list now includes:
 - Obscuring Mist
 - Dimension Jump
 - Resist Elements
@@ -124,4 +124,6 @@ The deferred new-scroll list would therefore contain at minimum:
 
 ## Status
 
-**OPEN — optional replacement-to-addition decisions are finalized: Moment of Prescience, Symbol of Weakness and Bigby's Icy Grasp are all skipped. Awaiting implementation of the approved base Level-8 selection in component #0.**
+**CLOSED for spell selection and implemented in component #0.**
+
+Further Level-8 changes should be limited to technical fixes found during install/in-game testing or the deferred scroll-distribution pass.
