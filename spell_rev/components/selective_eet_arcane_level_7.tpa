@@ -140,18 +140,54 @@ COPY_EXISTING ~scrla4.itm~ ~override~
 
 // -----------------------------------------------------------------------------
 // Summon Death Knight: NEW Level-7 spell.
-// SR normally replaces Cacofiend/SPWI707 and reuses SPCACO.EFF. This project
-// preserves Cacofiend completely. Copy SR's EFF under a private resource and
-// retarget only the newly allocated Death Knight spell.
+// SR normally replaces Cacofiend/SPWI707 and also relies on several shared
+// SR resources. Keep Cacofiend and all global resources intact by giving the
+// Death Knight a private EFF plus private undead/aura/fireball/symbol resources.
 // -----------------------------------------------------------------------------
 
+ADD_PROJECTILE ~spell_rev/projectles/dvclfear.pro~
+
 COPY ~spell_rev/spwi7##/spcaco.eff~ ~override/dvdkteff.eff~
+
+COPY ~spell_rev/shared/undtype.itm~ ~override/dvdkund.itm~
+
+COPY ~spell_rev/shared/fearaura.spl~ ~override/dvdkfear.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR projectile = dvclfear END
+
+COPY ~spell_rev/shared/spin701.spl~ ~override/dvdkfire.spl~
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x28
+    STR_VAR old_resref = ~SPIN701I~
+            new_resref = ~DVDKFIRI~
+  END
+
+COPY ~spell_rev/shared/spin701i.eff~ ~override/dvdkfiri.eff~
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0xd8
+    STR_VAR old_resref = ~SPIN701~
+            new_resref = ~DVDKFIRE~
+  END
+
+COPY ~spell_rev/shared/spwi897.spl~ ~override/dvdksymd.spl~
+COPY ~spell_rev/shared/spwi899.spl~ ~override/dvdksymw.spl~
+
 COPY ~spell_rev/spwi7##/dvdeathk.bcs~ ~override~
      ~spell_rev/spwi7##/dvdeathk.cre~ ~override~
      ~spell_rev/spwi7##/dvdeathk.itm~ ~override~
      ~spell_rev/spwi7##/dvwi707a.bam~ ~override~
      ~spell_rev/spwi7##/dvwi707b.bam~ ~override~
      ~spell_rev/spwi7##/dvwi707c.bam~ ~override~
+
+COPY_EXISTING ~dvdeathk.cre~ ~override~
+  REPLACE_TEXTUALLY ~UNDTYPE~ ~DVDKUND~
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~dvdeathk.itm~ ~override~
+  LPF DVSEL_REPLACE_RESREF INT_VAR ability_size = 0x38 STR_VAR old_resref = ~FEARAURA~ new_resref = ~DVDKFEAR~ END
+  LPF DVSEL_REPLACE_RESREF INT_VAR ability_size = 0x38 STR_VAR old_resref = ~SPIN701~  new_resref = ~DVDKFIRE~ END
+  LPF DVSEL_REPLACE_RESREF INT_VAR ability_size = 0x38 STR_VAR old_resref = ~SPWI897~  new_resref = ~DVDKSYMD~ END
+  LPF DVSEL_REPLACE_RESREF INT_VAR ability_size = 0x38 STR_VAR old_resref = ~SPWI899~  new_resref = ~DVDKSYMW~ END
+  BUT_ONLY_IF_IT_CHANGES
 
 ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_SUMMON_DEATH_KNIGHT~)) BEGIN
   LAF RES_NUM_OF_SPELL_NAME
