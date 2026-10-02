@@ -117,3 +117,16 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Banishment scroll: `DVBANSCR.ITM`; add it during the unified EET arcane-scroll distribution pass.
 - Flesh to Stone: keep installed/vanilla version. SR's implementation is a mixed redesign tied to its global petrification framework rather than a clean buff.
 - Stone to Flesh: keep installed/vanilla version. Full SR hides/disables the player spell rather than improving it.
+
+
+### Level-7 decisions
+- Protection from the Elements: use the full SR upgrade (100% elemental resistance; 1 turn per 2 levels).
+- Ruby Ray of Reversal: preserve the installed/Tactics removal list and import only SR's 30-ft. range.
+- Spell Sequencer: change only to Universal school and clear specialist exclusions.
+- Delayed Blast Fireball: use SR range, 30-ft. area, -4 save penalty and scaling to 20d6, but retain Save vs. Spell and raise the first SR damage tier so the spell never drops below vanilla 15d6.
+- Power Word, Stun: use SR's additional 1-round stun for targets with 90+ HP, but preserve vanilla Conjuration/Summoning school.
+- Summon Djinni: preserve installed summon assets and add only 8 rounds to the summon duration.
+- Mass Invisibility: preserve all installed/ZSTweaks effects and import only SR's 30-ft. area projectile.
+- Limited Wish: change only to Universal school and clear specialist exclusions.
+- Summon Death Knight: add as a new dynamically allocated Level-7 spell. Preserve Cacofiend completely. Copy SR's SPCACO.EFF as `DVDKTEFF.EFF` and retarget only the new spell; use `DVDKSCR.ITM` as its dedicated scroll.
+- Prismatic Mantle: not selected because Tactics owns the physical-defense hierarchy.
