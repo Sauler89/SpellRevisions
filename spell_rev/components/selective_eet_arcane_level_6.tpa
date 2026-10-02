@@ -1,0 +1,114 @@
+// Selective Spell Revisions for EET - Arcane Level 6
+// Finalized selection:
+//   Globe of Invulnerability: 2 turns minimum, vanilla 1 round/level retained above level 20.
+//   Power Word Silence: SR 1-turn duration, vanilla school/semantics retained.
+//   Contingency: Universal school only; installed mechanics/casting behavior retained.
+//   Banishment: new dynamically allocated Level-6 spell; Death Spell remains untouched.
+
+// -----------------------------------------------------------------------------
+// Globe of Invulnerability: preserve the installed spell and its protection
+// semantics. Raise only positive durations below 2 turns (120 seconds) to 120.
+// Higher-level vanilla headers/effects already exceeding 120 seconds are kept.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi602.spl~ ~override~
+  LPF ALTER_EFFECT_EX
+    INT_VAR
+      duration = 120
+    STR_VAR
+      match_duration_ex = ~(o_duration > 0 AND o_duration < 120)~
+  END
+  SAY NAME1 @30600
+  SAY UNIDENTIFIED_DESC @30601
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl7f.itm~ ~override~
+  SAY NAME2 @30600
+  SAY IDENTIFIED_DESC @30601
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Power Word Silence: preserve the installed spell and vanilla
+// Conjuration/Summoning school; extend only the vanilla 7-round duration
+// (42 seconds) to SR's 1 turn (60 seconds).
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi612.spl~ ~override~
+  LPF ALTER_EFFECT_EX
+    INT_VAR
+      duration = 60
+    STR_VAR
+      match_duration_ex = ~(o_duration = 42)~
+  END
+  SAY NAME1 @30610
+  SAY UNIDENTIFIED_DESC @30611
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl7p.itm~ ~override~
+  SAY NAME2 @30610
+  SAY IDENTIFIED_DESC @30611
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Contingency: make the existing spell Universal without importing SR's other
+// implementation changes. Clear specialist exclusions on both spell and scroll.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi617.spl~ ~override~
+  WRITE_BYTE 0x25 0 // Universal / unaffiliated school
+  WRITE_BYTE 0x1e 0 // blocked specialist schools: none
+  WRITE_BYTE 0x1f 0
+  SAY NAME1 @30620
+  SAY UNIDENTIFIED_DESC @30621
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl7u.itm~ ~override~
+  WRITE_BYTE 0x2f 0 // blocked specialist schools: none
+  WRITE_BYTE 0x2d 0
+  SAY NAME2 @30620
+  SAY IDENTIFIED_DESC @30621
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Banishment: NEW Level-6 Abjuration.
+// SR normally overwrites Death Spell (SPWI605/SCRL7I). This selective project
+// keeps Death Spell completely intact, so Banishment gets a dynamic spell slot
+// and a dedicated scroll resource.
+// -----------------------------------------------------------------------------
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_BANISHMENT~)) BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_BANISHMENT~
+    RET dvsel_banishment_resref = spell_res
+  END
+
+  COPY ~spell_rev/spwi6##/spwi605.spl~ ~override/%dvsel_banishment_resref%.spl~
+    SAY NAME1 @30630
+    SAY UNIDENTIFIED_DESC @30631
+END ELSE BEGIN
+  ADD_SPELL ~spell_rev/spwi6##/spwi605.spl~ 2 6 ~WIZARD_BANISHMENT~
+    SAY NAME1 @30630
+    SAY UNIDENTIFIED_DESC @30631
+
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_BANISHMENT~
+    RET dvsel_banishment_resref = spell_res
+  END
+END
+
+COPY ~spell_rev/spwi6##/dvwi605a.bam~ ~override~
+     ~spell_rev/spwi6##/dvwi605b.bam~ ~override~
+     ~spell_rev/spwi6##/dvwi605c.bam~ ~override~
+
+COPY ~spell_rev/spwi6##/scrl7i.itm~ ~override/dvbanscr.itm~
+  SAY NAME2 @30630
+  SAY IDENTIFIED_DESC @30631
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x38
+    STR_VAR old_resref = ~SPWI605~
+            new_resref = EVAL ~%dvsel_banishment_resref%~
+  END
+
+// Flesh to Stone and Stone to Flesh intentionally remain installed/vanilla:
+// SR's Flesh to Stone is a mixed petrification-system redesign, while full SR
+// hides/disables Stone to Flesh rather than buffing it.
