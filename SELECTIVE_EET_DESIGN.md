@@ -144,3 +144,13 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Pierce Shield and Improved Mantle: preserve Tactics.
 - Abi-Dalzim's Horrid Wilting, Maze and Bigby's Clenched Fist: preserve ZSTweaks.
 - Moment of Prescience, Symbol of Weakness and Bigby's Icy Grasp: explicitly not added.
+
+
+### Level-9 decisions
+- Chain Contingency: change only to Universal school and clear specialist exclusions on spell and scroll. Preserve installed mechanics and casting time 9.
+- Freedom: use SR's expanded mass-freedom/cure implementation while retaining vanilla Maze/Imprisonment release. Restore casting time 9 instead of SR's 1 round.
+- Spell Trap, Spellstrike, Gate and Absolute Immunity: preserve Tactics semantics.
+- Imprisonment, Meteor Swarm, Power Word Kill, Wail of the Banshee, Energy Drain, Black Blade of Disaster and Bigby's Crushing Hand: preserve ZSTweaks.
+- Shapechange and Time Stop: keep installed/vanilla versions.
+- Wish: keep existing implementation and all Tactics/ZSTweaks subspell hooks.
+- SR Monster Summoning IX: not used; source block is disabled and IWDification already owns WIZARD_MONSTER_SUMMONING_7.
