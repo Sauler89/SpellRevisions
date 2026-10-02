@@ -158,7 +158,7 @@ APPEND ~spell.ids~ ~2223 WIZARD_SOUND_BURST~ UNLESS ~WIZARD_SOUND_BURST~
 // Create our own scroll resource now; EET distribution is deferred.
 // -----------------------------------------------------------------------------
 
-ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_RESIST_ELEMENTS~)) BEGIN
+ACTION_IF (IDS_OF_SYMBOL (~spell~ ~WIZARD_RESIST_ELEMENTS~) >= 0) BEGIN
   LAF RES_NUM_OF_SPELL_NAME
     STR_VAR spell_name = ~WIZARD_RESIST_ELEMENTS~
     RET dvsel_resist_elements_resref = spell_res
