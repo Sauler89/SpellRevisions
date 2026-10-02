@@ -186,7 +186,7 @@ COPY_EXISTING ~dvdeathk.itm~ ~override~
   LPF DVSEL_REPLACE_RESREF INT_VAR ability_size = 0x38 STR_VAR old_resref = ~SPWI899~  new_resref = ~DVDKSYMW~ END
   BUT_ONLY_IF_IT_CHANGES
 
-ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_SUMMON_DEATH_KNIGHT~)) BEGIN
+ACTION_IF (IDS_OF_SYMBOL (~spell~ ~WIZARD_SUMMON_DEATH_KNIGHT~) >= 0) BEGIN
   LAF RES_NUM_OF_SPELL_NAME
     STR_VAR spell_name = ~WIZARD_SUMMON_DEATH_KNIGHT~
     RET dvsel_death_knight_resref = spell_res
