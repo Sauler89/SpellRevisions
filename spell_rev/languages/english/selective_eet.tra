@@ -465,3 +465,133 @@ Area of Effect: 30-ft. radius
 Saving Throw: None
 
 This spell forces hostile summoned creatures within the area of effect back to their proper plane or otherwise ends the magic sustaining their presence. There is no Saving Throw, and Magic Resistance does not protect against Banishment.~
+
+
+@30700 = ~Protection from the Elements~
+@30701 = ~Protection from the Elements
+(Abjuration)
+
+Level: 7
+Range: Touch
+Duration: 1 turn/2 levels
+Casting Time: 7
+Area of Effect: 1 creature
+Saving Throw: None
+
+When this spell is cast, the recipient gains complete protection from acid, cold, electricity, and fire. Damage of these types from weapons, spells, wands, breath weapons, and other sources is resisted completely for the duration of the spell or until dispelled.~
+
+@30710 = ~Ruby Ray of Reversal~
+@30711 = ~Ruby Ray of Reversal
+(Alteration)
+
+Level: 7
+Range: 30 ft.
+Duration: Instant
+Casting Time: 5
+Area of Effect: 1 creature
+Saving Throw: None
+
+When this spell is cast, it dispels one spell protection affecting the target creature, always removing the highest-level eligible protection first. If more than one protection of the same highest level is active, one is chosen at random. The exact protection-removal rules remain those of the installed spell system. Magic Resistance does not affect Ruby Ray of Reversal.~
+
+@30720 = ~Spell Sequencer~
+@30721 = ~Spell Sequencer
+(Universal)
+
+Level: 7
+Range: Personal
+Duration: Permanent until used
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+This spell allows a wizard to store three spells of 4th level or lower and release them simultaneously from the Special Ability button. The sequencer remains prepared until activated. A wizard can possess only one Spell Sequencer at a time.
+
+Because Spell Sequencer belongs to the Universal school, it can be learned and cast by specialist mages regardless of their opposition school.~
+
+@30730 = ~Delayed Blast Fireball~
+@30731 = ~Delayed Blast Fireball
+(Invocation/Evocation)
+
+Level: 7
+Range: Long
+Duration: Special
+Casting Time: 7
+Area of Effect: 30-ft. radius
+Saving Throw: Spell half
+
+This spell creates a fireball that remains at the chosen point until a creature approaches closely enough to trigger it. When detonated, it explodes in a 30-ft. radius. The explosion deals at least 15d6 points of fire damage and thereafter scales with caster level up to a maximum of 20d6. Victims make a Saving Throw vs. Spell at a -4 penalty for half damage.~
+
+@30740 = ~Power Word, Stun~
+@30741 = ~Power Word, Stun
+(Conjuration/Summoning)
+
+Level: 7
+Range: Long
+Duration: Special
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: None
+
+When this power word is uttered, one creature is stunned according to its current Hit Points:
+  1-29 Hit Points: 4d4 rounds
+  30-59 Hit Points: 2d4 rounds
+  60-89 Hit Points: 1d4 rounds
+  90 or more Hit Points: 1 round
+
+No Saving Throw is allowed.~
+
+@30750 = ~Summon Djinni~
+@30751 = ~Summon Djinni
+(Conjuration/Summoning)
+
+Level: 7
+Range: 120 ft.
+Duration: 8 rounds + 1 round/level
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+This spell calls a djinni from the Elemental Plane of Air to serve the caster. The summoned creature uses the abilities and statistics supplied by the installed game and mod setup. It remains under the caster's control for 8 rounds plus 1 additional round per caster level, unless slain or otherwise dismissed.~
+
+@30760 = ~Mass Invisibility~
+@30761 = ~Mass Invisibility
+(Illusion/Phantasm)
+
+Level: 7
+Range: Visual range of the caster
+Duration: 1 round/level
+Casting Time: 7
+Area of Effect: 30-ft. radius
+Saving Throw: None
+
+Upon casting this spell, all friendly creatures within a 30-ft. radius of the target point are affected by Improved Invisibility. The underlying invisibility effects and their interaction with divination magic follow the installed game and mod rules.~
+
+@30770 = ~Limited Wish~
+@30771 = ~Limited Wish
+(Universal)
+
+Level: 7
+Range: Unlimited
+Duration: Special
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+Limited Wish is a powerful but difficult spell that can partially alter reality according to the caster's request. The precise results depend upon the wish chosen and, in many cases, the caster's Wisdom. Existing Limited Wish dialogue choices and special interactions are preserved.
+
+Because Limited Wish belongs to the Universal school, it can be learned and cast by specialist mages regardless of their opposition school.~
+
+@30780 = ~Summon Death Knight~
+@30781 = ~Summon Death Knight
+(Necromancy)
+
+Level: 7
+Range: Medium
+Duration: 3 turns
+Casting Time: 1 round
+Area of Effect: Special
+Saving Throw: None
+
+This spell calls a Death Knight, a powerful undead fiend, to the Prime Material Plane. The creature is not directly controlled and must be bound or negotiated with; an unsuccessful or abusive summoning may cause it to turn against its summoner.
+
+The summoned Death Knight is a formidable 13-Hit-Dice warrior with strong physical and magical defenses, an aura of fear, resistance to mundane weapons and many disabling effects, and several powerful spell-like abilities. The creature remains for up to 3 turns unless slain, banished, or otherwise dismissed.~
