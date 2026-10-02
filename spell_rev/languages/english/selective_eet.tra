@@ -691,3 +691,34 @@ Area of Effect: 20-ft. radius
 Saving Throw: Death negates
 
 This spell inscribes a magical symbol that remains dormant until a creature approaches closely enough to trigger it. When activated, creatures within a 20-ft. radius must make a Saving Throw vs. Death at a -4 penalty or die. Creatures with more than 60 current Hit Points are immune to the death effect.~
+
+
+@30900 = ~Chain Contingency~
+@30901 = ~Chain Contingency
+(Universal)
+
+Level: 9
+Range: Personal
+Duration: Permanent until triggered
+Casting Time: 9
+Area of Effect: The caster
+Saving Throw: None
+
+Chain Contingency allows a wizard to store three spells of 8th level or lower and have them released automatically when a chosen condition is met. When the condition occurs, all three spells are cast immediately.
+
+Because Chain Contingency belongs to the Universal school, it can be learned and cast by specialist mages regardless of their opposition school.~
+
+@30910 = ~Freedom~
+@30911 = ~Freedom
+(Abjuration)
+
+Level: 9
+Range: Personal
+Duration: Instant
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+When this spell is cast, all friendly creatures in the area are freed from effects that bind their minds or restrict their movement. Freedom removes charm, confusion, domination, entangle, feeblemindedness, hold, paralysis, petrification, sleep, slow, stun, and web.
+
+The spell also cancels Maze and returns creatures trapped in the labyrinth of planes. If cast in an area where a creature was sealed by Imprisonment, it immediately releases that creature, which reappears where it was originally imprisoned.~
