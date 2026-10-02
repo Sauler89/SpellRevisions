@@ -130,3 +130,17 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Limited Wish: change only to Universal school and clear specialist exclusions.
 - Summon Death Knight: add as a new dynamically allocated Level-7 spell. Preserve Cacofiend completely. Copy SR's SPCACO.EFF as `DVDKTEFF.EFF` and retarget only the new spell; use `DVDKSCR.ITM` as its dedicated scroll.
 - Prismatic Mantle: not selected because Tactics owns the physical-defense hierarchy.
+
+
+### Level-8 decisions
+- Ghostform: add as a new dynamically allocated Level-8 Alteration. IWDification owns SPWI801, so never overwrite it. Retarget Ghostform's internal SPWI801 self-immunity reference to the final dynamic resource; use `DVGHSCR.ITM` as its dedicated scroll.
+- Protection from Energy: use the full SR upgrade (100% acid/cold/electricity/fire/magic damage protection; 2 rounds/level).
+- Spell Trigger: change only to Universal school and clear specialist exclusions.
+- Incendiary Cloud: preserve installed/vanilla Evocation school, 1d4/level damage and Save vs. Spell; import SR's 30-ft. cloud projectile and no-save -4 THAC0/-4 AC smoke penalties.
+- Power Word, Blind: preserve installed AoE/projectile and Conjuration/Summoning school; extend normal blindness from 6 rounds to 1 turn and mirror SR's permanent blindness for targets below 6 HD.
+- Symbol, Stun: preserve installed scaling duration, -4 save and casting time; import SR's 20-ft. symbol projectile.
+- Symbol, Death: preserve installed casting time and 60-current-HP limit; import SR's 20-ft. symbol projectile and -4 Save vs. Death penalty.
+- Mind Blank: preserve IWDification.
+- Pierce Shield and Improved Mantle: preserve Tactics.
+- Abi-Dalzim's Horrid Wilting, Maze and Bigby's Clenched Fist: preserve ZSTweaks.
+- Moment of Prescience, Symbol of Weakness and Bigby's Icy Grasp: explicitly not added.
