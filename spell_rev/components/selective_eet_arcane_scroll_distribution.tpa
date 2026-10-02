@@ -20,3 +20,8 @@ COPY_EXISTING ~u!lstore.sto~ ~override~
     ADD_STORE_ITEM ~dvghscr~  LAST #1 #0 #0 ~IDENTIFIED~ #5 // Ghostform
   END
   BUT_ONLY IF_EXISTS
+
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~u!lstore.sto~ BEGIN
+  WARN ~Selective Spell Revisions: Lucy scroll distribution skipped because U!LSTORE.STO was not found. Install this component after Shards of Ice if Lucy the Wyvern should stock the new scrolls.~
+END
