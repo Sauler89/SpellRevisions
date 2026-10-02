@@ -1,0 +1,22 @@
+// Selective Spell Revisions for EET
+// Temporary arcane scroll distribution.
+//
+// Lucy the Wyvern's shop is supplied by Shards of Ice and uses U!LSTORE.STO.
+// For the current development/testing phase, every genuinely new arcane
+// scroll is stocked here in a finite quantity of five copies.
+//
+// If Shards of Ice / U!LSTORE.STO is not installed, this patch is skipped
+// rather than making the main spell component fail.
+
+COPY_EXISTING ~u!lstore.sto~ ~override~
+  PATCH_IF (SOURCE_SIZE > 0x9b) BEGIN
+    ADD_STORE_ITEM ~dvobmscr~ LAST #1 #0 #0 ~IDENTIFIED~ #5 // Obscuring Mist
+    ADD_STORE_ITEM ~dvdjmscr~ LAST #1 #0 #0 ~IDENTIFIED~ #5 // Dimension Jump
+    ADD_STORE_ITEM ~dvresscr~ LAST #1 #0 #0 ~IDENTIFIED~ #5 // Resist Elements
+    ADD_STORE_ITEM ~dvpeescr~ LAST #1 #0 #0 ~IDENTIFIED~ #5 // Protection from Elemental Energy
+    ADD_STORE_ITEM ~dvmasscr~ LAST #1 #0 #0 ~IDENTIFIED~ #5 // Mestil's Acid Sheath
+    ADD_STORE_ITEM ~dvbanscr~ LAST #1 #0 #0 ~IDENTIFIED~ #5 // Banishment
+    ADD_STORE_ITEM ~dvdkscr~  LAST #1 #0 #0 ~IDENTIFIED~ #5 // Summon Death Knight
+    ADD_STORE_ITEM ~dvghscr~  LAST #1 #0 #0 ~IDENTIFIED~ #5 // Ghostform
+  END
+  BUT_ONLY IF_EXISTS
