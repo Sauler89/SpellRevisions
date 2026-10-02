@@ -120,7 +120,7 @@ The patch is conditional on `U!LSTORE.STO` existing, so installations without th
 - Protection from the Elements: use the full SR upgrade (100% elemental resistance; 1 turn per 2 levels).
 - Ruby Ray of Reversal: preserve the installed/Tactics removal list and import only SR's 30-ft. range.
 - Spell Sequencer: change only to Universal school and clear specialist exclusions.
-- Delayed Blast Fireball: use SR range, 30-ft. area, -4 save penalty and scaling to 20d6, but retain Save vs. Spell and raise the first SR damage tier so the spell never drops below vanilla 15d6.
+- Delayed Blast Fireball: preserve ZSTweaks #446 completely. That component directly rebuilds SPWI712, so the selective module must not patch SPWI712 or SCRL8N.
 - Power Word, Stun: use SR's additional 1-round stun for targets with 90+ HP, but preserve vanilla Conjuration/Summoning school.
 - Summon Djinni: preserve installed summon assets and add only 8 rounds to the summon duration.
 - Mass Invisibility: preserve all installed/ZSTweaks effects and import only SR's 30-ft. area projectile.
