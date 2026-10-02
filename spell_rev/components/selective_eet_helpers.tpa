@@ -11,10 +11,11 @@ BEGIN
     READ_LONG  0x64 dvsel_abil_off
     READ_SHORT 0x68 dvsel_abil_num
     READ_LONG  0x6a dvsel_fx_off
+    READ_SHORT 0x6e dvsel_global_fx_index
     READ_SHORT 0x70 dvsel_global_fx_num
 
     FOR (dvsel_i = 0; dvsel_i < dvsel_global_fx_num; ++dvsel_i) BEGIN
-      SET dvsel_effect_off = dvsel_fx_off + (0x30 * dvsel_i)
+      SET dvsel_effect_off = dvsel_fx_off + (0x30 * (dvsel_global_fx_index + dvsel_i))
       READ_LONG (dvsel_effect_off + 0x24) dvsel_savingthrow
       PATCH_IF (dvsel_savingthrow > 0) BEGIN
         WRITE_LONG (dvsel_effect_off + 0x28) savebonus
@@ -49,10 +50,11 @@ BEGIN
     READ_LONG  0x64 dvsel_abil_off
     READ_SHORT 0x68 dvsel_abil_num
     READ_LONG  0x6a dvsel_fx_off
+    READ_SHORT 0x6e dvsel_global_fx_index
     READ_SHORT 0x70 dvsel_global_fx_num
 
     FOR (dvsel_i = 0; dvsel_i < dvsel_global_fx_num; ++dvsel_i) BEGIN
-      SET dvsel_effect_off = dvsel_fx_off + (0x30 * dvsel_i)
+      SET dvsel_effect_off = dvsel_fx_off + (0x30 * (dvsel_global_fx_index + dvsel_i))
       READ_SHORT dvsel_effect_off dvsel_opcode
       READ_LONG (dvsel_effect_off + 0x0e) dvsel_duration
       PATCH_IF (((match_opcode < 0) OR (dvsel_opcode = match_opcode)) AND
@@ -90,10 +92,11 @@ BEGIN
     READ_LONG  0x64 dvsel_abil_off
     READ_SHORT 0x68 dvsel_abil_num
     READ_LONG  0x6a dvsel_fx_off
+    READ_SHORT 0x6e dvsel_global_fx_index
     READ_SHORT 0x70 dvsel_global_fx_num
 
     FOR (dvsel_i = 0; dvsel_i < dvsel_global_fx_num; ++dvsel_i) BEGIN
-      SET dvsel_effect_off = dvsel_fx_off + (0x30 * dvsel_i)
+      SET dvsel_effect_off = dvsel_fx_off + (0x30 * (dvsel_global_fx_index + dvsel_i))
       READ_SHORT dvsel_effect_off dvsel_opcode
       READ_LONG (dvsel_effect_off + 0x0e) dvsel_duration
       PATCH_IF (((match_opcode < 0) OR (dvsel_opcode = match_opcode)) AND
