@@ -56,25 +56,22 @@ The final installer should be built from an explicit allowlist rather than insta
 - Completed spell-level modules are included from `spell_rev/components/selective_eet_main.tpa`.
 - New levels are added to that main aggregator after their audit is closed.
 
-## Scroll distribution roadmap
+## Current arcane scroll distribution
 
-### Dimension Jump
-The upstream SR implementation reuses an already distributed scroll resource. Before release, verify how those placements behave in EET and ensure the standalone Dimension Jump scroll inherits or reproduces appropriate distribution **without deleting another spell's scroll**.
+All genuinely new arcane scrolls are currently distributed through **Lucy the Wyvern** in the Adventure Mart, using the **Shards of Ice** store resource `U!LSTORE.STO`.
 
-### Obscuring Mist
-Upstream SR replaces Blindness and can therefore reuse the Blindness scroll. This project keeps Blindness, so Obscuring Mist must retain a unique scroll resource.
+The installer appends five identified copies of each scroll and does not remove or replace Lucy's existing stock:
 
-Before release, dynamically inject the Obscuring Mist scroll into appropriate EET scroll distribution. Preferred behavior:
-1. Keep every existing Blindness scroll untouched.
-2. Detect stores that contain the Blindness scroll and add Obscuring Mist alongside it where appropriate.
-3. Audit non-store placements (CRE/area/container or other scripted placements) and duplicate only suitable learnable-scroll placements rather than replacing them.
-4. Avoid duplicate stock entries when reinstalling or when another component has already added the new scroll.
+- `DVOBMSCR.ITM` — Obscuring Mist
+- `DVDJMSCR.ITM` — Dimension Jump
+- `DVRESSCR.ITM` — Resist Elements
+- `DVPEESCR.ITM` — Protection from Elemental Energy
+- `DVMASSCR.ITM` — Mestil's Acid Sheath
+- `DVBANSCR.ITM` — Banishment
+- `DVDKSCR.ITM` — Summon Death Knight
+- `DVGHSCR.ITM` — Ghostform
 
-This distribution task is intentionally deferred until the arcane spell set is complete, so all new scrolls can be distributed coherently in one pass.
-
-
-### Resist Elements
-Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll resource is `DVRESSCR.ITM`. Add it to the unified EET scroll-distribution pass after the arcane spell-selection audit is complete.
+The patch is conditional on `U!LSTORE.STO` existing, so installations without the relevant Shards of Ice Lucy shop do not fail. This is the current centralized development/test distribution and supersedes the earlier deferred unified-scroll roadmap. Permanent world/store distribution can be revisited later.
 
 ### Level-2 replacements and scroll inheritance
 - Detect Alignment replaces Know Alignment and converts existing learnable Know Alignment scrolls to the new Level-1 resource.
@@ -96,7 +93,7 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Secret Word: retain the installed Abjuration school and existing Level-8-or-lower protection-removal behavior; import only SR's casting time 1 and longer range.
 - Farsight: use the SR 5-turn duration.
 - Protection from Elemental Energy: add as a new dynamically allocated Level-4 spell. Do not reuse IWDification's SPWI426. The selection menu points to four hidden SR-derived subspells (DVPEEFIR, DVPEECOL, DVPEEELE, DVPEEACI) so the spell always provides 100% protection without replacing the retained elemental-protection spells.
-- Protection from Elemental Energy scroll: `DVPEESCR.ITM`; add it during the unified EET arcane-scroll distribution pass.
+- Protection from Elemental Energy scroll: `DVPEESCR.ITM`; currently stocked at Lucy's `U!LSTORE.STO` (5 copies).
 
 
 ### Level-5 decisions
@@ -106,7 +103,7 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Lower Resistance: use SR's scalable implementation, but preserve the vanilla Abjuration school and 40-ft. range. Use 19% at caster level 9, then 2%/level from level 10 onward, capped at 40%.
 - Oracle: preserve vanilla 120-ft. radius and Non-Detection removal; add SR coverage for Blur, Ghost Armor, Invisibility Sphere, Pixie Dust, Mislead, Project Image, and Mass Invisibility.
 - Mestil's Acid Sheath: add as a new dynamically allocated Level-5 spell. Never reuse IWDification's SPWI526 (Summon Shadow). Its retaliation subspell is renamed to `DVMASDMG.SPL`.
-- Mestil's Acid Sheath scroll: `DVMASSCR.ITM`; add it during the unified EET arcane-scroll distribution pass.
+- Mestil's Acid Sheath scroll: `DVMASSCR.ITM`; currently stocked at Lucy's `U!LSTORE.STO` (5 copies).
 
 
 ### Level-6 decisions
@@ -114,7 +111,7 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Power Word, Silence: preserve installed mechanics and vanilla Conjuration/Summoning school; extend the vanilla 7-round duration to 1 turn.
 - Contingency: change only to Universal school, clearing specialist exclusions on both the spell and its scroll.
 - Banishment: add as a new dynamically allocated Level-6 Abjuration. Never overwrite Death Spell/SPWI605; Death Spell remains fully available for Tactics semantics.
-- Banishment scroll: `DVBANSCR.ITM`; add it during the unified EET arcane-scroll distribution pass.
+- Banishment scroll: `DVBANSCR.ITM`; currently stocked at Lucy's `U!LSTORE.STO` (5 copies).
 - Flesh to Stone: keep installed/vanilla version. SR's implementation is a mixed redesign tied to its global petrification framework rather than a clean buff.
 - Stone to Flesh: keep installed/vanilla version. Full SR hides/disables the player spell rather than improving it.
 
@@ -128,12 +125,12 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Summon Djinni: preserve installed summon assets and add only 8 rounds to the summon duration.
 - Mass Invisibility: preserve all installed/ZSTweaks effects and import only SR's 30-ft. area projectile.
 - Limited Wish: change only to Universal school and clear specialist exclusions.
-- Summon Death Knight: add as a new dynamically allocated Level-7 spell. Preserve Cacofiend completely. Copy SR's SPCACO.EFF as `DVDKTEFF.EFF` and retarget only the new spell; use `DVDKSCR.ITM` as its dedicated scroll.
+- Summon Death Knight: add as a new dynamically allocated Level-7 spell. Preserve Cacofiend completely. Copy SR's SPCACO.EFF as `DVDKTEFF.EFF` and retarget only the new spell; use `DVDKSCR.ITM` as its dedicated scroll, currently stocked at Lucy's `U!LSTORE.STO` (5 copies).
 - Prismatic Mantle: not selected because Tactics owns the physical-defense hierarchy.
 
 
 ### Level-8 decisions
-- Ghostform: add as a new dynamically allocated Level-8 Alteration. IWDification owns SPWI801, so never overwrite it. Retarget Ghostform's internal SPWI801 self-immunity reference to the final dynamic resource; use `DVGHSCR.ITM` as its dedicated scroll.
+- Ghostform: add as a new dynamically allocated Level-8 Alteration. IWDification owns SPWI801, so never overwrite it. Retarget Ghostform's internal SPWI801 self-immunity reference to the final dynamic resource; use `DVGHSCR.ITM` as its dedicated scroll, currently stocked at Lucy's `U!LSTORE.STO` (5 copies).
 - Protection from Energy: use the full SR upgrade (100% acid/cold/electricity/fire/magic damage protection; 2 rounds/level).
 - Spell Trigger: change only to Universal school and clear specialist exclusions.
 - Incendiary Cloud: preserve installed/vanilla Evocation school, 1d4/level damage and Save vs. Spell; import SR's 30-ft. cloud projectile and no-save -4 THAC0/-4 AC smoke penalties.
