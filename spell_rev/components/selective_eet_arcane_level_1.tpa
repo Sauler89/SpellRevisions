@@ -240,6 +240,8 @@ OUTER_SET dvsel_obmist_clearair = dvfogc - 1
 APPEND ~clearair.2da~ ~Selective_Obscuring_Mist     %dvsel_obmist_clearair%~ UNLESS ~Selective_Obscuring_Mist~
 
 COPY ~spell_rev/spwi1##/scrl71.itm~ ~override/dvobmscr.itm~
+  WRITE_BYTE 0x2d 0x01 // Conjuration: blocked for Diviners
+  WRITE_BYTE 0x2f 0x00
   SAY NAME2 @30170
   SAY IDENTIFIED_DESC @30171
   LPF DVSEL_REPLACE_RESREF
@@ -273,6 +275,8 @@ COPY ~spell_rev/spwi1##/dvwi109a.bam~ ~override~
      ~spell_rev/spwi1##/dvwi109b.bam~ ~override~
      ~spell_rev/spwi1##/dvwi109c.bam~ ~override~
 COPY ~spell_rev/spwi1##/scrl1v.itm~ ~override/dvdjmscr.itm~
+  WRITE_BYTE 0x2d 0x01 // Conjuration: blocked for Diviners
+  WRITE_BYTE 0x2f 0x00
   SAY NAME2 @30180
   SAY IDENTIFIED_DESC @30181
   LPF DVSEL_REPLACE_RESREF
