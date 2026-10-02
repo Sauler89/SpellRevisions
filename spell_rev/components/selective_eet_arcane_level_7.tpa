@@ -3,7 +3,7 @@
 //   Protection from the Elements: full SR upgrade.
 //   Ruby Ray of Reversal: SR range only; installed/Tactics protection list retained.
 //   Spell Sequencer: Universal school only.
-//   Delayed Blast Fireball: strict-buff SR/vanilla hybrid.
+//   Delayed Blast Fireball: preserved from ZSTweaks #446.
 //   Power Word Stun: SR 1-round effect for 90+ HP; vanilla school retained.
 //   Summon Djinni: SR duration bonus only; installed summon assets retained.
 //   Mass Invisibility: SR 30-ft. area only; ZSTweaks/vanilla effects retained.
@@ -60,35 +60,11 @@ COPY_EXISTING ~scrl8l.itm~ ~override~
   BUT_ONLY_IF_IT_CHANGES
 
 // -----------------------------------------------------------------------------
-// Delayed Blast Fireball: use SR's Long range, 30-ft. blast, -4 save penalty,
-// and scaling up to 20d6, but retain Save vs. Spell and never fall below
-// vanilla's 15d6 at the first available caster level.
-// SR implements save-for-half as an always-applied damage half plus a second
-// save-negated half. On its first header, raise the saved half from 7d6 to 8d6
-// so total failed-save damage is 15d6 rather than 14d6.
+// Delayed Blast Fireball: KEEP ZSTWEAKS #446.
+// The user's enabled ZSTweaks arcane group directly rebuilds SPWI712,
+// including damage scaling and its optional projectile animation.
+// Do not patch SPWI712 or SCRL8N here: ZSTweaks has higher priority.
 // -----------------------------------------------------------------------------
-
-COPY ~spell_rev/spwi7##/spwi712.spl~ ~override/spwi712.spl~
-  LPF ALTER_EFFECT
-    INT_VAR
-      match_opcode = 12
-      match_savingthrow = 2
-      savingthrow = 1
-  END
-  LPF ALTER_EFFECT
-    INT_VAR
-      header = 0
-      match_opcode = 12
-      match_savingthrow = 1
-      dicenumber = 8
-  END
-  SAY NAME1 @30730
-  SAY UNIDENTIFIED_DESC @30731
-
-COPY_EXISTING ~scrl8n.itm~ ~override~
-  SAY NAME2 @30730
-  SAY IDENTIFIED_DESC @30731
-  BUT_ONLY_IF_IT_CHANGES
 
 // -----------------------------------------------------------------------------
 // Power Word Stun: SR keeps all vanilla HP bands and adds a 1-round stun for
