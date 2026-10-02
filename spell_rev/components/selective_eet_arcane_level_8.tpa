@@ -15,7 +15,7 @@
 // dynamically and retarget Ghostform's self-immunity from SPWI801.
 // -----------------------------------------------------------------------------
 
-ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_GHOSTFORM~)) BEGIN
+ACTION_IF (IDS_OF_SYMBOL (~spell~ ~WIZARD_GHOSTFORM~) >= 0) BEGIN
   LAF RES_NUM_OF_SPELL_NAME
     STR_VAR spell_name = ~WIZARD_GHOSTFORM~
     RET dvsel_ghostform_resref = spell_res
