@@ -1,0 +1,193 @@
+// Selective Spell Revisions for EET - Arcane Level 8
+// Finalized selection:
+//   Ghostform: new dynamically allocated Level-8 spell.
+//   Protection from Energy: full SR upgrade.
+//   Spell Trigger: Universal school only.
+//   Incendiary Cloud: vanilla damage/save/school + SR 30-ft. area and smoke penalties.
+//   Power Word Blind: vanilla AoE/school + SR duration/permanent low-HD blindness.
+//   Symbol Stun: vanilla scaling duration + SR 20-ft. area.
+//   Symbol Death: vanilla casting time + SR 20-ft. area and -4 save.
+// Explicitly skipped: Moment of Prescience, Symbol of Weakness, Bigby's Icy Grasp.
+
+// -----------------------------------------------------------------------------
+// Ghostform: NEW Level-8 Alteration.
+// IWDification already owns SPWI801 (Monster Summoning VI), so allocate
+// dynamically and retarget Ghostform's self-immunity from SPWI801.
+// -----------------------------------------------------------------------------
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_GHOSTFORM~)) BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_GHOSTFORM~
+    RET dvsel_ghostform_resref = spell_res
+  END
+
+  COPY ~spell_rev/spwi8##/spwi801.spl~ ~override/%dvsel_ghostform_resref%.spl~
+    SAY NAME1 @30800
+    SAY UNIDENTIFIED_DESC @30801
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPWI801~
+              new_resref = EVAL ~%dvsel_ghostform_resref%~
+    END
+END ELSE BEGIN
+  ADD_SPELL ~spell_rev/spwi8##/spwi801.spl~ 2 8 ~WIZARD_GHOSTFORM~
+    SAY NAME1 @30800
+    SAY UNIDENTIFIED_DESC @30801
+
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_GHOSTFORM~
+    RET dvsel_ghostform_resref = spell_res
+  END
+
+  COPY_EXISTING ~%dvsel_ghostform_resref%.spl~ ~override~
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPWI801~
+              new_resref = EVAL ~%dvsel_ghostform_resref%~
+    END
+    BUT_ONLY_IF_IT_CHANGES
+END
+
+COPY ~spell_rev/spwi8##/scrlw801.itm~ ~override/dvghscr.itm~
+  SAY NAME2 @30800
+  SAY IDENTIFIED_DESC @30801
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x38
+    STR_VAR old_resref = ~SPWI801~
+            new_resref = EVAL ~%dvsel_ghostform_resref%~
+  END
+
+// -----------------------------------------------------------------------------
+// Protection from Energy: selected full SR upgrade.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi8##/spwi803.spl~ ~override/spwi803.spl~
+  SAY NAME1 @30810
+  SAY UNIDENTIFIED_DESC @30811
+
+COPY_EXISTING ~scrl8y.itm~ ~override~
+  SAY NAME2 @30810
+  SAY IDENTIFIED_DESC @30811
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Spell Trigger: Universal school only; installed mechanics/casting retained.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi809.spl~ ~override~
+  WRITE_BYTE 0x25 0
+  WRITE_BYTE 0x1e 0
+  WRITE_BYTE 0x1f 0
+  SAY NAME1 @30820
+  SAY UNIDENTIFIED_DESC @30821
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl9d.itm~ ~override~
+  WRITE_BYTE 0x2f 0
+  WRITE_BYTE 0x2d 0
+  SAY NAME2 @30820
+  SAY IDENTIFIED_DESC @30821
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Incendiary Cloud: retain installed/vanilla damage scaling, Save vs. Spell,
+// Evocation school and duration. Import SR's 30-ft. cloud projectile plus
+// the no-save smoke penalties (-4 THAC0 and -4 AC) reapplied by the cloud.
+// -----------------------------------------------------------------------------
+
+ADD_PROJECTILE ~spell_rev/projectles/dvicloud.pro~
+OUTER_SET dvsel_icloud_clear = (dvicloud - 1)
+APPEND ~clearair.2da~ ~Selective_Incendiary_Cloud        %dvsel_icloud_clear%~ UNLESS ~Selective_Incendiary_Cloud~
+
+COPY_EXISTING ~spwi810.spl~ ~override~
+  LPF ALTER_SPELL_HEADER INT_VAR projectile = dvicloud END
+  LPF ADD_SPELL_EFFECT
+    INT_VAR opcode = 0 target = 2 power = 8 parameter1 = "-4" timing = 0 duration = 6 resist_dispel = 2
+  END
+  LPF ADD_SPELL_EFFECT
+    INT_VAR opcode = 54 target = 2 power = 8 parameter1 = "-4" timing = 0 duration = 6 resist_dispel = 2
+  END
+  SAY NAME1 @30830
+  SAY UNIDENTIFIED_DESC @30831
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl9e.itm~ ~override~
+  SAY NAME2 @30830
+  SAY IDENTIFIED_DESC @30831
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Power Word Blind: preserve installed AoE/projectile and vanilla school.
+// Extend normal timed blindness from 6 rounds to 1 turn. Mirror SR's low-HD
+// permanent-blindness encoding by cloning the blindness/icon effects with its
+// 5-HD limiter field.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi815.spl~ ~override~
+  LPF ALTER_EFFECT_EX
+    INT_VAR duration = 60
+    STR_VAR match_duration_ex = ~(o_duration = 36)~
+  END
+  LPF CLONE_EFFECT
+    INT_VAR
+      match_opcode = 74
+      match_duration = 60
+      duration = 3600000
+      dicesize = 5
+  END
+  LPF CLONE_EFFECT
+    INT_VAR
+      match_opcode = 142
+      match_duration = 60
+      duration = 3600000
+      dicesize = 5
+  END
+  SAY NAME1 @30840
+  SAY UNIDENTIFIED_DESC @30841
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl9j.itm~ ~override~
+  SAY NAME2 @30840
+  SAY IDENTIFIED_DESC @30841
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Symbol Stun: preserve installed scaling duration/save/casting time; import
+// only SR's 20-ft. symbol projectile.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi816.spl~ ~override~
+  LPF ALTER_SPELL_HEADER INT_VAR projectile = 225 END
+  SAY NAME1 @30850
+  SAY UNIDENTIFIED_DESC @30851
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrlap.itm~ ~override~
+  SAY NAME2 @30850
+  SAY IDENTIFIED_DESC @30851
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Symbol Death: preserve installed mechanics/casting time and 60-HP cap;
+// import SR's 20-ft. symbol projectile and -4 Save vs. Death penalty.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi817.spl~ ~override~
+  LPF ALTER_SPELL_HEADER INT_VAR projectile = 225 END
+  LPF ALTER_EFFECT
+    INT_VAR
+      match_opcode = 209
+      savebonus = "-4"
+  END
+  SAY NAME1 @30860
+  SAY UNIDENTIFIED_DESC @30861
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrlao.itm~ ~override~
+  SAY NAME2 @30860
+  SAY IDENTIFIED_DESC @30861
+  BUT_ONLY_IF_IT_CHANGES
+
+// Tactics Improved Mantle, vanilla Symbol Fear and ZSTweaks Bigby's Clenched
+// Fist remain untouched. Moment of Prescience, Symbol of Weakness and
+// Bigby's Icy Grasp are intentionally not added.
