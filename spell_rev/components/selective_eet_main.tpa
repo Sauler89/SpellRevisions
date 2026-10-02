@@ -2,6 +2,7 @@
 // Main component aggregator.
 // Add each completed spell-level module here; component #0 remains the single main component.
 
+INCLUDE ~spell_rev/components/selective_eet_helpers.tpa~
 INCLUDE ~spell_rev/components/selective_eet_arcane_level_1.tpa~
 INCLUDE ~spell_rev/components/selective_eet_arcane_level_2.tpa~
 INCLUDE ~spell_rev/components/selective_eet_arcane_level_3.tpa~
