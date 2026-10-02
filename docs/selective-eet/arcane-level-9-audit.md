@@ -24,7 +24,7 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 | Wish | KEEP EXISTING | Vanilla already belongs to Any School/Universal in practice. SR provides no clean main-spell buff, while Tactics patches Wish's Mass Breach subspell (SPWISH38) as part of mage chess and ZSTweaks patches several Wish outcomes. Preserve the installed Wish ecosystem unchanged. |
 | SR Monster Summoning IX | SKIP / DISABLED SR SOURCE + IWDIFICATION | SR's Monster Summoning IX ADD_SPELL block is commented out in v4.21. IWDification already owns WIZARD_MONSTER_SUMMONING_7 / SPWI901 as its coherent Level-9 Monster Summoning VII with scroll distribution. Do not revive the disabled SR spell or collide with IWDification. |
 
-## Proposed selected set
+## Final selected set
 
 ### INCLUDE — ADAPTED
 - Chain Contingency — Universal school only; installed mechanics and casting time 9 retained
@@ -82,4 +82,6 @@ The deferred new-scroll list remains:
 
 ## Status
 
-**OPEN — awaiting user approval of the proposed Level-9 selection before implementation in component #0.**
+**CLOSED for spell selection and implemented in component #0.**
+
+Further Level-9 changes should be limited to technical fixes found during install/in-game testing.
