@@ -41,10 +41,10 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 
 Everything else remains with vanilla, Tactics Remix, ZSTweaks or IWDification.
 
-## Replacement-to-addition candidates requiring explicit approval
+## Replacement-to-addition candidates — final decision
 
-### Moment of Prescience
-Keep Tactics Improved Mantle completely intact and add SR's Moment of Prescience as a separate dynamic Level-8 Divination:
+### Moment of Prescience — SKIP
+Keep Tactics Improved Mantle completely intact. Do not add SR's Moment of Prescience as a separate spell. For reference, SR's version would have:
 - Casting Time 1
 - Duration 4 rounds
 - +20 AC
@@ -52,8 +52,8 @@ Keep Tactics Improved Mantle completely intact and add SR's Moment of Prescience
 
 No WIZARD_MOMENT_OF_PRESCIENCE conflict was found in IWDification or ZSTweaks.
 
-### Symbol of Weakness
-Keep Symbol Fear completely intact and add SR Symbol of Weakness as a separate dynamic Level-8 Conjuration:
+### Symbol of Weakness — SKIP
+Keep Symbol Fear completely intact. Do not add SR Symbol of Weakness as a separate spell. For reference, SR's version would have:
 - 20-ft. area
 - Save vs. Spell at -4
 - -4 Strength, Dexterity and Constitution
@@ -61,8 +61,8 @@ Keep Symbol Fear completely intact and add SR Symbol of Weakness as a separate d
 
 No WIZARD_SYMBOL_WEAKNESS conflict was found in IWDification or ZSTweaks.
 
-### Bigby's Icy Grasp
-Keep the ZSTweaks-enhanced Bigby's Clenched Fist completely intact and add SR Bigby's Icy Grasp separately:
+### Bigby's Icy Grasp — SKIP
+Keep the ZSTweaks-enhanced Bigby's Clenched Fist completely intact. Do not add SR Bigby's Icy Grasp separately. For reference, SR's version would have:
 - Long range
 - 8-round duration
 - 2d8 cold damage each round
@@ -124,4 +124,4 @@ The deferred new-scroll list would therefore contain at minimum:
 
 ## Status
 
-**OPEN — awaiting user approval of the proposed Level-8 selection and explicit decisions on Moment of Prescience, Symbol of Weakness and Bigby's Icy Grasp before implementation in component #0.**
+**OPEN — optional replacement-to-addition decisions are finalized: Moment of Prescience, Symbol of Weakness and Bigby's Icy Grasp are all skipped. Awaiting implementation of the approved base Level-8 selection in component #0.**
