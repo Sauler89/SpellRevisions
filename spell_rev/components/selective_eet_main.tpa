@@ -11,6 +11,7 @@ INCLUDE ~spell_rev/components/selective_eet_arcane_level_6.tpa~
 INCLUDE ~spell_rev/components/selective_eet_arcane_level_7.tpa~
 INCLUDE ~spell_rev/components/selective_eet_arcane_level_8.tpa~
 INCLUDE ~spell_rev/components/selective_eet_arcane_level_9.tpa~
+INCLUDE ~spell_rev/components/selective_eet_arcane_scroll_distribution.tpa~
 
 // Future modules:
 // INCLUDE ~spell_rev/components/selective_eet_divine_level_1.tpa~
