@@ -162,11 +162,8 @@ COPY ~spell_rev/shared/spin701.spl~ ~override/dvdkfire.spl~
   END
 
 COPY ~spell_rev/shared/spin701i.eff~ ~override/dvdkfiri.eff~
-  LPF DVSEL_REPLACE_RESREF
-    INT_VAR ability_size = 0xd8
-    STR_VAR old_resref = ~SPIN701~
-            new_resref = ~DVDKFIRE~
-  END
+  // EFF V2 resource field is an 8-byte resref at 0x30.
+  WRITE_ASCII 0x30 ~DVDKFIRE~ #8
 
 COPY ~spell_rev/shared/spwi897.spl~ ~override/dvdksymd.spl~
 COPY ~spell_rev/shared/spwi899.spl~ ~override/dvdksymw.spl~
