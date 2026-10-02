@@ -43,15 +43,18 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 - Mass Invisibility — SR 30-ft. area only; preserve ZSTweaks/vanilla invisibility behavior
 - Limited Wish — Universal school only; preserve existing Wish dialogue/options and ZSTweaks interactions
 
+### ADD AS NEW SPELL
+- Summon Death Knight — dynamically allocated Level-7 spell; Cacofiend remains untouched
+
 Everything else remains with vanilla, Tactics Remix, ZSTweaks or IWDification.
 
-## Optional replacement-to-addition candidates not selected by default
+## Additional new spell
 
 ### Summon Death Knight
-SR replaces Cacofiend with Summon Death Knight. It is technically possible to keep Cacofiend and register Summon Death Knight as a separate dynamic Level-7 spell, similar to the project's treatment of Banishment. It is not selected by default because the custom SR Death Knight CRE/AI package sits outside the Tactics/IWDification summon hierarchy.
+User-approved as a separate new Level-7 spell. Cacofiend remains fully intact. The implementation dynamically allocates the new spell, copies SR's Death Knight CRE/ITM/BCS assets, copies SR's SPCACO.EFF under the private resource `DVDKTEFF.EFF`, and retargets only the new spell to that private EFF. The dedicated learnable scroll is `DVDKSCR.ITM`.
 
 ### Prismatic Mantle
-SR replaces Mantle with Prismatic Mantle. A separate new spell could technically be created, but it is not selected by default because Tactics deliberately owns the physical-defense spell hierarchy and Prismatic Mantle would add another high-level defensive option outside that balance.
+Not selected. Tactics deliberately owns the physical-defense spell hierarchy and Prismatic Mantle would add another high-level defensive option outside that balance.
 
 ## Priority-mod notes
 
@@ -91,16 +94,19 @@ All proposed Level-7 changes are in-place revisions of existing spells:
 
 No new Level-7 scroll resource or distribution work is required for the proposed set.
 
-If Summon Death Knight is later approved as an additional spell, it will require a new dedicated scroll and dynamic EET distribution because Cacofiend and its scroll must remain intact.
+Summon Death Knight is genuinely new and uses the dedicated scroll resource `DVDKSCR.ITM`. Cacofiend and its original scroll remain untouched. `DVDKSCR.ITM` must be distributed dynamically during the unified EET arcane-scroll pass.
 
-The current deferred new-scroll list remains:
+The deferred new-scroll list now includes:
 - Obscuring Mist
 - Dimension Jump
 - Resist Elements
 - Protection from Elemental Energy
 - Mestil's Acid Sheath
 - Banishment
+- Summon Death Knight
 
 ## Status
 
-**OPEN — awaiting user approval of the proposed Level-7 selection before implementation in component #0.**
+**CLOSED for spell selection and implemented in component #0.**
+
+Further Level-7 changes should be limited to technical fixes found during install/in-game testing or the deferred scroll-distribution pass.
