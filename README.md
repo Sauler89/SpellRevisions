@@ -175,7 +175,7 @@ Adapted buffs:
 
 - Ruby Ray of Reversal: SR range only; installed/Tactics protection-removal semantics retained
 - Spell Sequencer: Universal school only
-- Delayed Blast Fireball: SR range/area/save penalty/scaling, but Save vs. Spell retained and damage never falls below vanilla 15d6
+- Delayed Blast Fireball: preserved from ZSTweaks #446; the selective component does not patch SPWI712 or SCRL8N
 - Power Word, Stun: SR 1-round effect against 90+ HP targets with vanilla school retained
 - Summon Djinni: SR +8-round duration bonus only; installed summon assets retained
 - Mass Invisibility: SR 30-ft. area only; ZSTweaks/vanilla invisibility behavior retained
