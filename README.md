@@ -263,6 +263,14 @@ https://gibberlings3.github.io/SpellRevisions/
 
 The upstream documentation may lag behind the current v4.21 source; when documentation and source differ, this project audits the actual source used by the installer.
 
+## Technical QA
+
+Arcane Levels 1–9 have completed a strict static/source audit. See:
+
+`docs/selective-eet/arcane-levels-1-9-technical-audit.md`
+
+A real WeiDU install against the target EET installation is still required before the branch is considered install-tested.
+
 ## Status
 
 **Early development / alpha.**
