@@ -37,6 +37,7 @@ Completed modules currently included in component #0:
 - Arcane Level 6
 - Arcane Level 7
 - Arcane Level 8
+- Arcane Level 9
 
 Further arcane and divine levels will be added to the same component as their audits are completed.
 
@@ -215,6 +216,19 @@ Explicitly skipped:
 The detailed spell-by-spell audit is in:
 
 `docs/selective-eet/arcane-level-8-audit.md`
+
+## Arcane Level 9
+
+Adapted buffs:
+
+- Chain Contingency: Universal school only; installed mechanics and casting time 9 retained
+- Freedom: SR expanded freedom/cure behavior while retaining vanilla Maze/Imprisonment release and casting time 9
+
+No new Level-9 spell or scroll resource is added.
+
+The detailed spell-by-spell audit is in:
+
+`docs/selective-eet/arcane-level-9-audit.md`
 
 ## Scroll distribution policy
 
