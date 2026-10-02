@@ -35,6 +35,7 @@ Completed modules currently included in component #0:
 - Arcane Level 4
 - Arcane Level 5
 - Arcane Level 6
+- Arcane Level 7
 
 Further arcane and divine levels will be added to the same component as their audits are completed.
 
@@ -162,6 +163,30 @@ The detailed spell-by-spell audit is in:
 
 `docs/selective-eet/arcane-level-6-audit.md`
 
+## Arcane Level 7
+
+Included upgrade:
+
+- Protection from the Elements: SR 100% elemental protection and longer duration
+
+Adapted buffs:
+
+- Ruby Ray of Reversal: SR range only; installed/Tactics protection-removal semantics retained
+- Spell Sequencer: Universal school only
+- Delayed Blast Fireball: SR range/area/save penalty/scaling, but Save vs. Spell retained and damage never falls below vanilla 15d6
+- Power Word, Stun: SR 1-round effect against 90+ HP targets with vanilla school retained
+- Summon Djinni: SR +8-round duration bonus only; installed summon assets retained
+- Mass Invisibility: SR 30-ft. area only; ZSTweaks/vanilla invisibility behavior retained
+- Limited Wish: Universal school only
+
+New spell:
+
+- Summon Death Knight: dynamically allocated Level-7 spell with private EFF/scroll resources; Cacofiend remains untouched
+
+The detailed spell-by-spell audit is in:
+
+`docs/selective-eet/arcane-level-7-audit.md`
+
 ## Scroll distribution policy
 
 New spell scrolls must not silently remove vanilla or higher-priority-mod scrolls.
@@ -191,6 +216,11 @@ Mestil's Acid Sheath uses its own scroll resource, `DVMASSCR.ITM`, because this 
 ### Banishment
 
 Banishment uses its own scroll resource, `DVBANSCR.ITM`. Death Spell and its original scroll remain untouched for Tactics compatibility. Add the Banishment scroll dynamically during the final EET arcane-scroll distribution pass.
+
+
+### Summon Death Knight
+
+Summon Death Knight uses the private effect resource `DVDKTEFF.EFF` and the dedicated learnable scroll `DVDKSCR.ITM`. Cacofiend, `SPWI707`, `SPCACO.EFF`, and `SCRL8I` remain untouched. Add `DVDKSCR.ITM` during the final EET arcane-scroll distribution pass.
 
 
 See `SELECTIVE_EET_DESIGN.md` for the full compatibility rules.
