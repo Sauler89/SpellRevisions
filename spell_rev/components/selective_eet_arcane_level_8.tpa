@@ -49,6 +49,8 @@ END ELSE BEGIN
 END
 
 COPY ~spell_rev/spwi8##/scrlw801.itm~ ~override/dvghscr.itm~
+  WRITE_BYTE 0x2d 0x00
+  WRITE_BYTE 0x2f 0x40 // Alteration: blocked for Abjurers
   SAY NAME2 @30800
   SAY IDENTIFIED_DESC @30801
   LPF DVSEL_REPLACE_RESREF
