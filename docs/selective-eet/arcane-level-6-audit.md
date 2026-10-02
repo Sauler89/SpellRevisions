@@ -10,7 +10,8 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 | Globe of Invulnerability | INCLUDE — ADAPTED | SR fixes duration at 2 turns, which is stronger than vanilla 1 round/level through caster level 19 but weaker above level 20. Use the better-of-both progression: 2 turns minimum through level 20, then vanilla 1 round/level scaling beyond 20. Core protection semantics remain untouched. |
 | Tenser's Transformation | SKIP / ZSTWEAKS | ZSTweaks component 441 directly modifies Tenser's THAC0/APR behavior. Preserve ZS. SR is also a broad combat redesign. |
 | Flesh to Stone | SKIP / ZSTWEAKS | ZSTweaks component 444 directly modifies Flesh to Stone's saving throw/immunity behavior. Preserve ZS. |
-| Death Spell / SR Banishment | SKIP / TACTICS SEMANTICS + REPLACEMENT | SR completely replaces Death Spell with Banishment, which only removes hostile summons. Tactics Remix explicitly relies on Death Spell for additional interactions such as killing insect swarms. Preserve Death Spell. |
+| Death Spell | KEEP TACTICS / VANILLA | Preserve Death Spell completely because Tactics Remix relies on its existing semantics and additional interactions such as killing insect swarms. It is no longer consumed by the SR replacement. |
+| Banishment | ADD AS NEW SPELL | Import SR Banishment as a separate dynamically allocated Level-6 Abjuration. It banishes hostile summoned creatures in a 30-ft. radius, allows no save, and ignores Magic Resistance. Death Spell remains fully intact. No WIZARD_BANISHMENT conflict was found in IWDification or ZSTweaks. |
 | Protection from Magic Energy | SKIP / NO MATERIAL BUFF | SR retains the same essential 100% magic-damage protection, duration, range and casting time. No meaningful reason to overwrite the installed spell. |
 | Mislead | SKIP / ZSTWEAKS + MIXED | ZSTweaks component 582 patches Mislead as part of its True Sight/invisibility system. SR also fixes the decoy to 6 rounds instead of letting it naturally match the caster's scaling spell duration. Preserve ZS. |
 | Pierce Magic | SKIP / TACTICS MAGE CHESS | Tactics Remix moves Pierce Magic to Level 8 and makes it function as vanilla Pierce Shield. The Level-6 SR/vanilla resource semantics must not be restored over Tactics. |
@@ -38,6 +39,9 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 - Globe of Invulnerability — 2 turns minimum; from caster level 21 onward retain vanilla 1 round/level scaling
 - Power Word Silence — SR 1-turn duration, vanilla Conjuration/Summoning school retained
 - Contingency — change school to Universal only; retain installed mechanics/casting behavior
+
+### ADD AS NEW SPELL
+- Banishment — add SR Banishment as a separate dynamically allocated Level-6 Abjuration; Death Spell remains untouched
 
 Everything else remains with vanilla, Tactics Remix, ZSTweaks or IWDification.
 
@@ -72,19 +76,20 @@ Relevant ownership:
 
 ## Scroll implications
 
-All three proposed changes are in-place revisions of existing spells:
+The three adapted changes are in-place revisions of existing spells:
 - Globe of Invulnerability
 - Power Word Silence
 - Contingency
 
-No new Level-6 scroll resource or distribution work is required.
+Banishment is genuinely new. Because SR normally replaces Death Spell and therefore reuses the Death Spell scroll, this project must instead create a unique Banishment scroll and distribute it dynamically without replacing any Death Spell scroll.
 
-The deferred new-scroll list remains:
+The deferred new-scroll list becomes:
 - Obscuring Mist
 - Dimension Jump
 - Resist Elements
 - Protection from Elemental Energy
 - Mestil's Acid Sheath
+- Banishment
 
 ## Status
 
