@@ -595,3 +595,99 @@ Saving Throw: None
 This spell calls a Death Knight, a powerful undead fiend, to the Prime Material Plane. The creature is not directly controlled and must be bound or negotiated with; an unsuccessful or abusive summoning may cause it to turn against its summoner.
 
 The summoned Death Knight is a formidable 13-Hit-Dice warrior with strong physical and magical defenses, an aura of fear, resistance to mundane weapons and many disabling effects, and several powerful spell-like abilities. The creature remains for up to 3 turns unless slain, banished, or otherwise dismissed.~
+
+
+@30800 = ~Ghostform~
+@30801 = ~Ghostform
+(Alteration)
+
+Level: 8
+Range: Personal
+Duration: 1 round/level
+Casting Time: 8
+Area of Effect: The caster
+Saving Throw: None
+
+The caster and all carried equipment assume a visible incorporeal form like that of a manifesting ghost. While in this state, the caster can be struck only by magical or otherwise specially effective attacks and suffers only half physical damage from attacks that can affect incorporeal creatures. The caster is immune to poison and disease, cannot be backstabbed, gains a base Armor Class of 0 and +100% Move Silently, and is protected from effects that require a corporeal target.
+
+Melee attacks made in ghost form are treated as touch attacks and gain a +4 bonus to the attack roll. Ghostform cannot be used together with other shapeshifting effects such as Polymorph Self or Shapechange.~
+
+@30810 = ~Protection from Energy~
+@30811 = ~Protection from Energy
+(Abjuration)
+
+Level: 8
+Range: Touch
+Duration: 2 rounds/level
+Casting Time: 8
+Area of Effect: 1 creature
+Saving Throw: None
+
+The recipient gains complete protection from acid, cold, electricity, fire, and magic damage. Damage of these types from weapons, spells, wands, breath weapons, and other sources is resisted completely for the duration of the spell or until dispelled.~
+
+@30820 = ~Spell Trigger~
+@30821 = ~Spell Trigger
+(Universal)
+
+Level: 8
+Range: Personal
+Duration: Permanent until used
+Casting Time: 9
+Area of Effect: Special
+Saving Throw: None
+
+This spell allows a wizard to store three spells of 6th level or lower and release them simultaneously from the Special Ability button. The trigger remains prepared until activated, and a wizard can possess only one Spell Trigger at a time.
+
+Because Spell Trigger belongs to the Universal school, it can be learned and cast by specialist mages regardless of their opposition school.~
+
+@30830 = ~Incendiary Cloud~
+@30831 = ~Incendiary Cloud
+(Invocation/Evocation)
+
+Level: 8
+Range: Visual range of the caster
+Duration: 1 turn
+Casting Time: 8
+Area of Effect: 30-ft. radius
+Saving Throw: Spell half
+
+This spell creates a billowing cloud of roaring flame. Creatures within the cloud suffer 1d4 points of fire damage per caster level each round, with a Saving Throw vs. Spell for half damage. The dense smoke also imposes a -4 penalty to attack rolls and Armor Class while a creature remains within the cloud.~
+
+@30840 = ~Power Word, Blind~
+@30841 = ~Power Word, Blind
+(Conjuration/Summoning)
+
+Level: 8
+Range: Visual range of the caster
+Duration: 1 turn or permanent
+Casting Time: 1
+Area of Effect: 4-ft. radius
+Saving Throw: None
+
+When this power word is uttered, creatures within the area of effect become blind without a Saving Throw. The blindness normally lasts for 1 turn. Creatures with fewer than 6 Hit Dice are instead blinded permanently, although the effect can still be removed by appropriate magic.~
+
+@30850 = ~Symbol, Stun~
+@30851 = ~Symbol, Stun
+(Conjuration/Summoning)
+
+Level: 8
+Range: 90 ft.
+Duration: Special
+Casting Time: 9
+Area of Effect: 20-ft. radius
+Saving Throw: Spell negates
+
+This spell inscribes a magical symbol that remains dormant until a creature approaches closely enough to trigger it. When activated, the symbol affects creatures within a 20-ft. radius. Each victim must make a Saving Throw vs. Spell at a -4 penalty or be stunned for 2 rounds plus 1 additional round for every 3 caster levels.~
+
+@30860 = ~Symbol, Death~
+@30861 = ~Symbol, Death
+(Conjuration/Summoning)
+
+Level: 8
+Range: 90 ft.
+Duration: Special
+Casting Time: 9
+Area of Effect: 20-ft. radius
+Saving Throw: Death negates
+
+This spell inscribes a magical symbol that remains dormant until a creature approaches closely enough to trigger it. When activated, creatures within a 20-ft. radius must make a Saving Throw vs. Death at a -4 penalty or die. Creatures with more than 60 current Hit Points are immune to the death effect.~
