@@ -139,7 +139,7 @@ COPY ~spell_rev/spwi5##/mestsh.vvc~ ~override~
      ~spell_rev/spwi5##/dvwi526b.bam~ ~override~
      ~spell_rev/spwi5##/dvwi526c.bam~ ~override~
 
-ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_MESTILS_ACID_SHEATH~)) BEGIN
+ACTION_IF (IDS_OF_SYMBOL (~spell~ ~WIZARD_MESTILS_ACID_SHEATH~) >= 0) BEGIN
   LAF RES_NUM_OF_SPELL_NAME
     STR_VAR spell_name = ~WIZARD_MESTILS_ACID_SHEATH~
     RET dvsel_mestil_resref = spell_res
