@@ -1,0 +1,224 @@
+// Selective Spell Revisions for EET - Arcane Level 7
+// Finalized selection:
+//   Protection from the Elements: full SR upgrade.
+//   Ruby Ray of Reversal: SR range only; installed/Tactics protection list retained.
+//   Spell Sequencer: Universal school only.
+//   Delayed Blast Fireball: strict-buff SR/vanilla hybrid.
+//   Power Word Stun: SR 1-round effect for 90+ HP; vanilla school retained.
+//   Summon Djinni: SR duration bonus only; installed summon assets retained.
+//   Mass Invisibility: SR 30-ft. area only; ZSTweaks/vanilla effects retained.
+//   Limited Wish: Universal school only.
+//   Summon Death Knight: new dynamically allocated Level-7 spell; Cacofiend untouched.
+
+// -----------------------------------------------------------------------------
+// Protection from the Elements: selected full SR implementation.
+// 100% acid/cold/electricity/fire protection, 1 turn per 2 caster levels.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi7##/spwi702.spl~ ~override/spwi702.spl~
+  SAY NAME1 @30700
+  SAY UNIDENTIFIED_DESC @30701
+COPY_EXISTING ~scrl8e.itm~ ~override~
+  SAY NAME2 @30700
+  SAY IDENTIFIED_DESC @30701
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Ruby Ray of Reversal: preserve the installed/Tactics spell-protection list
+// and semantics; import only SR's longer 30-ft. range.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi704.spl~ ~override~
+  LPF ALTER_SPELL_HEADER INT_VAR range = 30 END
+  SAY NAME1 @30710
+  SAY UNIDENTIFIED_DESC @30711
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl8g.itm~ ~override~
+  SAY NAME2 @30710
+  SAY IDENTIFIED_DESC @30711
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Spell Sequencer: Universal school only.
+// Keep the installed sequencer mechanics and vanilla casting time.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi710.spl~ ~override~
+  WRITE_BYTE 0x25 0
+  WRITE_BYTE 0x1e 0
+  WRITE_BYTE 0x1f 0
+  SAY NAME1 @30720
+  SAY UNIDENTIFIED_DESC @30721
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl8l.itm~ ~override~
+  WRITE_BYTE 0x2f 0
+  WRITE_BYTE 0x2d 0
+  SAY NAME2 @30720
+  SAY IDENTIFIED_DESC @30721
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Delayed Blast Fireball: use SR's Long range, 30-ft. blast, -4 save penalty,
+// and scaling up to 20d6, but retain Save vs. Spell and never fall below
+// vanilla's 15d6 at the first available caster level.
+// SR implements save-for-half as an always-applied damage half plus a second
+// save-negated half. On its first header, raise the saved half from 7d6 to 8d6
+// so total failed-save damage is 15d6 rather than 14d6.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi7##/spwi712.spl~ ~override/spwi712.spl~
+  LPF ALTER_EFFECT
+    INT_VAR
+      match_opcode = 12
+      match_savingthrow = 2
+      savingthrow = 1
+  END
+  LPF ALTER_EFFECT
+    INT_VAR
+      header = 0
+      match_opcode = 12
+      match_savingthrow = 1
+      dicenumber = 8
+  END
+  SAY NAME1 @30730
+  SAY UNIDENTIFIED_DESC @30731
+
+COPY_EXISTING ~scrl8n.itm~ ~override~
+  SAY NAME2 @30730
+  SAY IDENTIFIED_DESC @30731
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Power Word Stun: SR keeps all vanilla HP bands and adds a 1-round stun for
+// targets at 90+ current HP. Use that implementation, but preserve vanilla
+// Conjuration/Summoning specialist interaction.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi7##/spwi715.spl~ ~override/spwi715.spl~
+  WRITE_BYTE 0x25 2 // Conjuration/Summoning
+  SAY NAME1 @30740
+  SAY UNIDENTIFIED_DESC @30741
+
+COPY_EXISTING ~scrl8q.itm~ ~override~
+  SAY NAME2 @30740
+  SAY IDENTIFIED_DESC @30741
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Summon Djinni: preserve the installed Djinni CRE/AI/spellbook and add only
+// SR's +8-round duration bonus to the summon effect.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi718.spl~ ~override~
+  LPF ALTER_EFFECT_EX
+    INT_VAR
+      match_opcode = 177
+    STR_VAR
+      match_duration_ex = ~(o_duration > 0)~
+      duration_ex = ~(THIS + 48)~
+  END
+  SAY NAME1 @30750
+  SAY UNIDENTIFIED_DESC @30751
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl8t.itm~ ~override~
+  SAY NAME2 @30750
+  SAY IDENTIFIED_DESC @30751
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Mass Invisibility: preserve all installed effects, including ZSTweaks True
+// Sight compatibility. Import only SR's 30-ft. area projectile.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi721.spl~ ~override~
+  LPF ALTER_SPELL_HEADER INT_VAR projectile = 158 END
+  SAY NAME1 @30760
+  SAY UNIDENTIFIED_DESC @30761
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl8w.itm~ ~override~
+  SAY NAME2 @30760
+  SAY IDENTIFIED_DESC @30761
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Limited Wish: Universal school only.
+// Preserve existing wish dialogue/options and all ZSTweaks Limited-Wish hooks.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi722.spl~ ~override~
+  WRITE_BYTE 0x25 0
+  WRITE_BYTE 0x1e 0
+  WRITE_BYTE 0x1f 0
+  SAY NAME1 @30770
+  SAY UNIDENTIFIED_DESC @30771
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrla4.itm~ ~override~
+  WRITE_BYTE 0x2f 0
+  WRITE_BYTE 0x2d 0
+  SAY NAME2 @30770
+  SAY IDENTIFIED_DESC @30771
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Summon Death Knight: NEW Level-7 spell.
+// SR normally replaces Cacofiend/SPWI707 and reuses SPCACO.EFF. This project
+// preserves Cacofiend completely. Copy SR's EFF under a private resource and
+// retarget only the newly allocated Death Knight spell.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi7##/spcaco.eff~ ~override/dvdkteff.eff~
+COPY ~spell_rev/spwi7##/dvdeathk.bcs~ ~override~
+     ~spell_rev/spwi7##/dvdeathk.cre~ ~override~
+     ~spell_rev/spwi7##/dvdeathk.itm~ ~override~
+     ~spell_rev/spwi7##/dvwi707a.bam~ ~override~
+     ~spell_rev/spwi7##/dvwi707b.bam~ ~override~
+     ~spell_rev/spwi7##/dvwi707c.bam~ ~override~
+
+ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_SUMMON_DEATH_KNIGHT~)) BEGIN
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_SUMMON_DEATH_KNIGHT~
+    RET dvsel_death_knight_resref = spell_res
+  END
+
+  COPY ~spell_rev/spwi7##/spwi707.spl~ ~override/%dvsel_death_knight_resref%.spl~
+    SAY NAME1 @30780
+    SAY UNIDENTIFIED_DESC @30781
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPCACO~
+              new_resref = ~DVDKTEFF~
+    END
+END ELSE BEGIN
+  ADD_SPELL ~spell_rev/spwi7##/spwi707.spl~ 2 7 ~WIZARD_SUMMON_DEATH_KNIGHT~
+    SAY NAME1 @30780
+    SAY UNIDENTIFIED_DESC @30781
+
+  LAF RES_NUM_OF_SPELL_NAME
+    STR_VAR spell_name = ~WIZARD_SUMMON_DEATH_KNIGHT~
+    RET dvsel_death_knight_resref = spell_res
+  END
+
+  COPY_EXISTING ~%dvsel_death_knight_resref%.spl~ ~override~
+    LPF DVSEL_REPLACE_RESREF
+      INT_VAR ability_size = 0x28
+      STR_VAR old_resref = ~SPCACO~
+              new_resref = ~DVDKTEFF~
+    END
+    BUT_ONLY_IF_IT_CHANGES
+END
+
+COPY ~spell_rev/spwi7##/scrl8i.itm~ ~override/dvdkscr.itm~
+  SAY NAME2 @30780
+  SAY IDENTIFIED_DESC @30781
+  LPF DVSEL_REPLACE_RESREF
+    INT_VAR ability_size = 0x38
+    STR_VAR old_resref = ~SPWI707~
+            new_resref = EVAL ~%dvsel_death_knight_resref%~
+  END
+
+// Cacofiend/SPWI707 and SCRL8I are never overwritten by this module.
