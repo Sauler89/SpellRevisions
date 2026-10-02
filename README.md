@@ -230,46 +230,24 @@ The detailed spell-by-spell audit is in:
 
 `docs/selective-eet/arcane-level-9-audit.md`
 
-## Scroll distribution policy
+## Temporary arcane scroll distribution
 
-New spell scrolls must not silently remove vanilla or higher-priority-mod scrolls.
+For the current development/testing phase, every genuinely new arcane scroll is sold by **Lucy the Wyvern** in the Adventure Mart. Lucy's shop is supplied by **Shards of Ice** and uses the store resource `U!LSTORE.STO`.
 
-### Dimension Jump
+The installer adds **5 identified copies** of each new scroll without replacing any existing store item:
 
-Spell Revisions normally reuses the existing Dimension Door scroll resource, which naturally inherits its existing placements. Because this project preserves other spells rather than blindly replacing their resources, final integration must verify the original SR distribution behavior and ensure **Dimension Jump receives proper EET scroll distribution without destroying an existing scroll**.
+- Obscuring Mist — `DVOBMSCR.ITM`
+- Dimension Jump — `DVDJMSCR.ITM`
+- Resist Elements — `DVRESSCR.ITM`
+- Protection from Elemental Energy — `DVPEESCR.ITM`
+- Mestil's Acid Sheath — `DVMASSCR.ITM`
+- Banishment — `DVBANSCR.ITM`
+- Summon Death Knight — `DVDKSCR.ITM`
+- Ghostform — `DVGHSCR.ITM`
 
-### Obscuring Mist
+The store patch is conditional: if `U!LSTORE.STO` is not present, the main component continues without failing and no temporary vendor placement is performed.
 
-Spell Revisions normally replaces Blindness and therefore reuses Blindness's scroll distribution. This project keeps Blindness, so Obscuring Mist uses its own scroll resource.
-
-Before release, the installer must **dynamically distribute the new Obscuring Mist scroll** through the EET installation. The preferred approach is to identify relevant existing level-1 arcane scroll placements (especially Blindness placements) and add the new Obscuring Mist scroll alongside them rather than replacing the original item.
-
-Distribution must account for stores and, where relevant, other EET resources that can carry learnable scrolls.
-
-### Protection from Elemental Energy
-
-Protection from Elemental Energy uses its own scroll resource, `DVPEESCR.ITM`, and must be added dynamically during the final EET arcane-scroll distribution pass. Its hidden protection subspells are internal implementation resources and are not learnable spells.
-
-
-### Mestil's Acid Sheath
-
-Mestil's Acid Sheath uses its own scroll resource, `DVMASSCR.ITM`, because this project preserves Fire Shield (Blue) and its original scroll for Tactics compatibility. Add the Mestil scroll dynamically during the final EET arcane-scroll distribution pass.
-
-
-### Banishment
-
-Banishment uses its own scroll resource, `DVBANSCR.ITM`. Death Spell and its original scroll remain untouched for Tactics compatibility. Add the Banishment scroll dynamically during the final EET arcane-scroll distribution pass.
-
-
-### Summon Death Knight
-
-Summon Death Knight uses the private effect resource `DVDKTEFF.EFF` and the dedicated learnable scroll `DVDKSCR.ITM`. Cacofiend, `SPWI707`, `SPCACO.EFF`, and `SCRL8I` remain untouched. Add `DVDKSCR.ITM` during the final EET arcane-scroll distribution pass.
-
-
-### Ghostform
-
-Ghostform uses a dynamically allocated Level-8 spell resource and the dedicated learnable scroll `DVGHSCR.ITM`. IWDification's `SPWI801` (Monster Summoning VI) remains untouched. The original SR Ghostform self-immunity reference to `SPWI801` is retargeted to the final dynamic Ghostform resource. Add `DVGHSCR.ITM` during the final EET arcane-scroll distribution pass.
-
+This Lucy placement is intentionally a **temporary centralized distribution policy** for development and in-game testing. A broader permanent EET distribution can be designed later if desired.
 
 See `SELECTIVE_EET_DESIGN.md` for the full compatibility rules.
 
