@@ -46,15 +46,15 @@ COPY_EXISTING ~scrl8g.itm~ ~override~
 
 COPY_EXISTING ~spwi710.spl~ ~override~
   WRITE_BYTE 0x25 0
-  WRITE_BYTE 0x1e 0
-  WRITE_BYTE 0x1f 0
+  WRITE_BYTE 0x1e ((BYTE_AT 0x1e) BAND 0b00111111)
+  WRITE_BYTE 0x1f ((BYTE_AT 0x1f) BAND 0b10000000)
   SAY NAME1 @30720
   SAY UNIDENTIFIED_DESC @30721
   BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING ~scrl8l.itm~ ~override~
-  WRITE_BYTE 0x2f 0
-  WRITE_BYTE 0x2d 0
+  WRITE_BYTE 0x2f ((BYTE_AT 0x2f) BAND 0b00111111)
+  WRITE_BYTE 0x2d ((BYTE_AT 0x2d) BAND 0b10000000)
   SAY NAME2 @30720
   SAY IDENTIFIED_DESC @30721
   BUT_ONLY_IF_IT_CHANGES
@@ -112,12 +112,10 @@ COPY_EXISTING ~scrl8q.itm~ ~override~
 // -----------------------------------------------------------------------------
 
 COPY_EXISTING ~spwi718.spl~ ~override~
-  LPF ALTER_EFFECT_EX
+  LPF DVSEL_ADD_EFFECT_DURATION
     INT_VAR
       match_opcode = 177
-    STR_VAR
-      match_duration_ex = ~(o_duration > 0)~
-      duration_ex = ~(THIS + 48)~
+      add_duration = 48
   END
   SAY NAME1 @30750
   SAY UNIDENTIFIED_DESC @30751
@@ -151,15 +149,15 @@ COPY_EXISTING ~scrl8w.itm~ ~override~
 
 COPY_EXISTING ~spwi722.spl~ ~override~
   WRITE_BYTE 0x25 0
-  WRITE_BYTE 0x1e 0
-  WRITE_BYTE 0x1f 0
+  WRITE_BYTE 0x1e ((BYTE_AT 0x1e) BAND 0b00111111)
+  WRITE_BYTE 0x1f ((BYTE_AT 0x1f) BAND 0b10000000)
   SAY NAME1 @30770
   SAY UNIDENTIFIED_DESC @30771
   BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING ~scrla4.itm~ ~override~
-  WRITE_BYTE 0x2f 0
-  WRITE_BYTE 0x2d 0
+  WRITE_BYTE 0x2f ((BYTE_AT 0x2f) BAND 0b00111111)
+  WRITE_BYTE 0x2d ((BYTE_AT 0x2d) BAND 0b10000000)
   SAY NAME2 @30770
   SAY IDENTIFIED_DESC @30771
   BUT_ONLY_IF_IT_CHANGES
