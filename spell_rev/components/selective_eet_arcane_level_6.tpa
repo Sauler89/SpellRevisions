@@ -12,11 +12,11 @@
 // -----------------------------------------------------------------------------
 
 COPY_EXISTING ~spwi602.spl~ ~override~
-  LPF ALTER_EFFECT_EX
+  LPF DVSEL_SET_EFFECT_DURATION_RANGE
     INT_VAR
-      duration = 120
-    STR_VAR
-      match_duration_ex = ~(o_duration > 0 AND o_duration < 120)~
+      min_duration = 1
+      max_duration = 119
+      new_duration = 120
   END
   SAY NAME1 @30600
   SAY UNIDENTIFIED_DESC @30601
@@ -34,11 +34,11 @@ COPY_EXISTING ~scrl7f.itm~ ~override~
 // -----------------------------------------------------------------------------
 
 COPY_EXISTING ~spwi612.spl~ ~override~
-  LPF ALTER_EFFECT_EX
+  LPF DVSEL_SET_EFFECT_DURATION_RANGE
     INT_VAR
-      duration = 60
-    STR_VAR
-      match_duration_ex = ~(o_duration = 42)~
+      min_duration = 42
+      max_duration = 42
+      new_duration = 60
   END
   SAY NAME1 @30610
   SAY UNIDENTIFIED_DESC @30611
@@ -56,15 +56,15 @@ COPY_EXISTING ~scrl7p.itm~ ~override~
 
 COPY_EXISTING ~spwi617.spl~ ~override~
   WRITE_BYTE 0x25 0 // Universal / unaffiliated school
-  WRITE_BYTE 0x1e 0 // blocked specialist schools: none
-  WRITE_BYTE 0x1f 0
+  WRITE_BYTE 0x1e ((BYTE_AT 0x1e) BAND 0b00111111)
+  WRITE_BYTE 0x1f ((BYTE_AT 0x1f) BAND 0b10000000)
   SAY NAME1 @30620
   SAY UNIDENTIFIED_DESC @30621
   BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING ~scrl7u.itm~ ~override~
-  WRITE_BYTE 0x2f 0 // blocked specialist schools: none
-  WRITE_BYTE 0x2d 0
+  WRITE_BYTE 0x2f ((BYTE_AT 0x2f) BAND 0b00111111)
+  WRITE_BYTE 0x2d ((BYTE_AT 0x2d) BAND 0b10000000)
   SAY NAME2 @30620
   SAY IDENTIFIED_DESC @30621
   BUT_ONLY_IF_IT_CHANGES
@@ -95,6 +95,9 @@ END ELSE BEGIN
     RET dvsel_banishment_resref = spell_res
   END
 END
+
+COPY ~spell_rev/shared/dvbanish.eff~ ~override~
+     ~spell_rev/shared/dvbanish.spl~ ~override~
 
 COPY ~spell_rev/spwi6##/dvwi605a.bam~ ~override~
      ~spell_rev/spwi6##/dvwi605b.bam~ ~override~
