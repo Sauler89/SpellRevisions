@@ -1,0 +1,42 @@
+// Selective Spell Revisions for EET - Arcane Level 9
+// Finalized selection:
+//   Chain Contingency: Universal school only; installed mechanics/casting retained.
+//   Freedom: SR expanded freedom/cure effects with vanilla casting time 9.
+
+// -----------------------------------------------------------------------------
+// Chain Contingency: Universal school only.
+// Preserve installed contingency mechanics and vanilla casting time.
+// -----------------------------------------------------------------------------
+
+COPY_EXISTING ~spwi908.spl~ ~override~
+  WRITE_BYTE 0x25 0
+  WRITE_BYTE 0x1e 0
+  WRITE_BYTE 0x1f 0
+  SAY NAME1 @30900
+  SAY UNIDENTIFIED_DESC @30901
+  BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~scrl9q.itm~ ~override~
+  WRITE_BYTE 0x2f 0
+  WRITE_BYTE 0x2d 0
+  SAY NAME2 @30900
+  SAY IDENTIFIED_DESC @30901
+  BUT_ONLY_IF_IT_CHANGES
+
+// -----------------------------------------------------------------------------
+// Freedom: selected SR expansion.
+// Retains vanilla Maze/Imprisonment release while also freeing friendly
+// creatures from charm, confusion, domination, entangle, feeblemind, hold,
+// paralysis, petrification, sleep, slow, stun and web.
+// Restore vanilla casting time 9 instead of SR's 1 round.
+// -----------------------------------------------------------------------------
+
+COPY ~spell_rev/spwi9##/spwi917.spl~ ~override/spwi917.spl~
+  LPF ALTER_SPELL_HEADER INT_VAR speed = 9 END
+  SAY NAME1 @30910
+  SAY UNIDENTIFIED_DESC @30911
+
+COPY_EXISTING ~scrl9z.itm~ ~override~
+  SAY NAME2 @30910
+  SAY IDENTIFIED_DESC @30911
+  BUT_ONLY_IF_IT_CHANGES
