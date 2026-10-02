@@ -33,15 +33,15 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 | SR Monster Summoning VI / WIZARD_MONSTER_SUMMONING_4 | SKIP / DUPLICATE IWDIFICATION | IWDification already adds WIZARD_MONSTER_SUMMONING_4 as its coherent Level-6 Monster Summoning IV and distributes its scroll. SR uses the same semantic identifier for a differently named Monster Summoning VI. Retain IWDification. |
 | Khelben's Warding Whip (Tactics-added Level 6) | KEEP TACTICS | Tactics Remix moves Khelben's Warding Whip from Level 7 to Level 6 as part of its mage-chess redesign. This is not an SR Level-6 change and must remain untouched. |
 
-## Proposed selected set
+## Final selected set
 
 ### INCLUDE — ADAPTED
 - Globe of Invulnerability — 2 turns minimum; from caster level 21 onward retain vanilla 1 round/level scaling
 - Power Word Silence — SR 1-turn duration, vanilla Conjuration/Summoning school retained
-- Contingency — change school to Universal only; retain installed mechanics/casting behavior
+- Contingency — Universal school only; installed mechanics/casting behavior retained
 
 ### ADD AS NEW SPELL
-- Banishment — add SR Banishment as a separate dynamically allocated Level-6 Abjuration; Death Spell remains untouched
+- Banishment — SR Banishment added as a separate dynamically allocated Level-6 Abjuration; Death Spell remains untouched
 
 Everything else remains with vanilla, Tactics Remix, ZSTweaks or IWDification.
 
@@ -82,7 +82,7 @@ The three adapted changes are in-place revisions of existing spells:
 - Power Word Silence
 - Contingency
 
-Banishment is genuinely new. Because SR normally replaces Death Spell and therefore reuses the Death Spell scroll, this project must instead create a unique Banishment scroll and distribute it dynamically without replacing any Death Spell scroll.
+Banishment is genuinely new. Because SR normally replaces Death Spell and therefore reuses the Death Spell scroll, this project instead uses the dedicated learnable scroll resource `DVBANSCR.ITM`. Death Spell and its scroll remain untouched; `DVBANSCR.ITM` must be distributed dynamically during the unified EET arcane-scroll pass.
 
 The deferred new-scroll list becomes:
 - Obscuring Mist
@@ -94,4 +94,6 @@ The deferred new-scroll list becomes:
 
 ## Status
 
-**OPEN — awaiting user approval of the proposed Level-6 selection before implementation in component #0.**
+**CLOSED for spell selection and implemented in component #0.**
+
+Further Level-6 changes should be limited to technical fixes found during install/in-game testing or the deferred scroll-distribution pass.
