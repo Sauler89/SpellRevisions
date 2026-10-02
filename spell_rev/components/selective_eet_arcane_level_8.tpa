@@ -76,15 +76,15 @@ COPY_EXISTING ~scrl8y.itm~ ~override~
 
 COPY_EXISTING ~spwi809.spl~ ~override~
   WRITE_BYTE 0x25 0
-  WRITE_BYTE 0x1e ((BYTE_AT 0x1e) BAND 0b00111111)
-  WRITE_BYTE 0x1f ((BYTE_AT 0x1f) BAND 0b10000000)
+  WRITE_BYTE 0x1e 0
+  WRITE_BYTE 0x1f 0
   SAY NAME1 @30820
   SAY UNIDENTIFIED_DESC @30821
   BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING ~scrl9d.itm~ ~override~
-  WRITE_BYTE 0x2f ((BYTE_AT 0x2f) BAND 0b00111111)
-  WRITE_BYTE 0x2d ((BYTE_AT 0x2d) BAND 0b10000000)
+  WRITE_BYTE 0x2f 0
+  WRITE_BYTE 0x2d 0
   SAY NAME2 @30820
   SAY IDENTIFIED_DESC @30821
   BUT_ONLY_IF_IT_CHANGES
@@ -135,14 +135,16 @@ COPY_EXISTING ~spwi815.spl~ ~override~
       match_opcode = 74
       match_duration = 60
       duration = 3600000
-      dicesize = 5
+      dicenumber = 5
+      dicesize = 0
   END
   LPF CLONE_EFFECT
     INT_VAR
       match_opcode = 142
       match_duration = 60
       duration = 3600000
-      dicesize = 5
+      dicenumber = 5
+      dicesize = 0
   END
   SAY NAME1 @30840
   SAY UNIDENTIFIED_DESC @30841
