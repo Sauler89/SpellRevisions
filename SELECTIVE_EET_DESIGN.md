@@ -107,3 +107,13 @@ Resist Elements is a genuinely new Level-2 arcane spell. Its dedicated scroll re
 - Oracle: preserve vanilla 120-ft. radius and Non-Detection removal; add SR coverage for Blur, Ghost Armor, Invisibility Sphere, Pixie Dust, Mislead, Project Image, and Mass Invisibility.
 - Mestil's Acid Sheath: add as a new dynamically allocated Level-5 spell. Never reuse IWDification's SPWI526 (Summon Shadow). Its retaliation subspell is renamed to `DVMASDMG.SPL`.
 - Mestil's Acid Sheath scroll: `DVMASSCR.ITM`; add it during the unified EET arcane-scroll distribution pass.
+
+
+### Level-6 decisions
+- Globe of Invulnerability: preserve installed protection semantics; raise any positive duration shorter than 2 turns to 2 turns, while retaining longer vanilla high-level scaling.
+- Power Word, Silence: preserve installed mechanics and vanilla Conjuration/Summoning school; extend the vanilla 7-round duration to 1 turn.
+- Contingency: change only to Universal school, clearing specialist exclusions on both the spell and its scroll.
+- Banishment: add as a new dynamically allocated Level-6 Abjuration. Never overwrite Death Spell/SPWI605; Death Spell remains fully available for Tactics semantics.
+- Banishment scroll: `DVBANSCR.ITM`; add it during the unified EET arcane-scroll distribution pass.
+- Flesh to Stone: keep installed/vanilla version. SR's implementation is a mixed redesign tied to its global petrification framework rather than a clean buff.
+- Stone to Flesh: keep installed/vanilla version. Full SR hides/disables the player spell rather than improving it.
