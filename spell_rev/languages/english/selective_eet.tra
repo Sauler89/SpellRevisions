@@ -410,3 +410,58 @@ Area of Effect: The caster
 Saving Throw: None
 
 This spell surrounds the caster with a caustic shield. While protected, the caster gains 50% resistance to acid damage. Any opponent that strikes the caster with a weapon or spell from within 5 ft. suffers 4d4 points of acid damage. Multiple castings are not cumulative, but the spell can be used together with similar magical protections. Magic resistance does not prevent the retaliatory acid damage.~
+
+
+@30600 = ~Globe of Invulnerability~
+@30601 = ~Globe of Invulnerability
+(Abjuration)
+
+Level: 6
+Range: Personal
+Duration: 2 turns minimum; 1 round/level at 21st level and above
+Casting Time: 6
+Area of Effect: 5-ft. radius sphere
+Saving Throw: None
+
+This spell creates an immobile, faintly shimmering magical sphere around the caster that prevents 1st-, 2nd-, 3rd-, and 4th-level spell effects from penetrating it. This includes innate abilities and effects from devices. Spells can still be cast outward from within the globe. Spells of 5th level and higher are unaffected, and appropriate higher-level magical attacks can bring the globe down. The protection lasts for at least 2 turns; at caster level 21 and above it instead lasts 1 round per level.~
+
+@30610 = ~Power Word, Silence~
+@30611 = ~Power Word, Silence
+(Conjuration/Summoning)
+
+Level: 6
+Range: 90 ft.
+Duration: 1 turn
+Casting Time: 1
+Area of Effect: 1 creature
+Saving Throw: None
+
+When the wizard utters this power word, the target creature becomes unable to make any sound for 1 turn. This silence prevents the casting of spells that require verbal components. The effect allows no Saving Throw and can be countered by Dispel Magic or Vocalize.~
+
+@30620 = ~Contingency~
+@30621 = ~Contingency
+(Universal)
+
+Level: 6
+Range: Personal
+Duration: Permanent until triggered
+Casting Time: 9
+Area of Effect: The caster
+Saving Throw: None
+
+Upon casting this spell, the wizard chooses one known spell to be stored and a condition that will trigger it. One spell level is allowed for every 3 caster levels, up to 6th-level spells at 18th level. When the chosen condition is met, the stored spell is cast automatically and instantaneously. The spell placed in the contingency must target the caster; offensive spells and spells targeting other party members cannot be stored.
+
+Because Contingency belongs to the Universal school, it can be learned and cast by specialist mages regardless of their opposition school.~
+
+@30630 = ~Banishment~
+@30631 = ~Banishment
+(Abjuration)
+
+Level: 6
+Range: Long
+Duration: Instant
+Casting Time: 6
+Area of Effect: 30-ft. radius
+Saving Throw: None
+
+This spell forces hostile summoned creatures within the area of effect back to their proper plane or otherwise ends the magic sustaining their presence. There is no Saving Throw, and Magic Resistance does not protect against Banishment.~
