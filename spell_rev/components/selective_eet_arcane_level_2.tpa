@@ -193,6 +193,8 @@ END
 
 COPY ~spell_rev/spwi2##/dvpr210a.bam~ ~override~
 COPY ~spell_rev/spwi2##/scrl86.itm~ ~override/dvresscr.itm~
+  WRITE_BYTE 0x2d 0x20 // Abjuration: blocked for Transmuters
+  WRITE_BYTE 0x2f 0x00
   SAY NAME2 @30260
   SAY IDENTIFIED_DESC @30261
   LPF DVSEL_REPLACE_RESREF
