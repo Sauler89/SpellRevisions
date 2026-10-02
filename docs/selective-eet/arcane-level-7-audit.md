@@ -15,7 +15,7 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 | Mantle / SR Prismatic Mantle | SKIP / TACTICS REMIX | Tactics' physical-defense overhaul directly improves Mantle and its enchantment/physical-resistance behavior. SR's Prismatic Mantle is a different spell entirely. Preserve Tactics Mantle. |
 | Spell Sequencer / Simbul's Spell Sequencer | INCLUDE — ADAPTED | SR makes the spell Universal, allowing all specialist mages to use it, but its 1-round casting time is not an improvement over vanilla casting time 9. Change only the school to Universal and clear specialist exclusions; keep installed sequencer mechanics/casting time. |
 | Sphere of Chaos / SR Chaos | SKIP / REPLACEMENT + DUPLICATE ROLE | This project deliberately retained vanilla Chaos at Level 5. SR replaces Sphere of Chaos with another Chaos spell at Level 7, creating a duplicate role/name and removing the unique Sphere spell. Keep Sphere of Chaos. |
-| Delayed Blast Fireball | INCLUDE — ADAPTED | SR greatly increases radius (11 ft. -> 30 ft.), trigger radius, range, late-game damage scaling (up to 20d6) and applies a -4 save penalty, but changes Save vs. Spell to Save vs. Breath and is 1d6 weaker at caster level 14. Use a strict-buff hybrid: retain Save vs. Spell; use 15d6 minimum at levels 14-15, then scale 1d6/level to 20d6; apply SR's -4 save penalty, Long range and 30-ft. blast. |
+| Delayed Blast Fireball | SKIP / ZSTWEAKS | ZSTweaks #446 directly rebuilds SPWI712, including its damage scaling and optional projectile animation. Preserve that higher-priority implementation; do not patch SPWI712 or SCRL8N. |
 | Finger of Death | SKIP / ZSTWEAKS | ZSTweaks component 140 directly standardizes/improves Finger of Death and its damage scaling. Preserve ZS. |
 | Prismatic Spray | SKIP / MIXED | SR gives casting time 1 and -4 saves, but substantially changes the ray outcomes: the yellow damage ray can be much weaker than vanilla, petrification becomes stun, and disintegration becomes Maze. Major redesign rather than a strict buff. |
 | Power Word Stun | INCLUDE — ADAPTED | Vanilla does nothing to targets at 90+ current HP; SR stuns such targets for 1 round while leaving all lower-HP duration bands intact. Add only the 1-round 90+ HP band and preserve vanilla Conjuration/Summoning school. Strict buff. |
@@ -37,7 +37,6 @@ Spell Revisions v4.21 source is authoritative for SR behavior. Tactics Remix 8.2
 ### INCLUDE — ADAPTED
 - Ruby Ray of Reversal — longer SR range only; retain installed/Tactics protection-removal list
 - Spell Sequencer — Universal school only; retain installed mechanics and casting time
-- Delayed Blast Fireball — 15d6 minimum, scales to 20d6; 30-ft. SR area/Long range/-4 Save vs. Spell
 - Power Word Stun — add SR's 1-round effect against targets with 90+ current HP; retain vanilla school
 - Summon Djinni — SR duration improvement only; retain installed summon assets
 - Mass Invisibility — SR 30-ft. area only; preserve ZSTweaks/vanilla invisibility behavior
@@ -86,7 +85,6 @@ All proposed Level-7 changes are in-place revisions of existing spells:
 - Protection from the Elements
 - Ruby Ray of Reversal
 - Spell Sequencer
-- Delayed Blast Fireball
 - Power Word Stun
 - Summon Djinni
 - Mass Invisibility
