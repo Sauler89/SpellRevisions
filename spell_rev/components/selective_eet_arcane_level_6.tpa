@@ -104,6 +104,8 @@ COPY ~spell_rev/spwi6##/dvwi605a.bam~ ~override~
      ~spell_rev/spwi6##/dvwi605c.bam~ ~override~
 
 COPY ~spell_rev/spwi6##/scrl7i.itm~ ~override/dvbanscr.itm~
+  WRITE_BYTE 0x2d 0x20 // Abjuration: blocked for Transmuters
+  WRITE_BYTE 0x2f 0x00
   SAY NAME2 @30630
   SAY IDENTIFIED_DESC @30631
   LPF DVSEL_REPLACE_RESREF
