@@ -168,12 +168,18 @@ COPY ~spell_rev/shared/spin701i.eff~ ~override/dvdkfiri.eff~
 COPY ~spell_rev/shared/spwi897.spl~ ~override/dvdksymd.spl~
 COPY ~spell_rev/shared/spwi899.spl~ ~override/dvdksymw.spl~
 
+COPY ~spell_rev/shared/dvtelpor.spl~ ~override/dvdktelp.spl~
+
 COPY ~spell_rev/spwi7##/dvdeathk.bcs~ ~override~
      ~spell_rev/spwi7##/dvdeathk.cre~ ~override~
      ~spell_rev/spwi7##/dvdeathk.itm~ ~override~
      ~spell_rev/spwi7##/dvwi707a.bam~ ~override~
      ~spell_rev/spwi7##/dvwi707b.bam~ ~override~
      ~spell_rev/spwi7##/dvwi707c.bam~ ~override~
+
+COPY_EXISTING ~dvdeathk.bcs~ ~override~
+  REPLACE_TEXTUALLY ~dvtelpor~ ~dvdktelp~
+  BUT_ONLY_IF_IT_CHANGES
 
 COPY_EXISTING ~dvdeathk.cre~ ~override~
   REPLACE_TEXTUALLY ~UNDTYPE~ ~DVDKUND~
