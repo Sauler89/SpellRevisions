@@ -156,7 +156,7 @@ COPY_EXISTING ~spwi123.spl~ ~override~
 // The SR implementation replaces its mechanics without adding a duplicate spell.
 // -----------------------------------------------------------------------------
 
-ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_EXPEDITIOUS_RETREAT~)) BEGIN
+ACTION_IF (IDS_OF_SYMBOL (~spell~ ~WIZARD_EXPEDITIOUS_RETREAT~) >= 0) BEGIN
   LAF RES_NUM_OF_SPELL_NAME
     STR_VAR spell_name = ~WIZARD_EXPEDITIOUS_RETREAT~
     RET dvsel_exp_resref = spell_res
@@ -253,7 +253,7 @@ COPY ~spell_rev/spwi1##/scrl71.itm~ ~override/dvobmscr.itm~
 // Dimension Jump: add as a NEW spell with a new scroll resource.
 // -----------------------------------------------------------------------------
 
-ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_DIMENSION_JUMP~)) BEGIN
+ACTION_IF (IDS_OF_SYMBOL (~spell~ ~WIZARD_DIMENSION_JUMP~) >= 0) BEGIN
   LAF RES_NUM_OF_SPELL_NAME
     STR_VAR spell_name = ~WIZARD_DIMENSION_JUMP~
     RET dvsel_dimjump_resref = spell_res
