@@ -147,6 +147,8 @@ COPY_EXISTING ~scrl5u.itm~ ~override~
 // Find Familiar: only import SR's Universal-school change. Keep vanilla familiar resources and text.
 COPY_EXISTING ~spwi123.spl~ ~override~
   WRITE_BYTE 0x25 0 // Universal
+  WRITE_BYTE 0x1e ((BYTE_AT 0x1e) BAND 0b00111111)
+  WRITE_BYTE 0x1f ((BYTE_AT 0x1f) BAND 0b10000000)
   BUT_ONLY_IF_IT_CHANGES
 
 // -----------------------------------------------------------------------------
