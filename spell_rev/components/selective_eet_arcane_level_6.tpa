@@ -76,7 +76,7 @@ COPY_EXISTING ~scrl7u.itm~ ~override~
 // and a dedicated scroll resource.
 // -----------------------------------------------------------------------------
 
-ACTION_IF (FILE_CONTAINS_EVALUATED (~spell.ids~ ~WIZARD_BANISHMENT~)) BEGIN
+ACTION_IF (IDS_OF_SYMBOL (~spell~ ~WIZARD_BANISHMENT~) >= 0) BEGIN
   LAF RES_NUM_OF_SPELL_NAME
     STR_VAR spell_name = ~WIZARD_BANISHMENT~
     RET dvsel_banishment_resref = spell_res
