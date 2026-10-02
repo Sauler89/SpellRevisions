@@ -176,21 +176,26 @@ COPY_EXISTING ~scrlap.itm~ ~override~
 // import SR's 20-ft. symbol projectile and -4 Save vs. Death penalty.
 // -----------------------------------------------------------------------------
 
-COPY_EXISTING ~spwi817.spl~ ~override~
-  LPF ALTER_SPELL_HEADER INT_VAR projectile = 225 END
-  LPF ALTER_EFFECT
-    INT_VAR
-      match_opcode = 209
-      savebonus = "-4"
-  END
-  SAY NAME1 @30860
-  SAY UNIDENTIFIED_DESC @30861
-  BUT_ONLY_IF_IT_CHANGES
+ACTION_IF (FILE_EXISTS_IN_GAME ~zstwsdh0.spl~ OR FILE_EXISTS_IN_GAME ~zstwsdh1.spl~) BEGIN
+  // ZSTweaks #443 Symbol Spells detected. Its Symbol Death is a full rewrite,
+  // so preserve SPWI817 and SCRLAO exactly as installed.
+END ELSE BEGIN
+  COPY_EXISTING ~spwi817.spl~ ~override~
+    LPF ALTER_SPELL_HEADER INT_VAR projectile = 225 END
+    LPF ALTER_EFFECT
+      INT_VAR
+        match_opcode = 209
+        savebonus = "-4"
+    END
+    SAY NAME1 @30860
+    SAY UNIDENTIFIED_DESC @30861
+    BUT_ONLY_IF_IT_CHANGES
 
-COPY_EXISTING ~scrlao.itm~ ~override~
-  SAY NAME2 @30860
-  SAY IDENTIFIED_DESC @30861
-  BUT_ONLY_IF_IT_CHANGES
+  COPY_EXISTING ~scrlao.itm~ ~override~
+    SAY NAME2 @30860
+    SAY IDENTIFIED_DESC @30861
+    BUT_ONLY_IF_IT_CHANGES
+END
 
 // Tactics Improved Mantle, vanilla Symbol Fear and ZSTweaks Bigby's Clenched
 // Fist remain untouched. Moment of Prescience, Symbol of Weakness and
